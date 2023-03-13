@@ -1,0 +1,24 @@
+#navigation{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    background-color: #003262;
+    color: white !important;
+    font-weight: bolder !important;
+}
+
+#navigation #menu {
+    height: 100%;
+}
+
+#navigation #menu nav{
+    height: 100%;
+    justify-content: flex-start;
+    color: white !important;
+}
+
+#navigation .menu{
+    display: flex;
+    flex-direction: column;
+}
