@@ -1,4 +1,4 @@
-import AllAccount from "../pages/AllAccount";
+import AllAccounts from "../pages/Employees";
 import DashBoard from "../pages/DashBoard";
 import Login from "../pages/Login";
 
@@ -8,7 +8,7 @@ const userRoutes = [
         path: "/"
     },
     {
-        element: <AllAccount/>,
+        element: <AllAccounts/>,
         path: "/employees"
     },
     {

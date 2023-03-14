@@ -1,40 +1,43 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSquarePollVertical } from '@fortawesome/free-solid-svg-icons';
+import { faUserGroup } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import("./style.css");
 
+
 function Navigation() {
-    const [collapsed, setCollapsed] = useState(false);
-    const toggleCollapsed = () => {
-        setCollapsed(!collapsed);
-    };
+    const [activeD, setActiveD] = useState(false);
+    const [activeE, setActiveE] = useState(false);
+    const [activeA, setActiveA] = useState(false);
 
     return (
         <div id="navigation">
             <div id="menu">
-                <nav className="navbar navbar-expand-md navbar-light flex-column">
-                    <a className="navbar-brand mb-3" href="#">Logo</a>
+                <nav className="navbar flex-column">
+                <h3 className='py-sm-3 py-lg-4'><img src='https://cdn-icons-png.flaticon.com/512/3773/3773713.png' className='logoIcon me-2'></img>Logo</h3>
                     <div className='menu'>
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="collapse navbar-collapse" id="navbarNav">
-                            <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">Dashboard</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">Employees</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">Account</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <ul className="navbar-nav">
+                            <li className={activeD == true? "active" : ""}>
+                                <Link className="nav-link" to="/" onClick={() => {setActiveD(true); setActiveA(false); setActiveE(false)}}><FontAwesomeIcon icon={faSquarePollVertical} className='me-2'/>Dashboard</Link>
+                            </li>
+                            <li className={activeE == true? "active" : ""}>
+                                <Link className="nav-link" to="/employees" onClick={() => {setActiveE(true); setActiveD(false); setActiveA(false)}}><FontAwesomeIcon icon={faUserGroup} className='me-2'/>Employees</Link>
+                            </li>
+                            <li className={activeA == true? "active" : ""}>
+                                <Link className="nav-link" to="#" onClick={() => {setActiveA(true); setActiveD(false); setActiveE(false)}}><FontAwesomeIcon icon={faUser} className='me-2'/>Account</Link>
+                            </li>
+                        </ul>
                     </div>
                 </nav>
             </div>
-            <div className='text-center pb-5'>Login</div>
+            <div className='text-center pb-5'>
+                <Link to="/login" className='nav-link'>
+                    <img src='https://cdn-icons-png.flaticon.com/512/8345/8345303.png' className='logOut me-2'></img>Login
+                </Link>
+            </div>
         </div>
     )
 }
