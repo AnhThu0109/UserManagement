@@ -17,3 +17,7 @@ table.allEmployees th:nth-child(odd){
 table.allEmployees th:nth-child(even){
     width: 30%;
 }
+
+.paginateBar{
+    order: 999;
+}
