@@ -1,6 +1,7 @@
 import AllAccounts from "../pages/Employees";
 import DashBoard from "../pages/DashBoard";
 import Login from "../pages/Login";
+import Register from "../pages/Register";
 
 const userRoutes = [
     {
@@ -14,7 +15,11 @@ const userRoutes = [
     {
         element: <Login/>,
         path: "/login"
-    }  
+    },
+    {
+        element: <Register/>,
+        path: "/register"
+    }
 ]
 
 const adminRoutes = [

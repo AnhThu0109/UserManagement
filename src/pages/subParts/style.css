@@ -44,8 +44,13 @@
     color: white !important;
 }
 
+img.logIn{
+    width: 30px;
+   }
+
 img.logOut{
  width: 30px;
+ transform: scaleX(-1);
 }
 
 /* Extra small devices (phones, 600px and down) */

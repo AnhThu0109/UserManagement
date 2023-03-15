@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import loginUser from '../../utils/loginUser';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [session, setSession] = useState(1);
+  const [isAuth, setIsAuth] = useState(true);
+  const [errMess, setErrMess] = useState("");
   const navigate = useNavigate();
 
 
@@ -18,11 +20,24 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    let user = {
+      "username": username,
+      "password": password,
+    }
+    try {
+      const data = await loginUser(user);
+      console.log(data);
+      if(data.accessToken){
+        localStorage.setItem("token", data.accessToken);
+        navigate('/');
+      } else {
+        setIsAuth(false);
+        setErrMess(data);
+      }
+    } catch (error) {
+      console.error(error);   
+    }
   };
-
-  useEffect(() => {
-
-  }, [])
 
 
   return (
@@ -43,6 +58,7 @@ const Login = () => {
               required
             />
           </div>
+          
           <div>
             <label htmlFor="password" className='form-label'>Password:</label>
             <input
@@ -57,11 +73,10 @@ const Login = () => {
           </div>
           <button type="submit" className='mt-3 text-white btn btn-info'>Login</button>
         </form>
+
         {
-          session == undefined ? (
-            <h5 className='text-danger pt-4'>Incorrect username or password. Please type again.</h5>
-          ) : (
-            <></>
+          isAuth == false && (
+            <h5 className='text-danger pt-4'>{errMess}. Please type again.</h5>
           )
         }
       </div>

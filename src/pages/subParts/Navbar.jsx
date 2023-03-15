@@ -1,11 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
-import { useState, createContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePollVertical } from '@fortawesome/free-solid-svg-icons';
 import { faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Switch } from "antd";
+import logoutUser from '../../utils/logout';
 import("./style.css");
 
 
@@ -15,6 +16,9 @@ function Navbar() {
         activeEmployees: false,
         activeAccount: false,
     });
+    const navigate = useNavigate();
+    const [token, setToken] = useState();
+    const t = localStorage.getItem("token");
     // const [theme, setTheme] = useState("light");
     // const [isChangeTheme, setIsChangeTheme] = useState(false);
 
@@ -23,6 +27,20 @@ function Navbar() {
     //     setTheme(value ? "dark" : "light");
     //     setIsChangeTheme(value);
     // };
+    const logOut = async() => {
+        let tokenUser = {
+            "accessToken": t
+          }
+        await logoutUser(tokenUser)
+        localStorage.removeItem('token');
+        setToken("");
+        navigate("/login");
+      }
+
+    useEffect(() => {
+        //userLog();
+        setToken(t);
+      }, [token])
 
     return (
         <div id="navigation">
@@ -52,9 +70,22 @@ function Navbar() {
                 checkedChildren="Dark"
                 unCheckedChildren="Light"
                 /> */}
-                <Link to="/login" className='nav-link'>
-                    <img src='https://cdn-icons-png.flaticon.com/512/8345/8345303.png' className='logOut me-2'></img>Login
+                <Link to="/register" className='nav-link'>
+                    Register
                 </Link>
+                {
+                    (t == null || token == "") ? (
+                        <Link to="/login" className='nav-link'>
+                    <img src='https://cdn-icons-png.flaticon.com/512/8345/8345303.png' className='logIn me-2'></img>Login
+                </Link>
+                    ) : (
+                        <Link onClick={logOut} className='nav-link'>
+                    <img src='https://cdn-icons-png.flaticon.com/512/8345/8345303.png' className='logOut me-2'></img>Logout
+                </Link>
+                    )
+                }
+                
+                
             </div>
         </div>
     )
