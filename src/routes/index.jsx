@@ -2,6 +2,7 @@ import AllAccounts from "../pages/Employees";
 import DashBoard from "../pages/DashBoard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import NotFound from "../pages/NotFoundPage";
 
 const userRoutes = [
     {
@@ -19,6 +20,10 @@ const userRoutes = [
     {
         element: <Register/>,
         path: "/register"
+    },
+    {
+        element: <NotFound/>,
+        path: "/*"
     }
 ]
 

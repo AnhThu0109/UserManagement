@@ -4,6 +4,7 @@ import { faSearch, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import { Dropdown, Button, Space } from "antd";
 import "./style.css";
+import "./../style.css"
 
 function Employees() {
     const items = [

@@ -27,36 +27,36 @@ function Navbar() {
     //     setTheme(value ? "dark" : "light");
     //     setIsChangeTheme(value);
     // };
-    const logOut = async() => {
+    const logOut = async () => {
         let tokenUser = {
             "accessToken": t
-          }
+        }
         await logoutUser(tokenUser)
         localStorage.removeItem('token');
         setToken("");
         navigate("/login");
-      }
+    }
 
     useEffect(() => {
-        //userLog();
         setToken(t);
-      }, [token])
+    }, [token])
 
     return (
         <div id="navigation">
             <div id="menu">
-                <nav className="navbar flex-column">
-                <h3 className='py-sm-3 py-lg-4'><img src='https://cdn-icons-png.flaticon.com/512/3773/3773713.png' className='logoIcon me-2'></img>Logo</h3>
+                <nav className="navbar flex-column mt-3">
+                    <p className='py-sm-2 py-lg-3 px-2 logo'><img src='https://cdn-icons-png.flaticon.com/512/3773/3773713.png' className='logoIcon me-2'></img><b>Logo</b></p>
+                    <hr></hr>
                     <div className='menu'>
                         <ul className="navbar-nav">
-                            <li className={active.activeDashboard == true? "active" : ""}>
-                                <Link className="nav-link" to="/" onClick={() => {setActive({activeAccount: false, activeDashboard: true, activeEmployees:false})}}><FontAwesomeIcon icon={faSquarePollVertical} className='me-2'/>Dashboard</Link>
+                            <li className={active.activeDashboard == true ? "active" : ""}>
+                                <Link className="nav-link pe-2" to="/" onClick={() => { setActive({ activeAccount: false, activeDashboard: true, activeEmployees: false }) }}><FontAwesomeIcon icon={faSquarePollVertical} className='me-2' />Dashboard</Link>
                             </li>
-                            <li className={active.activeEmployees == true? "active" : ""}>
-                                <Link className="nav-link" to="/employees" onClick={() => {setActive({activeAccount: false, activeDashboard: false, activeEmployees: true})}}><FontAwesomeIcon icon={faUserGroup} className='me-2'/>Employees</Link>
+                            <li className={active.activeEmployees == true ? "active" : ""}>
+                                <Link className="nav-link pe-2" to="/employees" onClick={() => { setActive({ activeAccount: false, activeDashboard: false, activeEmployees: true }) }}><FontAwesomeIcon icon={faUserGroup} className='me-2' />Employees</Link>
                             </li>
-                            <li className={active.activeAccount == true? "active" : ""}>
-                                <Link className="nav-link" to="#" onClick={() => {setActive({activeAccount: true, activeDashboard: false, activeEmployees: false})}}><FontAwesomeIcon icon={faUser} className='me-2'/>Account</Link>
+                            <li className={active.activeAccount == true ? "active" : ""}>
+                                <Link className="nav-link" to="#" onClick={() => { setActive({ activeAccount: true, activeDashboard: false, activeEmployees: false }) }}><FontAwesomeIcon icon={faUser} className='me-2' />My Account</Link>
                             </li>
                         </ul>
                     </div>
@@ -76,16 +76,16 @@ function Navbar() {
                 {
                     (t == null || token == "") ? (
                         <Link to="/login" className='nav-link'>
-                    <img src='https://cdn-icons-png.flaticon.com/512/8345/8345303.png' className='logIn me-2'></img>Login
-                </Link>
+                            <img src='https://cdn-icons-png.flaticon.com/512/8345/8345303.png' className='logIn me-2'></img>Login
+                        </Link>
                     ) : (
                         <Link onClick={logOut} className='nav-link'>
-                    <img src='https://cdn-icons-png.flaticon.com/512/8345/8345303.png' className='logOut me-2'></img>Logout
-                </Link>
+                            <img src='https://cdn-icons-png.flaticon.com/512/8345/8345303.png' className='logOut me-2'></img>Logout
+                        </Link>
                     )
                 }
-                
-                
+
+
             </div>
         </div>
     )
