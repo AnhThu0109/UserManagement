@@ -3,31 +3,47 @@ import DashBoard from "../pages/DashBoard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import NotFound from "../pages/NotFoundPage";
+import MyAccount from "../pages/MyAccount";
 
-const userRoutes = [
+const publicRoutes = [
     {
         element: <DashBoard/>,
         path: "/"
-    },
-    {
-        element: <AllAccounts/>,
-        path: "/employees"
     },
     {
         element: <Login/>,
         path: "/login"
     },
     {
-        element: <Register/>,
-        path: "/register"
-    },
-    {
         element: <NotFound/>,
         path: "/*"
+    },
+    {
+        element: <Register/>,
+        path: "/register"
     }
 ]
 
-const adminRoutes = [
+const userRoutes = [
+    {
+        element: MyAccount,
+        path: "/employees/:id"
+    },
+    {
+        element: AllAccounts,
+        path: "/employees"
+    },
     
 ]
-export {userRoutes, adminRoutes};
+
+const adminRoutes = [
+    {
+        element: <MyAccount/>,
+        path: "/employees/:id"
+    },
+    {
+        element: <AllAccounts/>,
+        path: "/employees"
+    },
+]
+export {publicRoutes, userRoutes, adminRoutes};

@@ -7,8 +7,9 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [isAuth, setIsAuth] = useState(true);
   const [errMess, setErrMess] = useState("");
+  const [token, setToken] = useState(1);
   const navigate = useNavigate();
-
+  let t = localStorage.getItem('token');
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -27,9 +28,13 @@ const Login = () => {
     try {
       const data = await loginUser(user);
       console.log(data);
-      if(data.accessToken){
+      if(data){
         localStorage.setItem("token", data.accessToken);
-        navigate('/');
+        setToken(data.accessToken);
+        localStorage.setItem("id", data._id);
+        setToken(data.accessToken);
+        localStorage.setItem("active", 1);
+        navigate("/");
       } else {
         setIsAuth(false);
         setErrMess(data);

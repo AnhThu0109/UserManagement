@@ -1,9 +1,6 @@
 .searchForm button{
     background-color: transparent;
 }
-.content{
-    background-color: aliceblue;
-}
 
 table.allEmployees{
     width: 100%;
@@ -19,5 +16,5 @@ table.allEmployees th:nth-child(even){
 }
 
 .paginateBar{
-    order: 999;
+    transform: translateX(-2%);
 }

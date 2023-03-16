@@ -10,9 +10,11 @@ import getPaginatedData from '../../utils/paginateData';
 
 function Employees() {
     const token = localStorage.getItem("token");
+    const collapsed = localStorage.getItem("collapsed");
     const [users, setUsers] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const [paginateUser, setPaginateUser] = useState();
+
     const onChange = (p) => {
         console.log(p);
         setCurrentPage(p);
@@ -47,10 +49,10 @@ function Employees() {
     const handleMenuClick = (e) => {
         console.log('click', e);
     };
-    const menuProps = {
-        items,
-        onClick: handleMenuClick,
-    };
+    // const menuProps = {
+    //     items,
+    //     onClick: handleMenuClick,
+    // };
 
     useEffect(() => {
         async function getData() {
@@ -58,7 +60,7 @@ function Employees() {
                 .then(data => {
                     console.log(data);
                     setUsers(data);
-                    let userPage = getPaginatedData(currentPage, 6, data);
+                    let userPage = getPaginatedData(currentPage, 10, data);
                     console.log(userPage);
                     setPaginateUser(userPage);
                 })
@@ -67,7 +69,7 @@ function Employees() {
     }, [currentPage])
 
     return (
-        <div className="content d-flex flex-column justify-content-between">
+        <div className={collapsed == true? "contentCollapsed" : "content"}>
             <div>
                 <div className="d-flex justify-content-between align-items-center p-4">
                     <h2 className='fw-bolder'>Employees</h2>
@@ -124,7 +126,7 @@ function Employees() {
                 showTotal={(total) => `Total ${total} users`}
                 total={users?.length}
                 pageSize={6}
-                onChange={onChange} className="text-center pb-4 paginateBar"
+                onChange={onChange} className="text-center pb-1 paginateBar"
             // showSizeChanger={false}
             />
         </div>
