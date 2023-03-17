@@ -3,6 +3,12 @@ div.content {
     height: 100%;
 }
 
+div.collapsedContent{
+    width: 91%;
+    float: right;
+    height: 100%;
+}
+
 @media only screen and (min-width: 600px) {
     div.content{
         width: 78%;

@@ -22,7 +22,6 @@ function Navbar() {
     const t = localStorage.getItem("token");
     const id = localStorage.getItem("id");
     const activeItem = localStorage.getItem("active");
-    const [contentWidth, setContentWidth] = useState(false);
     // const [theme, setTheme] = useState("light");
     // const [isChangeTheme, setIsChangeTheme] = useState(false);
 
@@ -34,8 +33,6 @@ function Navbar() {
     const [collapsed, setCollapsed] = useState(false);
     const toggleCollapsed = () => {        
         setCollapsed(!collapsed);
-        setContentWidth(!contentWidth);
-        localStorage.setItem("collapsed", contentWidth);
     };
 
     const saveActiveItem = (item) => {

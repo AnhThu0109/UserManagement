@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Dropdown, Button, Space, Pagination } from "antd";
 import "./style.css";
 import "./../style.css"
-import getAllUser from '../../utils/getUser';
+import {getAllUser} from '../../utils/getUser';
 import getPaginatedData from '../../utils/paginateData';
 
 function Employees() {
@@ -14,6 +14,8 @@ function Employees() {
     const [users, setUsers] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const [paginateUser, setPaginateUser] = useState();
+    const [collapsedContent, setCollapsedContent] = useState(false);
+    const buttonRef = useRef(null);
 
     const onChange = (p) => {
         console.log(p);
@@ -54,22 +56,26 @@ function Employees() {
     //     onClick: handleMenuClick,
     // };
 
+    const contentClass = () => {
+        setCollapsedContent(!collapsedContent);
+    }
+
     useEffect(() => {
         async function getData() {
             await getAllUser(token)
                 .then(data => {
                     console.log(data);
                     setUsers(data);
-                    let userPage = getPaginatedData(currentPage, 10, data);
+                    let userPage = getPaginatedData(currentPage, 5, data);
                     console.log(userPage);
                     setPaginateUser(userPage);
                 })
         }
-        getData();
-    }, [currentPage])
+        getData();  
+    }, [currentPage, collapsedContent])
 
     return (
-        <div className={collapsed == true? "contentCollapsed" : "content"}>
+        <div>
             <div>
                 <div className="d-flex justify-content-between align-items-center p-4">
                     <h2 className='fw-bolder'>Employees</h2>
@@ -125,7 +131,7 @@ function Employees() {
                 defaultCurrent={1}
                 showTotal={(total) => `Total ${total} users`}
                 total={users?.length}
-                pageSize={6}
+                pageSize={5}
                 onChange={onChange} className="text-center pb-1 paginateBar"
             // showSizeChanger={false}
             />

@@ -14,4 +14,18 @@ async function getAllUser(token) {
       });
   }
 
-export default getAllUser;
+async function getUserById(id, token) {
+  return fetch(`${GET_USERS}${id}`, {
+    headers: { 'token': `Bearer ${token}` },
+  })
+      .then(response => response.json())
+      .then(data => {
+        return data;
+      })
+      .catch(error => {
+        console.error(error);
+        throw error;
+      });
+}
+
+export {getAllUser, getUserById};

@@ -14,14 +14,21 @@
 #navigation{
     position: fixed;
     width: fit-content;
-    height: 100%;
-    background-color: #003262;
+    height: 100%;   
     color: white !important;
     font-weight: bolder !important;
 }
 
+#navigation.lightTheme{
+    background-color: #003262;
+}
+
+#navigation.darkTheme{
+    background-color: rgb(24, 23, 23);
+}
+
 #navigation #menu {
-    height: 80%;
+    height: 75%;
 }
 
 #navigation #menu nav{
@@ -35,20 +42,29 @@
     width: 100%;
 }
 
-#navigation .menu ul li{
+div.menuList {
     padding: 10px 0px 10px 15px;
 }
 
-#navigation .menu ul li.active{
+#navigation .menu ul li.active div.darkTheme{
+    background-color: #6C7375;
+    border-left: 5px solid #76bbd2;
+}
+
+#navigation .menu ul li.active div.lightTheme{
     background-color: #009DC5;
     border-left: 5px solid yellowgreen;
 }
 
-#navigation .menu ul li.active a{
+#navigation .menu ul li.active div.lightTheme a{
     color:#003737 !important;
 }
 
-#navigation .menu ul li>a{
+#navigation .menu ul li.active div.darkTheme a{
+    color:#0d1317 !important;
+}
+
+#navigation .menu ul li div>a{
     color: white !important;
 }
 
@@ -67,6 +83,44 @@ hr {
     border-top: 1px solid;
     opacity: 1;
     width: 100%;
+}
+
+button.ant-switch-checked{
+    background-color: black !important;
+}
+
+#innerContent{
+    height: 100%;
+}
+
+#innerContent.darkTheme{
+    background-color: #353839;
+    color: white !important;
+}
+
+#innerContent.darkTheme table{
+    background-color: #91a9b2;
+    /* color: white !important; */
+    border-radius: 10px;
+}
+
+#innerContent.lightTheme{
+    background-color: white;
+    color: black;
+}
+
+/* Pagination */
+#innerContent.darkTheme ul.ant-pagination{
+    color: white;
+}
+
+#innerContent.darkTheme li.ant-pagination-item-active {
+    color: black;
+    border: none;
+}
+
+#innerContent.darkTheme button.ant-pagination-item-link {
+    color: white !important;
 }
 
 /* Extra small devices (phones, 600px and down) */
