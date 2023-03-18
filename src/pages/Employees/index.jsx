@@ -77,21 +77,21 @@ function Employees() {
     return (
         <div>
             <div>
-                <form className='border border-primary rounded-4 ps-2 py-1 m-4 d-flex justify-content-between searchForm bg-white'>
+                <form className='border-0 ps-2 py-1 m-4 d-flex justify-content-between searchForm'>
                     <input type="text" name="search" id="search" className='border-0' placeholder='Search... ' />
                     <button type="submit" className='border-0'><FontAwesomeIcon icon={faSearch} /></button>
                 </form>
 
                 <div className='px-sm-2 px-lg-4'>
                     <div className="table-responsive">
-                        <table className="table">
+                        <table className="table border-0 bg-white rounded-3 allEmployees">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Created Date</th>
+                                    <th scope="col"><p>ID</p></th>
+                                    <th scope="col"><p>NAME</p></th>
+                                    <th scope="col"><p>GENDER</p></th>
+                                    <th scope="col"><p>EMAIL</p></th>
+                                    <th scope="col"><p>CREATED DATE</p></th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -92,8 +92,12 @@ button.ant-switch-checked{
     background-color: black !important;
 }
 
-.logOutTitle, .logInTitle{
+.logInTitle{
     color: #66615b !important;
+}
+
+.logOutTitle{
+    color: #ef8157 !important;
 }
 
 #innerContent{
@@ -117,7 +121,11 @@ button.ant-switch-checked{
 }
 
 h2.titleActive{
-    margin-left: 70px !important;
+    margin-left: 40px !important;
+}
+
+.colorTitle{
+    color: #66615b;
 }
 
 .avatarLogin{
@@ -136,6 +144,16 @@ h2.titleActive{
 
 #innerContent.darkTheme button.ant-pagination-item-link {
     color: white !important;
+}
+
+a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
+    color: grey !important;
+    padding: 0px !important;
+}
+
+#innerContent ul.dropdown-menu.text-center.show {
+    min-width: fit-content;
+    padding: 8px 10px;
 }
 
 /* Extra small devices (phones, 600px and down) */

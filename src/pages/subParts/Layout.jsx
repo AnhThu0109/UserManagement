@@ -158,7 +158,7 @@ const Layout = () => {
 
           ) : (
             <div className="d-flex justify-content-between p-2">
-              <h2 className={collapsed ? "titleActive fw-bolder ps-3 mt-2" : 'fw-bolder ps-3 mt-3'}>{title}</h2>
+              <h2 className={collapsed ? "titleActive  colorTitle fw-bolder ps-3 mt-2" : 'colorTitle fw-bolder ps-3 mt-2 mb-3'}>{title}</h2>
               <div className="d-flex">
 
                 <div className="border-0 bg-white rounded-circle py-2 px-3 avatarLogin">

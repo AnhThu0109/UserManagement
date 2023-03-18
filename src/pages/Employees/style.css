@@ -1,24 +1,35 @@
 .searchForm{
     width: 45%;
+    background-color: hsla(0, 0%, 87%, 0.689);
+}
+
+input#search {
+    background-color: hsla(0, 0%, 90%, 0.516);
+    width: 90%;
 }
 
 .searchForm button{
     background-color: transparent;
+    color: grey;
 }
 
 table.allEmployees{
     width: 100%;
-    background-color: white;
+    box-shadow: 0 6px 10px -4px rgba(0,0,0,.15);
 }
 
-table.allEmployees th:nth-child(odd){
+/* table.allEmployees th:nth-child(odd){
     width: 20%;
 }
 
 table.allEmployees th:nth-child(even){
     width: 30%;
+} */
+
+th>p{
+    color: #51cbce !important;
 }
 
-.paginateBar{
-    transform: translateX(-2%);
+tbody, td, tfoot, th, thead, tr {
+    border-color: lightgrey !important;
 }
