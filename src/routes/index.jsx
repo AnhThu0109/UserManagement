@@ -7,10 +7,6 @@ import MyAccount from "../pages/MyAccount";
 
 const publicRoutes = [
     {
-        element: <DashBoard/>,
-        path: "/"
-    },
-    {
         element: <Login/>,
         path: "/login"
     },
@@ -25,6 +21,10 @@ const publicRoutes = [
 ]
 
 const userRoutes = [
+    {
+        element: DashBoard,
+        path: "/"
+    },
     {
         element: MyAccount,
         path: "/employees/:id"

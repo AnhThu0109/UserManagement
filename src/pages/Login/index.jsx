@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import loginUser from '../../utils/loginUser';
+import "./style.css";
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -33,7 +34,6 @@ const Login = () => {
         setToken(data.accessToken);
         localStorage.setItem("id", data._id);
         setToken(data.accessToken);
-        localStorage.setItem("active", 1);
         navigate("/");
       } else {
         setIsAuth(false);
@@ -48,13 +48,14 @@ const Login = () => {
   return (
     <div className='p-5 ms-lg-5 ms-sm-3 mt-lg-4 mt-sm-3'>
       <div className='loginForm'>
-        <h2 className='fw-bolder'>Login to your account</h2>
-        <p className='fw-bolder'>Please log in to see more information.</p>
-        <form onSubmit={handleSubmit} className="pt-4">
-          <div>
+        <h4 className='fw-bolder text-center'>Login to your account</h4>
+        <p className='fw-bolder text-center'>Please log in to see more information.</p>
+        <div>
+        <form onSubmit={handleSubmit} className="pt-4 border p-sm-3 p-lg-4 rounded-3 bg-white position-relative">
+          <div className='mb-sm-2 mb-lg-3'>
             <label htmlFor="text" className='form-label'>Username:</label>
             <input
-              className='form-control'
+              className='form-control border border-3'
               type="input"
               id="username"
               name="username"
@@ -64,10 +65,10 @@ const Login = () => {
             />
           </div>
           
-          <div>
+          <div className='mb-sm-2 mb-lg-3'>
             <label htmlFor="password" className='form-label'>Password:</label>
             <input
-              className='form-control'
+              className='form-control border border-3'
               type="password"
               id="password"
               name="password"
@@ -76,8 +77,10 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className='mt-3 text-white btn btn-info'>Login</button>
+          <button type="submit" className='mt-3 text-white btn btn-secondary formLoginBtn'>Login</button>
         </form>
+        </div>
+        
 
         {
           isAuth == false && (

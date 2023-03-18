@@ -1,0 +1,13 @@
+.loginForm{
+    color: #3c3c3c;
+}
+
+.loginForm form{
+    width: 65%;
+    margin: 0 auto;
+}
+
+.formLoginBtn{
+    width: 40%;
+    border-radius: 50px !important;
+}

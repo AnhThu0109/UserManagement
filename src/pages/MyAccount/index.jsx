@@ -10,7 +10,8 @@ function MyAccount() {
   const token = localStorage.getItem("token");
   const id = localStorage.getItem("id");
   const [username, setUsername] = useState();
-  const [fullname, setFullname] = useState();
+  const [firstname, setFirstname] = useState();
+  const [lastname, setLastname] = useState();
   const [phone, setPhone] = useState();
   const [location, setLocation] = useState();
   const [email, setEmail] = useState();
@@ -21,7 +22,8 @@ function MyAccount() {
   const handleUpdate = async (event) => {
     event.preventDefault();
     let user = {
-      "fullname": fullname,
+      "firstname": firstname,
+      "lastname": lastname,
       "username": username,
       "email": email,
       "password": password,
@@ -63,35 +65,40 @@ function MyAccount() {
       <form className="py-3 px-lg-5 px-sm-1 text-center" onSubmit={handleUpdate}>
         <div className="row mb-4">
           <div className="col">
-            <label htmlFor="1stname">Full name</label><br></br>
-            <input type="text" name="fullname" id="fullname" defaultValue={user?.fullname == null? "Unknown" : `${user?.fullname}`} value={fullname} onChange={(e) => setFullname(e.target.value)}/>
+            <label htmlFor="firstname">First name</label><br></br>
+            <input type="text" name="firstname" id="firstname" defaultValue={user?.firstname == null? "Unknown" : `${user?.firstname}`} value={firstname} onChange={(e) => setFirstname(e.target.value)}/>
           </div>
           <div className="col">
-            <label htmlFor="username">Username</label><br></br>
-            <input type="text" name="username" id="username" defaultValue={user?.username} value={username} onChange={(e) => setUsername(e.target.value)}/>
+            <label htmlFor="lastname">Last name</label><br></br>
+            <input type="text" name="lastname" id="lastname" defaultValue={user?.lastname == null? "Unknown" : `${user?.lastname}`} value={lastname} onChange={(e) => setLastname(e.target.value)}/>
           </div>
         </div>
 
         <div className="row mb-4">
           <div className="col">
-            <label htmlFor="email">Email Address</label><br></br>
-            <input type="email" name="email" id="email" defaultValue={user?.email} value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <label htmlFor="username">Username</label><br></br>
+            <input type="text" name="username" id="username" defaultValue={user?.username} value={username} onChange={(e) => setUsername(e.target.value)}/>
           </div>
           <div className="col">
-            <label htmlFor="password">Password</label><br></br>
-            <input type="password" name="password" id="password" defaultValue={user?.password} value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <label htmlFor="email">Email Address</label><br></br>
+            <input type="email" name="email" id="email" defaultValue={user?.email} value={email} onChange={(e) => setEmail(e.target.value)}/>
           </div>
         </div>
 
         <div className="row mb-3">
           <div className="col">
+            <label htmlFor="password">Password</label><br></br>
+            <input type="password" name="password" id="password" defaultValue={user?.password} value={password} onChange={(e) => setPassword(e.target.value)}/>
+          </div>
+          <div className="col">
             <label htmlFor="phone">Phone</label><br></br>
             <input type="phone" name="phone" id="phone" defaultValue={user?.phone == null? "Unknown" : `${user?.phone}`} value={phone} onChange={(e) => setPhone(e.target.value)}/>
           </div>
-          <div className="col">
+        </div>
+
+        <div className="row">
             <label htmlFor="location">Location</label><br></br>
             <input type="text" name="location" id="location" defaultValue={user?.location == null? "Unknown" : `${user?.location}`} value={location} onChange={(e) => setLocation(e.target.value)}/>
-          </div>
         </div>
 
         <button className="btn btn-secondary mt-4 savechangeBtn">Save Changes</button>

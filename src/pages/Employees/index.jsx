@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Dropdown, Button, Space, Pagination } from "antd";
 import "./style.css";
 import "./../style.css"
-import {getAllUser} from '../../utils/getUser';
+import { getAllUser } from '../../utils/getUser';
 import getPaginatedData from '../../utils/paginateData';
 
 function Employees() {
@@ -71,19 +71,16 @@ function Employees() {
                     setPaginateUser(userPage);
                 })
         }
-        getData();  
+        getData();
     }, [currentPage, collapsedContent])
 
     return (
         <div>
             <div>
-                <div className="d-flex justify-content-between align-items-center p-4">
-                    <h2 className='fw-bolder'>Employees</h2>
-                    <form className='border border-primary rounded-4 ps-2 py-1 searchForm bg-white'>
-                        <input type="text" name="search" id="search" className='border-0' placeholder='Search... ' />
-                        <button type="submit" className='border-0'><FontAwesomeIcon icon={faSearch} /></button>
-                    </form>
-                </div>
+                <form className='border border-primary rounded-4 ps-2 py-1 m-4 d-flex justify-content-between searchForm bg-white'>
+                    <input type="text" name="search" id="search" className='border-0' placeholder='Search... ' />
+                    <button type="submit" className='border-0'><FontAwesomeIcon icon={faSearch} /></button>
+                </form>
 
                 <div className='px-sm-2 px-lg-4'>
                     <div className="table-responsive">
@@ -99,7 +96,7 @@ function Employees() {
                             </thead>
                             <tbody>
                                 {
-                                    paginateUser?.map((item, index) => (
+                                    paginateUser && paginateUser?.map((item, index) => (
                                         <tr key={index}>
                                             <td scope="row" className='py-3'>R1C1</td>
                                             <td className='py-3'>{item.username}</td>

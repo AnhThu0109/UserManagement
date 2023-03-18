@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Layout from "./pages/subParts/Layout";
 import { publicRoutes, userRoutes, adminRoutes } from "./routes";
 import UserRoutes from "./utils/userRoutes";
+import "./index.css";
 
 function App() {
   return (
