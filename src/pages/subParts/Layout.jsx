@@ -153,9 +153,9 @@ const Layout = () => {
                 checkedChildren="Dark"
                 unCheckedChildren="Light"
               />
-              <Link to="/register" className='nav-link'>
+              {/* <Link to="/register" className='nav-link'>
                 Register
-              </Link>
+              </Link> */}
 
             </div>
           )
@@ -185,7 +185,7 @@ const Layout = () => {
                 <div className="dropdown">
                   <button className=" border-0 mt-2 dropdown-toggle logOutTitle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Hello,&nbsp;
-                    {user1stName != null? (user1stName): ("User")}
+                    {firstname != null? (firstname): ("User")}
                   </button>
                   <ul className="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
                     <Link onClick={logOut} className='dropdown-item nav-link fw-lighter logOutTitle pt-2'>

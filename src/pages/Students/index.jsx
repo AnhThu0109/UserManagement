@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faEllipsisVertical, faEnvelope, faClipboardUser, faSquarePhone, faMapLocationDot} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { Dropdown, Button, Space, Pagination } from "antd";
+import { Dropdown, Button, Space, Pagination, Modal, Image } from "antd";
 import "./style.css";
 import "./../style.css"
-import { getAllUser } from '../../utils/getUser';
+import { getAllUser, getUserById } from '../../utils/getUser';
 import getPaginatedData from '../../utils/paginateData';
 
 function Students() {
@@ -15,17 +15,39 @@ function Students() {
     const [currentPage, setCurrentPage] = useState(1);
     const [paginateUser, setPaginateUser] = useState();
     const [collapsedContent, setCollapsedContent] = useState(false);
+    const [userId, setUserId] = useState();
+    const [chosenUser, setChosenUser] = useState();
+    const id = localStorage.getItem("userChosenId");
 
     const onChange = (p) => {
         console.log(p);
         setCurrentPage(p);
     }
 
+    const userChosen = (id) => {
+        console.log(id);
+        localStorage.setItem("userChosenId", id);
+        setUserId(id);
+    }
+
+    //Show modal to see user info
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
+    //Items in button of each user row
     const items = [
         {
             key: '1',
             label: (
-                <Link rel="noopener noreferrer" className='nav-link' to="/">
+                <Link rel="noopener noreferrer" className='nav-link' onClick={showModal}>
                     See Detail
                 </Link>
             ),
@@ -47,15 +69,17 @@ function Students() {
             ),
         },
     ];
-    const handleMenuClick = (e) => {
-        console.log('click', e);
-    };
+    // const handleMenuClick = (e) => {
+    //     console.log('click', e);
+    // };
 
-    const contentClass = () => {
-        setCollapsedContent(!collapsedContent);
-    }
+    // const contentClass = () => {
+    //     setCollapsedContent(!collapsedContent);
+    // }
 
     useEffect(() => {
+        setUserId(id);
+        //Get all users
         async function getData() {
             await getAllUser(token)
                 .then(data => {
@@ -66,8 +90,22 @@ function Students() {
                     setPaginateUser(userPage);
                 })
         }
+
+        //Get user chosen
+        async function getUserChosen() {
+            await getUserById(userId, token)
+                .then(data => {
+                    setChosenUser(data);
+                    console.log("chosen user", data);
+                })
+        }
         getData();
-    }, [currentPage, collapsedContent])
+        if(userId){
+            getUserChosen();
+            
+        }
+        
+    }, [currentPage, collapsedContent, userId])
 
     return (
         <div className='allAcountContent'>
@@ -103,7 +141,7 @@ function Students() {
                                                         items,
                                                     }}
                                                 >
-                                                    <Button>
+                                                    <Button onMouseEnter={() => userChosen(item._id)}>
                                                         <Space>
                                                             <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
                                                         </Space>
@@ -126,6 +164,44 @@ function Students() {
                 pageSize={7}
                 onChange={onChange} className="text-center pb-2 paginateBar"
             />
+
+            {/* Modal user information */}
+            <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={[
+          <Button key="close" onClick={handleOk} className="okBtnModal">
+            OK
+          </Button>,
+        ]}>
+                <div>
+                    <Image src={chosenUser?.avatar} className='avatarUserChosen rounded-circle border border-2'></Image>
+                    <h4>{chosenUser?.firstname != null ? (
+                        <>{chosenUser?.firstname} {chosenUser?.lastname}</>
+                    ) : (<>Unknown</>)}</h4>
+                    <div className='row mt-3'>
+                    <div className="col mb-3">
+                        <FontAwesomeIcon icon={faClipboardUser} className="modalIcon"/> 
+                        <span className=''></span>
+                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.username}></input>
+                    </div>
+                    <div className="col">
+                        <FontAwesomeIcon icon={faEnvelope} className="modalIcon"/> 
+                        <span className=''></span>
+                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.email}></input>
+                    </div>
+                    </div>
+                    <div className='row mt-3'>
+                    <div className="col mb-3">
+                        <FontAwesomeIcon icon={faSquarePhone} className="modalIcon"/> 
+                        <span className=''></span>
+                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.phone == null? ("Unkown") : (chosenUser?.phone)}></input>
+                    </div>
+                    <div className="col">
+                        <FontAwesomeIcon icon={faMapLocationDot} className="modalIcon"/> 
+                        <span className=''></span>
+                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.location == null? ("Unkown") : (chosenUser?.location)}></input>
+                    </div>
+                    </div>
+                </div>
+            </Modal>
         </div>
     )
 }
