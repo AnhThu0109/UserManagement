@@ -1,3 +1,11 @@
+.allAcountContent{
+    height: -webkit-fill-available;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
 .searchForm{
     width: 45%;
     background-color: hsla(0, 0%, 87%, 0.689);
@@ -33,3 +41,8 @@ th>p{
 tbody, td, tfoot, th, thead, tr {
     border-color: lightgrey !important;
 }
+
+.allAcountContent ul.ant-pagination.text-center.pb-2.paginateBar.css-dev-only-do-not-override-1me4733 {
+    background-color: #f2f2f2 !important;
+}
+

@@ -20,11 +20,13 @@ const Layout = () => {
   const [token, setToken] = useState();
   const t = localStorage.getItem("token");
   const id = localStorage.getItem("id");
+  const firstname = localStorage.getItem("userFirstName");
   const activeItem = localStorage.getItem("active");
   const [collapsed, setCollapsed] = useState(false);
   const [theme, setTheme] = useState("light");
   const [isChangeTheme, setIsChangeTheme] = useState(false);
   const [title, setTitle] = useState("Dashboard");
+  const [user1stName, set1stName] = useState("");
 
   const changeTheme = (value) => {
     console.log(value);
@@ -48,6 +50,7 @@ const Layout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('active');
     localStorage.removeItem('id');
+    localStorage.removeItem("userFirstName");
     setToken("");
     navigate("/login");
   }
@@ -66,6 +69,8 @@ const Layout = () => {
 
   useEffect(() => {
     setToken(t);
+    set1stName(firstname);
+    console.log(firstname);
     titleSetting();
   }, [token])
   return (
@@ -157,7 +162,7 @@ const Layout = () => {
             </div>
 
           ) : (
-            <div className="d-flex justify-content-between p-2">
+            <div className="d-flex justify-content-between p-2 menuHorizontal">
               <h2 className={collapsed ? "titleActive  colorTitle fw-bolder ps-3 mt-2" : 'colorTitle fw-bolder ps-3 mt-2 mb-3'}>{title}</h2>
               <div className="d-flex">
 
@@ -166,7 +171,8 @@ const Layout = () => {
                 </div>
                 <div className="dropdown">
                   <button className=" border-0 mt-2 dropdown-toggle logOutTitle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Hello, user
+                    Hello,&nbsp;
+                    {user1stName != "null"? (user1stName): ("User")}
                   </button>
                   <ul className="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
                     <Link onClick={logOut} className='dropdown-item nav-link fw-lighter logOutTitle pt-2'>
@@ -180,7 +186,7 @@ const Layout = () => {
         }
 
         <hr className="hrLogin"></hr>
-        <div >
+        <div className="contentOutlet">
           <Outlet />
         </div>
       </div>

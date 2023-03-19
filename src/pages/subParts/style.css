@@ -132,6 +132,17 @@ h2.titleActive{
     padding-top: 10px;
     height: 45px;
 }
+
+#menu nav button{  
+    background-color: white;
+    padding-top: 10px;
+    margin-top: -6px !important;
+}
+
+#menu nav button :hover{
+    color: #51cbce !important;
+}
+
 /* Pagination */
 #innerContent.darkTheme ul.ant-pagination{
     color: white;
@@ -154,6 +165,15 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
 #innerContent ul.dropdown-menu.text-center.show {
     min-width: fit-content;
     padding: 8px 10px;
+}
+
+div.menuHorizontal{
+    height: 12%;
+}
+
+div.contentOutlet{
+    height: 88%;
+
 }
 
 /* Extra small devices (phones, 600px and down) */

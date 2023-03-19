@@ -75,8 +75,8 @@ function Employees() {
     }, [currentPage, collapsedContent])
 
     return (
-        <div>
-            <div>
+        <div className='allAcountContent'>
+            <div className='accountTable'>
                 <form className='border-0 ps-2 py-1 m-4 d-flex justify-content-between searchForm'>
                     <input type="text" name="search" id="search" className='border-0' placeholder='Search... ' />
                     <button type="submit" className='border-0'><FontAwesomeIcon icon={faSearch} /></button>
@@ -129,7 +129,7 @@ function Employees() {
                 showTotal={(total) => `Total ${total} users`}
                 total={users?.length}
                 pageSize={5}
-                onChange={onChange} className="text-center pb-1 paginateBar"
+                onChange={onChange} className="text-center pb-2 paginateBar"
             // showSizeChanger={false}
             />
         </div>
