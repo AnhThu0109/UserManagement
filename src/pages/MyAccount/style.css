@@ -30,3 +30,11 @@ div.userInfo{
 .userInfo .firstColInfo h3{
     color: #51cbce;
 }
+
+.userInfo form .ant-space.css-dev-only-do-not-override-1me4733.ant-space-horizontal.ant-space-align-center {
+    float: right;
+}
+
+.ant-notification-notice-with-icon svg{
+    color: #51cbce!important;
+}

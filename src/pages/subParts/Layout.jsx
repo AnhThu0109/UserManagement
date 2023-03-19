@@ -13,7 +13,7 @@ import("./style.css");
 const Layout = () => {
   const [active, setActive] = useState({
     activeDashboard: false,
-    activeEmployees: false,
+    activeStudents: false,
     activeAccount: false,
   });
   const navigate = useNavigate();
@@ -60,14 +60,19 @@ const Layout = () => {
       setTitle("Dashboard");
     } 
     if (activeItem == 2){
-      setTitle("Employees");
+      setTitle("Students List");
     }
     if (activeItem == 3){
-      setTitle("MyAccount");
+      setTitle("My Account");
     }
   }
 
   useEffect(() => {
+    setActive({
+      activeDashboard: false,
+      activeStudents: false,
+      activeAccount: false,
+    });
     setToken(t);
     set1stName(firstname);
     console.log(firstname);
@@ -85,7 +90,7 @@ const Layout = () => {
                   onClick={toggleCollapsed}
                   className="border-0 btnCollapse d-flex align-items-center"
                 >
-                  {collapsed ? <MenuUnfoldOutlined /> : (
+                  {collapsed == true? <MenuUnfoldOutlined /> : (
                     <>
                       <MenuFoldOutlined />
                       <b className='ms-2'>Menu</b>
@@ -94,7 +99,7 @@ const Layout = () => {
                 </Button>
               </p>
               {
-                collapsed ? (
+                collapsed == true? (
                   <></>
                 ) : (
                   <>
@@ -103,13 +108,19 @@ const Layout = () => {
                       <ul className="navbar-nav">
                         <li className={active.activeDashboard == true || activeItem == 1 ? "active" : ""}>
                           <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
-                            <Link className="nav-link pe-2" to="/" onClick={() => { setActive({ activeAccount: false, activeDashboard: true, activeEmployees: false }); saveActiveItem(1); setTitle("Dashboard"); }}><FontAwesomeIcon icon={faSquarePollVertical} className='me-2' />Dashboard</Link>
+                            <Link className="nav-link pe-2" to="/" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: true, activeStudents: false }); saveActiveItem(1); setTitle("Dashboard"); })}>
+                              <FontAwesomeIcon icon={faSquarePollVertical} className='me-2' />
+                            Dashboard
+                            </Link>
                           </div>
                         </li>
 
-                        <li className={active.activeEmployees == true || activeItem == 2 ? "active" : ""}>
+                        <li className={active.activeStudents == true || activeItem == 2 ? "active" : ""}>
                           <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
-                            <Link className="nav-link pe-2" to="/employees" onClick={() => { setActive({ activeAccount: false, activeDashboard: false, activeEmployees: true }); saveActiveItem(2); setTitle("Employees"); }}><FontAwesomeIcon icon={faUserGroup} className='me-2' />Employees</Link>
+                            <Link className="nav-link pe-2" to="/students" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: false, activeStudents: true }); saveActiveItem(2); setTitle("Students"); })}>
+                              <FontAwesomeIcon icon={faUserGroup} className='me-2' />
+                              Students
+                            </Link>
                           </div>
                         </li>
 
@@ -117,7 +128,7 @@ const Layout = () => {
                           t != null &&
                           <li className={active.activeAccount == true || activeItem == 3 ? "active" : ""}>
                             <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
-                              <Link className="nav-link pe-2" to={`/employees/${id}`} onClick={() => { setActive({ activeAccount: true, activeDashboard: false, activeEmployees: false }); saveActiveItem(3); setTitle("My Account"); }}><FontAwesomeIcon icon={faUser} className='me-2' />My Account</Link>
+                              <Link className="nav-link pe-2" to={`/students/${id}`} onClick={t != null && (() => { setActive({ activeAccount: true, activeDashboard: false, activeStudents: false }); saveActiveItem(3); setTitle("My Account"); })}><FontAwesomeIcon icon={faUser} className='me-2' />My Account</Link>
                             </div>
                           </li>
                         }
@@ -131,7 +142,7 @@ const Layout = () => {
           </div>
         </div>
         {
-          collapsed ? (
+          collapsed == true? (
             <></>
           ) : (
             <div className='text-center pb-5'>
@@ -163,7 +174,9 @@ const Layout = () => {
 
           ) : (
             <div className="d-flex justify-content-between p-2 menuHorizontal">
-              <h2 className={collapsed ? "titleActive  colorTitle fw-bolder ps-3 mt-2" : 'colorTitle fw-bolder ps-3 mt-2 mb-3'}>{title}</h2>
+              <h2 className={collapsed ? "titleActive  colorTitle fw-bolder ps-3 mt-2" : 'colorTitle fw-bolder ps-3 mt-2 mb-3'}>
+                {title}
+              </h2>
               <div className="d-flex">
 
                 <div className="border-0 bg-white rounded-circle py-2 px-3 avatarLogin">
@@ -172,7 +185,7 @@ const Layout = () => {
                 <div className="dropdown">
                   <button className=" border-0 mt-2 dropdown-toggle logOutTitle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Hello,&nbsp;
-                    {user1stName != "null"? (user1stName): ("User")}
+                    {user1stName != null? (user1stName): ("User")}
                   </button>
                   <ul className="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
                     <Link onClick={logOut} className='dropdown-item nav-link fw-lighter logOutTitle pt-2'>

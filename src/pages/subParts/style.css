@@ -169,11 +169,12 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
 
 div.menuHorizontal{
     height: 12%;
+    background-color: #f2f2f2
 }
 
 div.contentOutlet{
     height: 88%;
-
+    background-color: #f2f2f2;
 }
 
 /* Extra small devices (phones, 600px and down) */

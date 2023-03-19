@@ -8,14 +8,13 @@ import "./../style.css"
 import { getAllUser } from '../../utils/getUser';
 import getPaginatedData from '../../utils/paginateData';
 
-function Employees() {
+function Students() {
     const token = localStorage.getItem("token");
     const collapsed = localStorage.getItem("collapsed");
     const [users, setUsers] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const [paginateUser, setPaginateUser] = useState();
     const [collapsedContent, setCollapsedContent] = useState(false);
-    const buttonRef = useRef(null);
 
     const onChange = (p) => {
         console.log(p);
@@ -51,10 +50,6 @@ function Employees() {
     const handleMenuClick = (e) => {
         console.log('click', e);
     };
-    // const menuProps = {
-    //     items,
-    //     onClick: handleMenuClick,
-    // };
 
     const contentClass = () => {
         setCollapsedContent(!collapsedContent);
@@ -66,7 +61,7 @@ function Employees() {
                 .then(data => {
                     console.log(data);
                     setUsers(data);
-                    let userPage = getPaginatedData(currentPage, 5, data);
+                    let userPage = getPaginatedData(currentPage, 7, data);
                     console.log(userPage);
                     setPaginateUser(userPage);
                 })
@@ -128,11 +123,10 @@ function Employees() {
                 defaultCurrent={1}
                 showTotal={(total) => `Total ${total} users`}
                 total={users?.length}
-                pageSize={5}
+                pageSize={7}
                 onChange={onChange} className="text-center pb-2 paginateBar"
-            // showSizeChanger={false}
             />
         </div>
     )
 }
-export default Employees;
+export default Students;

@@ -1,4 +1,4 @@
-import AllAccounts from "../pages/Employees";
+import AllAccounts from "../pages/Students";
 import DashBoard from "../pages/DashBoard";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -27,11 +27,11 @@ const userRoutes = [
     },
     {
         element: MyAccount,
-        path: "/employees/:id"
+        path: "/students/:id"
     },
     {
         element: AllAccounts,
-        path: "/employees"
+        path: "/students"
     },
     
 ]
@@ -39,11 +39,11 @@ const userRoutes = [
 const adminRoutes = [
     {
         element: <MyAccount/>,
-        path: "/employees/:id"
+        path: "/students/:id"
     },
     {
         element: <AllAccounts/>,
-        path: "/employees"
+        path: "/students"
     },
 ]
 export {publicRoutes, userRoutes, adminRoutes};

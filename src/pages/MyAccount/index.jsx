@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { getUserById } from "../../utils/getUser";
 import updateUser from "../../utils/updateUser";
-import { Image } from "antd";
+import { Image, notification, Space } from "antd";
 import "./../style.css";
 import "./style.css";
 
@@ -16,8 +15,19 @@ function MyAccount() {
   const [phone, setPhone] = useState();
   const [location, setLocation] = useState();
   const [email, setEmail] = useState();
-  const navigate = useNavigate();
   const [text, setText] = useState("");
+  const Context = React.createContext({
+    name: 'Default',
+  });
+
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = (placement) => {
+    api.info({
+      message: `Notification`,
+      description: <Context.Consumer>{() => `Hello, user's info was updated !!!`}</Context.Consumer>,
+      placement,
+    });
+  };
 
   const handleUpdate = async (event) => {
     event.preventDefault();
@@ -34,7 +44,7 @@ function MyAccount() {
       const data = await updateUser(id, token, user);
       console.log(data);
       if (data) {
-        setText(data);
+        setText(data + ' !!!');
       }
     } catch (error) {
       console.error(error);
@@ -50,65 +60,17 @@ function MyAccount() {
         setLastname(data.lastname);
         setUsername(data.username)
         setEmail(data.email);
-        console.log(data.username);
       });
     }
     getData();  
   }, []);
 
   return (
-    // <div className="p-sm-3 px-lg-5 py-3 d-flex flex-column align-items-center userInfo">
-    //   <h3 className="userTitle py-3 px-lg-5 px-sm-1 text-center">
-    //     <img
-    //       src="https://cdn-icons-png.flaticon.com/128/4322/4322991.png"
-    //       className="me-3"
-    //     ></img>
-    //     {user?.username}
-    //   </h3>
-    //   <form className="py-3 px-lg-5 px-sm-1 text-center" onSubmit={handleUpdate}>
-    //     <div className="row mb-4">
-    //       <div className="col">
-    //         <label htmlFor="firstname">First name</label><br></br>
-    //         <input type="text" name="firstname" id="firstname" defaultValue={user?.firstname == null ? "Unknown" : `${user?.firstname}`} value={firstname} onChange={(e) => setFirstname(e.target.value)} />
-    //       </div>
-    //       <div className="col">
-    //         <label htmlFor="lastname">Last name</label><br></br>
-    //         <input type="text" name="lastname" id="lastname" defaultValue={user?.lastname == null ? "Unknown" : `${user?.lastname}`} value={lastname} onChange={(e) => setLastname(e.target.value)} />
-    //       </div>
-    //     </div>
-
-    //     <div className="row mb-4">
-    //       <div className="col">
-    //         <label htmlFor="username">Username</label><br></br>
-    //         <input type="text" name="username" id="username" defaultValue={user?.username} value={username} onChange={(e) => setUsername(e.target.value)} />
-    //       </div>
-    //       <div className="col">
-    //         <label htmlFor="email">Email Address</label><br></br>
-    //         <input type="email" name="email" id="email" defaultValue={user?.email} value={email} onChange={(e) => setEmail(e.target.value)} />
-    //       </div>
-    //     </div>
-
-    //     <div className="row mb-3">
-    //       <div className="col">
-    //         <label htmlFor="phone">Phone</label><br></br>
-    //         <input type="phone" name="phone" id="phone" defaultValue={user?.phone == null ? "Unknown" : `${user?.phone}`} value={phone} onChange={(e) => setPhone(e.target.value)} />
-    //       </div>
-    //       <div className="col">
-    //         <label htmlFor="location">Location</label><br></br>
-    //         <input type="text" name="location" id="location" defaultValue={user?.location == null ? "Unknown" : `${user?.location}`} value={location} onChange={(e) => setLocation(e.target.value)} />
-    //       </div>
-    //     </div>
-
-
-
-    //     <button className="btn btn-secondary mt-4 savechangeBtn">Save Changes</button>
-    //   </form>
-    // </div>
     <div className="row userInfo pt-lg-2">
       <div className="col-lg-3 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 ms-4 rounded-4 p-0">
         <div className="firstCol text-center">
           <Image src="https://demos.creative-tim.com/paper-dashboard/assets/img/damir-bosnjak.jpg" alt="" className="w-100 bgInfoImg"></Image>
-          <Image src="https://img.freepik.com/free-vector/nature-scene-with-river-hills-forest-mountain-landscape-flat-cartoon-style-illustration_1150-37326.jpg" className="avatar rounded-circle"></Image>
+          <Image src="https://img.freepik.com/free-vector/nature-scene-with-river-hills-forest-mountain-landscape-flat-cartoon-style-illustration_1150-37326.jpg" className="avatar rounded-circle border border-2"></Image>
         </div>
         
         <div className="firstColInfo text-center">
@@ -152,11 +114,16 @@ function MyAccount() {
               <input type="text" className="form-control" name="" id="" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
             </div>
           </div>
-          <button type="submit" className="border-0 rounded-pill py-2 px-4 mt-3 float-end text-white savechangeBtn">UPDATE PROFILE</button>
+          <Context.Provider>
+            {contextHolder}
+          <Space>
+          <button type="submit" className="border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn" onClick={() => openNotification('bottomRight')}>UPDATE PROFILE</button>
+          </Space>
+          </Context.Provider>
         </form>
-        <p className="text-info">{text}</p>
       </div>
     </div>
+    
   );
 }
 

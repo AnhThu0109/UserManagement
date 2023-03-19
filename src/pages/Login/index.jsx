@@ -34,6 +34,7 @@ const Login = () => {
         setToken(data.accessToken);
         localStorage.setItem("id", data._id);
         localStorage.setItem("userFirstName", data.firstname);
+        localStorage.setItem("active", 1);
         setToken(data.accessToken);
         navigate("/");
       } else {

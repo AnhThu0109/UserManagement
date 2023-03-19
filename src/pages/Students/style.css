@@ -26,14 +26,6 @@ table.allEmployees{
     box-shadow: 0 6px 10px -4px rgba(0,0,0,.15);
 }
 
-/* table.allEmployees th:nth-child(odd){
-    width: 20%;
-}
-
-table.allEmployees th:nth-child(even){
-    width: 30%;
-} */
-
 th>p{
     color: #51cbce !important;
 }
@@ -46,3 +38,6 @@ tbody, td, tfoot, th, thead, tr {
     background-color: #f2f2f2 !important;
 }
 
+.accountTable{
+    background-color: #f2f2f2
+}
