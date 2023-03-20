@@ -139,7 +139,7 @@ h2.titleActive{
     margin-top: -6px !important;
 }
 
-#menu nav button :hover{
+#menu nav button.ant-btn-default:not(:disabled):hover{
     color: #51cbce !important;
 }
 
