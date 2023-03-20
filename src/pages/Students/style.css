@@ -45,18 +45,18 @@ tbody, td, tfoot, th, thead, tr {
 .avatarUserChosen{
     margin-top: -80%;
     width: 80px !important;
-    height: 90px !important;
+    height: 80px !important;
 }
 
 .okBtnModal{
-    background-color: lightgrey;
+    background-color: #51cbce;
     border: 0px;
     color: white;
     padding: 0px 30px;
 }
 
 .okBtnModal:hover{
-    background-color: rgb(135, 133, 133);
+    background-color: #4ca2a4;
     color: white !important;
 }
 
@@ -74,4 +74,9 @@ tbody, td, tfoot, th, thead, tr {
 
 .avatarRow{
     padding-top: 3px !important;
+}
+
+.ant-popover.ant-popconfirm.css-dev-only-do-not-override-1me4733.css-dev-only-do-not-override-1me4733{
+    left: 45% !important;
+    top: 1% !important;
 }

@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { Dropdown, Button, Space, Pagination, Modal, Image, Menu } from "antd";
+import { Dropdown, Button, Space, Pagination, Modal, Image, Menu, message, Popconfirm } from "antd";
 import "./style.css";
 import "./../style.css"
 import { getAllUser, getUserById } from '../../utils/getUser';
 import getPaginatedData from '../../utils/paginateData';
 import changeFormatDate from '../../utils/formatDate';
+import deleteUser from '../../utils/deleteUser';
 
 function Students() {
     const token = localStorage.getItem("token");
-    const collapsed = localStorage.getItem("collapsed");
+    // const collapsed = localStorage.getItem("collapsed");
     const isAdmin = localStorage.getItem("isAdmin");
     const [users, setUsers] = useState();
     const [currentPage, setCurrentPage] = useState(1);
@@ -19,6 +20,7 @@ function Students() {
     const [collapsedContent, setCollapsedContent] = useState(false);
     const [userId, setUserId] = useState();
     const [chosenUser, setChosenUser] = useState();
+    const [isDeleted, setIsDeleted] = useState(false);
     const id = localStorage.getItem("userChosenId");
 
     const onChange = (p) => {
@@ -34,7 +36,7 @@ function Students() {
 
     //Show modal to see user info
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
+    const showModalSeeInfo = () => {
         setIsModalOpen(true);
     };
     const handleOk = () => {
@@ -44,12 +46,23 @@ function Students() {
         setIsModalOpen(false);
     };
 
+    //Confirm delete and show message when cancel delete or delete successful
+    const confirm = (e) => {
+        console.log(e);
+        deleteUserById(id, token);
+        message.success(`User ${chosenUser?.username} is deleted successful !!!`);
+    };
+    const cancel = (e) => {
+        console.log(e);
+        message.error('Delete request is canceled !!!');
+    };
+
     //Items in button of each user row
     const items = [
         {
             key: '1',
             label: (
-                <Link rel="noopener noreferrer" className='nav-link' onClick={showModal}>
+                <Link rel="noopener noreferrer" className='nav-link' onClick={showModalSeeInfo}>
                     See Detail
                 </Link>
             ),
@@ -65,9 +78,20 @@ function Students() {
         {
             key: '3',
             label: (
-                <Link rel="noopener noreferrer" className='nav-link' to="/">
-                    Delete
-                </Link>
+                <Popconfirm
+                    placement=""
+                    title="Delete user"
+                    description="Are you sure to delete this user?"
+                    onConfirm={confirm}
+                    onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                >
+                    <Link rel="noopener noreferrer" className='nav-link'>
+
+                        Delete
+                    </Link>
+                </Popconfirm>
             ),
         },
     ];
@@ -75,23 +99,36 @@ function Students() {
     const itemNormalUser = (
         <Menu>
             <Menu.Item key="1">
-                <Link rel="noopener noreferrer" className='nav-link' onClick={showModal}>
+                <Link rel="noopener noreferrer" className='nav-link' onClick={showModalSeeInfo}>
                     See Detail
                 </Link>
             </Menu.Item>
         </Menu>
     );
-    ;
-    // const handleMenuClick = (e) => {
-    //     console.log('click', e);
+
+    //Show message when delete successful
+    // const [messageApi, contextHolder] = message.useMessage();
+    // const success = (username) => {
+    //     messageApi.open({
+    //         type: 'success',
+    //         content: `User ${username} is deleted successful!!!`,
+    //     });
     // };
 
-    // const contentClass = () => {
-    //     setCollapsedContent(!collapsedContent);
-    // }
+    //Delete user
+    async function deleteUserById(index, tokenUser) {
+        const response = await deleteUser(index, tokenUser)
+        if (response.ok) {
+            setIsDeleted(true);
+            setUserId("");
+        } else {
+
+        }
+    }
 
     useEffect(() => {
-        setUserId(id);
+        // setUserId(id);
+        console.log("newId", id);
         //Get all users
         async function getData() {
             await getAllUser(token)
@@ -109,17 +146,20 @@ function Students() {
             await getUserById(userId, token)
                 .then(data => {
                     setChosenUser(data);
+                    localStorage.setItem("chosenUsername", data.username);
                     console.log("chosen user", data);
                 })
         }
+
         console.log(isAdmin);
         getData();
-        if (userId) {
+        if (userId && userId != "") {
             getUserChosen();
-
         }
 
-    }, [currentPage, collapsedContent, userId])
+        console.log(isDeleted);
+        setIsDeleted(false);
+    }, [currentPage, collapsedContent, userId, isDeleted])
 
     return (
         <div className='allAcountContent'>
@@ -154,8 +194,8 @@ function Students() {
                                             <td className='d-flex py-3 justify-content-between'>{changeFormatDate(item.createdAt)}
                                                 {
                                                     isAdmin == "false" ? (
-                                                        <Dropdown overlay={itemNormalUser}>
-                                                            <Button onMouseEnter={() => userChosen(item._id)}>
+                                                        <Dropdown menu={itemNormalUser} trigger={['click']}>
+                                                            <Button onClick={() => userChosen(item._id)}>
                                                                 <Space>
                                                                     <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
                                                                 </Space>
@@ -163,11 +203,9 @@ function Students() {
                                                         </Dropdown>
                                                     ) : (
                                                         <Dropdown
-                                                            menu={{
-                                                                items,
-                                                            }}
+                                                            menu={{ items, }} trigger={['click']} 
                                                         >
-                                                            <Button onMouseEnter={() => userChosen(item._id)}>
+                                                            <Button onClick={() => { userChosen(item._id); }}>
                                                                 <Space>
                                                                     <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
                                                                 </Space>

@@ -35,6 +35,6 @@ div.userInfo{
     float: right;
 }
 
-.ant-notification-notice-with-icon svg{
-    color: #51cbce!important;
+.inconInfo{
+    width: 30px;
 }
