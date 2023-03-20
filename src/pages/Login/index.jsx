@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import loginUser from '../../utils/loginUser';
 import "./style.css";
 
@@ -27,9 +27,10 @@ const Login = () => {
       "password": password,
     }
     try {
-      const data = await loginUser(user);
-      console.log(data);
-      if(data){
+      const response = await loginUser(user);
+      console.log(response);
+      if (response.ok){
+        const data = await response.json();
         localStorage.setItem("token", data.accessToken);
         setToken(data.accessToken);
         localStorage.setItem("id", data._id);
@@ -37,9 +38,13 @@ const Login = () => {
         localStorage.setItem("active", 1);
         setToken(data.accessToken);
         navigate("/");
+      }   
+      else if (response.status === 404) { // handle 404 error
+      setIsAuth(false);
+      setErrMess("Incorrect password");
       } else {
-        setIsAuth(false);
-        setErrMess(data);
+      setIsAuth(false);
+      setErrMess("User not found");
       }
     } catch (error) {
       console.error(error);   
@@ -53,7 +58,7 @@ const Login = () => {
         <h4 className='fw-bolder text-center'>Login to your account</h4>
         <p className='fw-bolder text-center'>Please log in to see more information.</p>
         <div>
-        <form onSubmit={handleSubmit} className="pt-4 border p-sm-3 p-lg-4 rounded-3 bg-white position-relative">
+        <form onSubmit={handleSubmit} className="pt-4 border p-sm-3 p-lg-4 rounded-3 bg-white">
           <div className='mb-sm-2 mb-lg-3'>
             <label htmlFor="text" className='form-label'>Username:</label>
             <input
@@ -79,14 +84,14 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className='mt-3 text-white btn btn-secondary formLoginBtn'>Login</button>
+          <button type="submit" className='mt-3 mb-3 text-white btn btn-secondary formLoginBtn'>Login</button><br></br>
+          <small className='text-secondary'>Don't have an account?<Link to="/register" className='text-decoration-none'> Created here!</Link></small>
         </form>
-        </div>
-        
+        </div>     
 
         {
           isAuth == false && (
-            <h5 className='text-danger pt-4'>{errMess}. Please type again.</h5>
+            <h5 className='text-danger pt-4 text-center'>{errMess}. Please type again.</h5>
           )
         }
       </div>

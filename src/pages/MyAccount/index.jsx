@@ -15,6 +15,7 @@ function MyAccount() {
   const [phone, setPhone] = useState();
   const [location, setLocation] = useState();
   const [email, setEmail] = useState();
+  const [gender, setGender] = useState();
   const [text, setText] = useState("");
   const Context = React.createContext({
     name: 'Default',
@@ -37,7 +38,8 @@ function MyAccount() {
       "username": username,
       "email": email,
       "phone": phone,
-      "location": location
+      "location": location,
+      "gender": gender,
     }
     console.log(user);
     try {
@@ -70,7 +72,7 @@ function MyAccount() {
       <div className="col-lg-3 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 ms-4 rounded-4 p-0">
         <div className="firstCol text-center">
           <Image src="https://demos.creative-tim.com/paper-dashboard/assets/img/damir-bosnjak.jpg" alt="" className="w-100 bgInfoImg"></Image>
-          <Image src="https://img.freepik.com/free-vector/nature-scene-with-river-hills-forest-mountain-landscape-flat-cartoon-style-illustration_1150-37326.jpg" className="avatar rounded-circle border border-2"></Image>
+          <Image src={user?.avatar} className="avatar rounded-circle border border-2"></Image>
         </div>
         
         <div className="firstColInfo text-center">
@@ -98,22 +100,29 @@ function MyAccount() {
               <label for="" className="form-label text-secondary">Username</label>
               <input type="text" className="form-control" name="" id="" value={username} placeholder="Username" required onChange={(e) => setUsername(e.target.value)}></input>
             </div>
-            <div className="col">
-              <label for="" className="form-label text-secondary">Email</label>
-              <input type="email" className="form-control" name="" id="" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
-            </div>
+            <div className="col-lg-6 col-sm-12">
+              <label for="" className="form-label text-secondary">Gender</label>
+              <select className="form-select" value={gender} onChange={(e) => setGender(e.target.value)}>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>            
           </div>
 
           <div className="row mb-2">
-            <div className="col-lg-6 col-sm-12 mb-3">
+          <div className="col-lg-6 col-sm-12 mb-3">
+              <label for="" className="form-label text-secondary">Email</label>
+              <input type="email" className="form-control" name="" id="" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
+            </div>
+            <div className="col-lg-6 col-sm-12">
               <label for="" className="form-label text-secondary">Phone</label>
               <input type="phone" className="form-control" name="" id="" value={phone} placeholder="Phone" onChange={(e) => setPhone(e.target.value)}></input>
-            </div>
-            <div className="col">
+            </div>         
+          </div>
+          <div className="row mb-3 px-3">
               <label for="" className="form-label text-secondary">Address</label>
               <input type="text" className="form-control" name="" id="" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
             </div>
-          </div>
           <Context.Provider>
             {contextHolder}
           <Space>

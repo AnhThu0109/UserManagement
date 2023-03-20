@@ -61,7 +61,17 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .modalIcon {
-    font-size: 35px;
+    width: 40px;
     margin-bottom: -20px;
     color: #51cbce;
+}
+
+.avatarAllAccount{
+    width: 40px !important;
+    height: 40px !important;
+    margin-bottom: -10%;
+}
+
+.avatarRow{
+    padding-top: 3px !important;
 }

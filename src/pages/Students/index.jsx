@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faEllipsisVertical, faEnvelope, faClipboardUser, faSquarePhone, faMapLocationDot} from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faEllipsisVertical, faEnvelope, faClipboardUser, faSquarePhone, faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Dropdown, Button, Space, Pagination, Modal, Image } from "antd";
 import "./style.css";
 import "./../style.css"
 import { getAllUser, getUserById } from '../../utils/getUser';
 import getPaginatedData from '../../utils/paginateData';
+import changeFormatDate from '../../utils/formatDate';
 
 function Students() {
     const token = localStorage.getItem("token");
@@ -69,6 +70,17 @@ function Students() {
             ),
         },
     ];
+
+    const itemNormalUser = [
+        {
+            key: '1',
+            label: (
+                <Link rel="noopener noreferrer" className='nav-link' onClick={showModal}>
+                    See Detail
+                </Link>
+            ),
+        }
+    ];
     // const handleMenuClick = (e) => {
     //     console.log('click', e);
     // };
@@ -100,11 +112,11 @@ function Students() {
                 })
         }
         getData();
-        if(userId){
+        if (userId) {
             getUserChosen();
-            
+
         }
-        
+
     }, [currentPage, collapsedContent, userId])
 
     return (
@@ -120,22 +132,24 @@ function Students() {
                         <table className="table border-0 bg-white rounded-3 allEmployees">
                             <thead>
                                 <tr>
-                                    <th scope="col"><p>ID</p></th>
+                                    <th scope="col"><p>No.</p></th>
                                     <th scope="col"><p>NAME</p></th>
                                     <th scope="col"><p>GENDER</p></th>
                                     <th scope="col"><p>EMAIL</p></th>
-                                    <th scope="col"><p>CREATED DATE</p></th>
+                                    <th scope="col"><p>CREATED AT</p></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     paginateUser && paginateUser?.map((item, index) => (
                                         <tr key={index}>
-                                            <td scope="row" className='py-3'>R1C1</td>
+                                            <td scope="row" className='py-3'>
+                                                {index + 1}
+                                            </td>
                                             <td className='py-3'>{item.username}</td>
-                                            <td className='py-3'>R1C3</td>
+                                            <td className='py-3'>{item.gender != null? (item.gender) : (<>Unknown</>)}</td>
                                             <td className='py-3'>{item.email}</td>
-                                            <td className='d-flex py-3 justify-content-between'>R1C5
+                                            <td className='d-flex py-3 justify-content-between'>{changeFormatDate(item.createdAt)}
                                                 <Dropdown
                                                     menu={{
                                                         items,
@@ -167,39 +181,46 @@ function Students() {
 
             {/* Modal user information */}
             <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={[
-          <Button key="close" onClick={handleOk} className="okBtnModal">
-            OK
-          </Button>,
-        ]}>
+                <Button key="close" onClick={handleOk} className="okBtnModal">
+                    OK
+                </Button>,
+            ]}>
                 <div>
                     <Image src={chosenUser?.avatar} className='avatarUserChosen rounded-circle border border-2'></Image>
                     <h4>{chosenUser?.firstname != null ? (
                         <>{chosenUser?.firstname} {chosenUser?.lastname}</>
                     ) : (<>Unknown</>)}</h4>
                     <div className='row mt-3'>
+                        <div className="col mb-1">
+                            <img src="https://cdn-icons-png.flaticon.com/128/9533/9533813.png" className="modalIcon"></img>
+                            <span className=''></span>
+                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.username}></input>
+                        </div>
+                        <div className="col">
+                            <img src="https://cdn-icons-png.flaticon.com/512/9533/9533820.png" className="modalIcon"></img>
+                            <span className=''></span>
+                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.gender == null ? ("Unkown") : (chosenUser?.gender)}></input>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className="col mb-1">
+                        <img src="https://cdn-icons-png.flaticon.com/128/9533/9533772.png" className="modalIcon"></img>
+                            <span className=''></span>
+                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.email}></input>
+                        </div>
+                        <div className="col">
+                        <img src="https://cdn-icons-png.flaticon.com/128/9533/9533758.png" className="modalIcon"></img>
+                            <span className=''></span>
+                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.phone == null ? ("Unkown") : (chosenUser?.phone)}></input>
+                        </div>
+                    </div>
                     <div className="col mb-3">
-                        <FontAwesomeIcon icon={faClipboardUser} className="modalIcon"/> 
-                        <span className=''></span>
-                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.username}></input>
-                    </div>
-                    <div className="col">
-                        <FontAwesomeIcon icon={faEnvelope} className="modalIcon"/> 
-                        <span className=''></span>
-                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.email}></input>
-                    </div>
-                    </div>
-                    <div className='row mt-3'>
-                    <div className="col mb-3">
-                        <FontAwesomeIcon icon={faSquarePhone} className="modalIcon"/> 
-                        <span className=''></span>
-                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.phone == null? ("Unkown") : (chosenUser?.phone)}></input>
-                    </div>
-                    <div className="col">
-                        <FontAwesomeIcon icon={faMapLocationDot} className="modalIcon"/> 
-                        <span className=''></span>
-                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.location == null? ("Unkown") : (chosenUser?.location)}></input>
-                    </div>
-                    </div>
+                    <img src="https://cdn-icons-png.flaticon.com/128/9533/9533739.png" className="modalIcon"></img>
+                            <span className=''></span>
+                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.location == null ? ("Unkown") : (chosenUser?.location)}></input>
+                        </div>
+                    <p><b>Created at:</b> {changeFormatDate(chosenUser?.createdAt)}</p>
+                    <p><b>Last updated at:</b> {changeFormatDate(chosenUser?.updatedAt)}</p>
                 </div>
             </Modal>
         </div>

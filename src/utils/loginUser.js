@@ -6,10 +6,7 @@ async function loginUser(credentials) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(credentials),
   })
-    .then(response => response.json())
-    .then(data => {
-      return data;
-    })
+    .then(response => {return response;})
     .catch(error => {
       console.error(error);
       throw error;
