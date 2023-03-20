@@ -10,6 +10,8 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState('Male');
+  const [success, setSuccess] = useState(true);
+  const [errMess, setErrMess] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async e => {
@@ -23,12 +25,20 @@ function Register() {
         "password": password,
         "gender": gender
       }
-      const data = await registerUser(user);
-      console.log(data);
-      if (data != undefined) {
-        navigate('/login');
+      const response = await registerUser(user);
+      if (response.ok){
+        const data = await response.json();
+        navigate("/login");
+      } else {
+        const data = await response.json();
+        setSuccess(false);
+        if(data.keyValue.username){
+          setErrMess(`Username ${data.keyValue.username} is already taken. Please try another.`); 
+        }
+        if(data.keyValue.email){
+          setErrMess(`Email ${data.keyValue.email} is already taken. Please try another.`); 
+        }
       }
-
     } catch (error) {
       console.error(error);
     }
@@ -80,6 +90,12 @@ function Register() {
 
         <button type="submit" className='mt-3 mb-3 text-white btn btn-secondary formLoginBtn'>Submit</button>
       </form>
+
+      {
+          success == false && (
+            <h5 className='text-danger pt-4 text-center'>{errMess}</h5>
+          )
+        }
     </div>
   );
 }

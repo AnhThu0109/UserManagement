@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faEllipsisVertical, faEnvelope, faClipboardUser, faSquarePhone, faMapLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import { Dropdown, Button, Space, Pagination, Modal, Image } from "antd";
+import { Dropdown, Button, Space, Pagination, Modal, Image, Menu } from "antd";
 import "./style.css";
 import "./../style.css"
 import { getAllUser, getUserById } from '../../utils/getUser';
@@ -12,6 +12,7 @@ import changeFormatDate from '../../utils/formatDate';
 function Students() {
     const token = localStorage.getItem("token");
     const collapsed = localStorage.getItem("collapsed");
+    const isAdmin = localStorage.getItem("isAdmin");
     const [users, setUsers] = useState();
     const [currentPage, setCurrentPage] = useState(1);
     const [paginateUser, setPaginateUser] = useState();
@@ -71,16 +72,16 @@ function Students() {
         },
     ];
 
-    const itemNormalUser = [
-        {
-            key: '1',
-            label: (
+    const itemNormalUser = (
+        <Menu>
+            <Menu.Item key="1">
                 <Link rel="noopener noreferrer" className='nav-link' onClick={showModal}>
                     See Detail
                 </Link>
-            ),
-        }
-    ];
+            </Menu.Item>
+        </Menu>
+    );
+    ;
     // const handleMenuClick = (e) => {
     //     console.log('click', e);
     // };
@@ -111,6 +112,7 @@ function Students() {
                     console.log("chosen user", data);
                 })
         }
+        console.log(isAdmin);
         getData();
         if (userId) {
             getUserChosen();
@@ -147,20 +149,32 @@ function Students() {
                                                 {index + 1}
                                             </td>
                                             <td className='py-3'>{item.username}</td>
-                                            <td className='py-3'>{item.gender != null? (item.gender) : (<>Unknown</>)}</td>
+                                            <td className='py-3'>{item.gender != null ? (item.gender) : (<>Unknown</>)}</td>
                                             <td className='py-3'>{item.email}</td>
                                             <td className='d-flex py-3 justify-content-between'>{changeFormatDate(item.createdAt)}
-                                                <Dropdown
-                                                    menu={{
-                                                        items,
-                                                    }}
-                                                >
-                                                    <Button onMouseEnter={() => userChosen(item._id)}>
-                                                        <Space>
-                                                            <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
-                                                        </Space>
-                                                    </Button>
-                                                </Dropdown>
+                                                {
+                                                    isAdmin == "false" ? (
+                                                        <Dropdown overlay={itemNormalUser}>
+                                                            <Button onMouseEnter={() => userChosen(item._id)}>
+                                                                <Space>
+                                                                    <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
+                                                                </Space>
+                                                            </Button>
+                                                        </Dropdown>
+                                                    ) : (
+                                                        <Dropdown
+                                                            menu={{
+                                                                items,
+                                                            }}
+                                                        >
+                                                            <Button onMouseEnter={() => userChosen(item._id)}>
+                                                                <Space>
+                                                                    <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
+                                                                </Space>
+                                                            </Button>
+                                                        </Dropdown>
+                                                    )
+                                                }
                                             </td>
                                         </tr>
                                     ))
@@ -204,21 +218,21 @@ function Students() {
                     </div>
                     <div className='row'>
                         <div className="col mb-1">
-                        <img src="https://cdn-icons-png.flaticon.com/128/9533/9533772.png" className="modalIcon"></img>
+                            <img src="https://cdn-icons-png.flaticon.com/128/9533/9533772.png" className="modalIcon"></img>
                             <span className=''></span>
                             <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.email}></input>
                         </div>
                         <div className="col">
-                        <img src="https://cdn-icons-png.flaticon.com/128/9533/9533758.png" className="modalIcon"></img>
+                            <img src="https://cdn-icons-png.flaticon.com/128/9533/9533758.png" className="modalIcon"></img>
                             <span className=''></span>
                             <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.phone == null ? ("Unkown") : (chosenUser?.phone)}></input>
                         </div>
                     </div>
                     <div className="col mb-3">
-                    <img src="https://cdn-icons-png.flaticon.com/128/9533/9533739.png" className="modalIcon"></img>
-                            <span className=''></span>
-                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.location == null ? ("Unkown") : (chosenUser?.location)}></input>
-                        </div>
+                        <img src="https://cdn-icons-png.flaticon.com/128/9533/9533739.png" className="modalIcon"></img>
+                        <span className=''></span>
+                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.location == null ? ("Unkown") : (chosenUser?.location)}></input>
+                    </div>
                     <p><b>Created at:</b> {changeFormatDate(chosenUser?.createdAt)}</p>
                     <p><b>Last updated at:</b> {changeFormatDate(chosenUser?.updatedAt)}</p>
                 </div>

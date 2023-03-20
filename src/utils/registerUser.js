@@ -7,10 +7,7 @@ async function registerUser(userData) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userData),
   })
-  .then(response => response.json())
-  .then(data => {
-    return data;
-  })
+  .then(response => {return response;})
   .catch(error => {
     console.error(error);
     throw error;
