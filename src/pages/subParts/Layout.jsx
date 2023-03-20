@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePollVertical, faUserGroup, faUser, faRightToBracket, faRightFromBracket, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { Switch, Button } from "antd";
-import logoutUser from '../../utils/logout';
+import {logOut} from '../../utils/logout';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import("./style.css");
 
@@ -42,15 +42,8 @@ const Layout = () => {
     localStorage.setItem("active", item);
   }
 
-  const logOut = async () => {
-    let tokenUser = {
-      "accessToken": t
-    }
-    await logoutUser(tokenUser)
-    localStorage.removeItem('token');
-    localStorage.removeItem('active');
-    localStorage.removeItem('id');
-    localStorage.removeItem("userFirstName");
+  const logoutFunc = async () => {
+    await logOut(t);
     setToken("");
     navigate("/login");
   }
@@ -75,7 +68,6 @@ const Layout = () => {
     });
     setToken(t);
     set1stName(firstname);
-    console.log(firstname);
     titleSetting();
   }, [token])
   return (
@@ -188,7 +180,7 @@ const Layout = () => {
                     {firstname != null? (firstname): ("User")}
                   </button>
                   <ul className="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
-                    <Link onClick={logOut} className='dropdown-item nav-link fw-lighter logOutTitle pt-2'>
+                    <Link onClick={logoutFunc} className='dropdown-item nav-link fw-lighter logOutTitle pt-2'>
                       Logout
                     </Link>
                   </ul>

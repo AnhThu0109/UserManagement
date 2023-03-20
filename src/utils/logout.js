@@ -16,4 +16,12 @@ async function logoutUser(token) {
     });
 }
 
-export default logoutUser;
+const logOut = async (token) => {
+  let tokenUser = {
+    "accessToken": token
+  }
+  await logoutUser(tokenUser)
+  localStorage.clear();
+}
+
+export {logoutUser, logOut};

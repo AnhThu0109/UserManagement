@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown, Button, Space, Pagination, Modal, Image, Menu, message, Popconfirm } from "antd";
 import "./style.css";
 import "./../style.css"
@@ -9,8 +9,10 @@ import { getAllUser, getUserById } from '../../utils/getUser';
 import getPaginatedData from '../../utils/paginateData';
 import changeFormatDate from '../../utils/formatDate';
 import deleteUser from '../../utils/deleteUser';
+import { logOut } from '../../utils/logout';
 
 function Students() {
+    const navigate = useNavigate();
     const token = localStorage.getItem("token");
     // const collapsed = localStorage.getItem("collapsed");
     const isAdmin = localStorage.getItem("isAdmin");
@@ -22,6 +24,7 @@ function Students() {
     const [chosenUser, setChosenUser] = useState();
     const [isDeleted, setIsDeleted] = useState(false);
     const id = localStorage.getItem("userChosenId");
+    const loginUserId = localStorage.getItem("id");
 
     const onChange = (p) => {
         console.log(p);
@@ -106,19 +109,15 @@ function Students() {
         </Menu>
     );
 
-    //Show message when delete successful
-    // const [messageApi, contextHolder] = message.useMessage();
-    // const success = (username) => {
-    //     messageApi.open({
-    //         type: 'success',
-    //         content: `User ${username} is deleted successful!!!`,
-    //     });
-    // };
-
     //Delete user
     async function deleteUserById(index, tokenUser) {
         const response = await deleteUser(index, tokenUser)
         if (response.ok) {
+            if (loginUserId == index){
+                logOut(token);
+                window.location.reload();
+                navigate("/login");
+            }
             setIsDeleted(true);
             setUserId("");
         } else {
@@ -127,8 +126,6 @@ function Students() {
     }
 
     useEffect(() => {
-        // setUserId(id);
-        console.log("newId", id);
         //Get all users
         async function getData() {
             await getAllUser(token)
@@ -194,7 +191,7 @@ function Students() {
                                             <td className='d-flex py-3 justify-content-between'>{changeFormatDate(item.createdAt)}
                                                 {
                                                     isAdmin == "false" ? (
-                                                        <Dropdown menu={itemNormalUser} trigger={['click']}>
+                                                        <Dropdown overlay={itemNormalUser} trigger={['click']}>
                                                             <Button onClick={() => userChosen(item._id)}>
                                                                 <Space>
                                                                     <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
