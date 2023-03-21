@@ -177,7 +177,7 @@ const Layout = () => {
                 <div className="dropdown">
                   <button className=" border-0 mt-2 dropdown-toggle logOutTitle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Hello,&nbsp;
-                    {firstname != null? (firstname): ("User")}
+                    {firstname != ""? (firstname): ("User")}
                   </button>
                   <ul className="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
                     <Link onClick={logoutFunc} className='dropdown-item nav-link fw-lighter logOutTitle pt-2'>

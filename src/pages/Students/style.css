@@ -42,6 +42,11 @@ tbody, td, tfoot, th, thead, tr {
     background-color: #f2f2f2
 }
 
+.avatar{
+    width: 100px !important;
+    height: 100px !important;
+}
+
 .avatarUserChosen{
     margin-top: -80%;
     width: 80px !important;
@@ -72,11 +77,54 @@ tbody, td, tfoot, th, thead, tr {
     margin-bottom: -10%;
 }
 
-.avatarRow{
-    padding-top: 3px !important;
-}
-
 .ant-popover.ant-popconfirm.css-dev-only-do-not-override-1me4733.css-dev-only-do-not-override-1me4733{
     left: 45% !important;
     top: 1% !important;
+}
+
+.titleEdit{
+    color: #51cbce;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 8px;
+    }
+
+    .modalSeeInfo .ant-modal-content{
+        padding: 5px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    #menu .logo{
+        font-size: 25px !important;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    #menu .logo{
+        font-size: 25px !important;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+    #menu .logo{
+        font-size: 25px !important;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+    #menu .logo{
+        font-size: 25px !important;
+    }
 }

@@ -72,7 +72,7 @@ function MyAccount() {
         setLocation(data.location);
       });
     }
-    getData();  
+    getData();
   }, []);
 
   return (
@@ -82,9 +82,9 @@ function MyAccount() {
           <Image src="https://demos.creative-tim.com/paper-dashboard/assets/img/damir-bosnjak.jpg" alt="" className="w-100 bgInfoImg"></Image>
           <Image src={user?.avatar} className="avatar rounded-circle border border-2"></Image>
         </div>
-        
+
         <div className="firstColInfo text-center">
-          <h3 className="pt-3 pb-2">{user?.firstname != null && user?.lastname != null ? (<>{user?.firstname} {user?.lastname}</>) : ("Unknown")}</h3>
+          <h3 className="pt-3 pb-2">{user?.firstname != "" && user?.lastname != "" ? (<>{user?.firstname} {user?.lastname}</>) : ("Unknown")}</h3>
           <p>{user?.email}</p>
         </div>
 
@@ -119,36 +119,38 @@ function MyAccount() {
             <div className="col-lg-6 col-sm-12">
               <label for="" className="form-label text-secondary">Gender</label>
               <select className="form-select" value={gender} onChange={(e) => setGender(e.target.value)}>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="Male" readOnly>Male</option>
+                <option value="Female" readOnly>Female</option>
               </select>
-            </div>            
+            </div>
           </div>
 
           <div className="row mb-2">
-          <div className="col-lg-6 col-sm-12 mb-3">
+            <div className="col-lg-6 col-sm-12 mb-3">
               <label for="" className="form-label text-secondary">Email</label>
               <input type="email" className="form-control" name="" id="" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
             </div>
             <div className="col-lg-6 col-sm-12">
               <label for="" className="form-label text-secondary">Phone</label>
               <input type="tel" className="form-control" name="" id="" value={phone} placeholder="0123456789" onChange={(e) => setPhone(e.target.value)} pattern="[0-9]{10}"></input>
-            </div>         
+            </div>
           </div>
-          <div className="row mb-3 px-3">
+          <div className="row mb-3">
+            <div className="col">
               <label for="" className="form-label text-secondary">Address</label>
               <input type="text" className="form-control" name="" id="" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
             </div>
+          </div>
           <Context.Provider>
             {contextHolder}
-          <Space>
-          <button type="submit" className="border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn" onClick={() => openNotificationWithIcon("success", "bottomRight")}>UPDATE PROFILE</button>
-          </Space>
+            <Space>
+              <button type="submit" className="border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn" onClick={() => openNotificationWithIcon("success", "bottomRight")}>UPDATE PROFILE</button>
+            </Space>
           </Context.Provider>
         </form>
       </div>
     </div>
-    
+
   );
 }
 

@@ -180,11 +180,17 @@ div.contentOutlet{
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     body {
-        font-size: 8px;
+        font-size: 10px;
     }
 
-    .logoIcon{
-        width: 20px;
+    .logoIcon, #menu .logo b.ms-2 {
+        width: 15px;
+        font-size: 15px;
+    }
+
+    #menu .logo button{
+        padding-left: 0px;
+        padding-right: 0px;
     }
 
     #menu .logo{
@@ -194,12 +200,44 @@ div.contentOutlet{
     .navigation .menu ul li{
         padding: 10px 0px 10px 9px !important;
     }
+
+    .navigation{
+        background-color: white;
+    }
+
+    div.menuList {
+        padding: 5px 0px 5px 0px;
+    }
+
+    .menuHorizontal h2.colorTitle.fw-bolder.ps-3.mt-2 {
+        font-size: 15px;
+        margin-left: 25px !important;
+    }
+
+    div.menuHorizontal {
+        height: auto;
+    }
+    .navigation #menu nav {
+        padding: 0;
+    }
+
+    .accountTable {
+        padding: 0px 5px;
+    }
+
+    span.anticon.anticon-menu-unfold {
+        padding: 0px 5px;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    #menu .logo{
-        font-size: 25px !important;
+    .menuHorizontal h2.colorTitle.fw-bolder.ps-3.mt-2 {
+        margin-left: 60px !important;
+    }
+
+    div.menuHorizontal {
+        height: auto;
     }
 }
 

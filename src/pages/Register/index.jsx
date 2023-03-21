@@ -84,8 +84,8 @@ function Register() {
 
         <label>Gender:</label>
         <select className="form-select border border-3" value={gender} onChange={(e) => setGender(e.target.value)}>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
+          <option value="Male" readOnly>Male</option>
+          <option value="Female" readOnly>Female</option>
         </select>
 
         <button type="submit" className='mt-3 mb-3 text-white btn btn-secondary formLoginBtn'>Submit</button>
