@@ -22,7 +22,8 @@
 
 .navigationCollapsed{
     height: 7% !important;
-    background-color: #f2f2f2 !important;
+    position: relative;
+    margin-bottom: -10%;
 }
 
 .navigation.lightTheme{
@@ -128,15 +129,10 @@ h2.titleActive{
     color: #66615b;
 }
 
-.avatarLogin{
-    padding-top: 10px;
-    height: 45px;
-}
-
 #menu nav button{  
     background-color: white;
     padding-top: 10px;
-    margin-top: -6px !important;
+    margin-top: -2px !important;
 }
 
 #menu nav button.ant-btn-default:not(:disabled):hover{
@@ -175,6 +171,10 @@ div.menuHorizontal{
 div.contentOutlet{
     height: 88%;
     background-color: #f2f2f2;
+}
+
+.avatarNavBar svg {
+    margin-top: -10px;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -232,18 +232,24 @@ div.contentOutlet{
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .menuHorizontal h2.colorTitle.fw-bolder.ps-3.mt-2 {
-        margin-left: 60px !important;
+    .collapsedContent .menuHorizontal h2.colorTitle.fw-bolder.ps-3.mt-2 {
+        margin-left: 55px !important;
+    }
+
+    .content .menuHorizontal h2.colorTitle.fw-bolder.ps-3.mt-2 {
+        margin-left: 5px !important;
     }
 
     div.menuHorizontal {
         height: auto;
     }
+    .navigationCollapsed{
+        margin-bottom: -42px !important;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-
     #menu .logo{
         font-size: 25px !important;
     }
@@ -251,7 +257,6 @@ div.contentOutlet{
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-
     #menu .logo{
         font-size: 25px !important;
     }

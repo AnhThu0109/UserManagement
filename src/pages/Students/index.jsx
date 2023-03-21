@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { Dropdown, Button, Space, Pagination, Modal, Image, Menu, message, Popconfirm } from "antd";
+import { Dropdown, Button, Space, Modal, Image, Menu, message, Popconfirm, Table, Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import Highlighter from 'react-highlight-words';
 import "./style.css";
 import "./../style.css"
 import { getAllUser, getUserById } from '../../utils/getUser';
-import getPaginatedData from '../../utils/paginateData';
 import changeFormatDate from '../../utils/formatDate';
 import deleteUser from '../../utils/deleteUser';
 import { logOut } from '../../utils/logout';
@@ -19,7 +20,6 @@ function Students() {
     const isAdmin = localStorage.getItem("isAdmin");
     const [users, setUsers] = useState();
     const [currentPage, setCurrentPage] = useState(1);
-    const [paginateUser, setPaginateUser] = useState();
     const [collapsedContent, setCollapsedContent] = useState(false);
     const [userId, setUserId] = useState();
     const [chosenUser, setChosenUser] = useState();
@@ -36,11 +36,7 @@ function Students() {
     const [gender, setGender] = useState();
     const [isUpdated, setIsUpdated] = useState(false);
 
-    const onChange = (p) => {
-        console.log(p);
-        setCurrentPage(p);
-    }
-
+    //Get id of chosen user
     const userChosen = (id) => {
         console.log(id);
         localStorage.setItem("userChosenId", id);
@@ -69,9 +65,10 @@ function Students() {
     };
     const handleCancelUpdate = () => {
         setIsModalUpdateOpen(false);
+        message.error('Edit request is canceled !!!');
     };
 
-    //Update function
+    //Update info user function
     const handleUpdate = async (event) => {
         event.preventDefault();
         let user = {
@@ -97,8 +94,6 @@ function Students() {
         }
     }
 
-
-
     //Confirm delete and show message when cancel delete or delete successful
     const confirm = (e) => {
         console.log(e);
@@ -110,7 +105,8 @@ function Students() {
         message.error('Delete request is canceled !!!');
     };
 
-    //Items in button of each user row
+    //Items in dropdown button of each user row
+    //For admin
     const items = [
         {
             key: '1',
@@ -148,7 +144,7 @@ function Students() {
             ),
         },
     ];
-
+    //For normal user
     const itemNormalUser = (
         <Menu>
             <Menu.Item key="1">
@@ -175,6 +171,200 @@ function Students() {
         }
     }
 
+    //For table
+    const [searchText, setSearchText] = useState('');
+    const [searchedColumn, setSearchedColumn] = useState('');
+    const searchInput = useRef(null);
+
+    //Search user
+    const handleSearch = (selectedKeys, confirm, dataIndex) => {
+        confirm();
+        setSearchText(selectedKeys[0]);
+        setSearchedColumn(dataIndex);
+    };
+    const handleReset = (clearFilters) => {
+        clearFilters();
+        setSearchText('');
+    };
+    const getColumnSearchProps = (dataIndex) => ({
+        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+            <div
+                style={{
+                    padding: 8,
+                }}
+                onKeyDown={(e) => e.stopPropagation()}
+            >
+                <Input
+                    ref={searchInput}
+                    placeholder={`Search ${dataIndex}`}
+                    value={selectedKeys[0]}
+                    onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                    style={{
+                        marginBottom: 8,
+                        display: 'block',
+                    }}
+                />
+                <Space>
+                    <Button
+                        type="primary"
+                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+                        icon={<SearchOutlined />}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Search
+                    </Button>
+                    <Button
+                        onClick={() => clearFilters && handleReset(clearFilters)}
+                        size="small"
+                        style={{
+                            width: 90,
+                        }}
+                    >
+                        Reset
+                    </Button>
+                    <Button
+                        type="link"
+                        size="small"
+                        onClick={() => {
+                            confirm({
+                                closeDropdown: false,
+                            });
+                            setSearchText(selectedKeys[0]);
+                            setSearchedColumn(dataIndex);
+                        }}
+                    >
+                        Filter
+                    </Button>
+                    <Button
+                        type="link"
+                        size="small"
+                        onClick={() => {
+                            close();
+                        }}
+                    >
+                        close
+                    </Button>
+                </Space>
+            </div>
+        ),
+        filterIcon: (filtered) => (
+            <SearchOutlined
+                style={{
+                    color: filtered ? '#1890ff' : undefined,
+                }}
+            />
+        ),
+        onFilter: (value, record) =>
+            record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+        onFilterDropdownOpenChange: (visible) => {
+            if (visible) {
+                setTimeout(() => searchInput.current?.select(), 100);
+            }
+        },
+        render: (text) =>
+            searchedColumn === dataIndex ? (
+                <Highlighter
+                    highlightStyle={{
+                        backgroundColor: '#ffc069',
+                        padding: 0,
+                    }}
+                    searchWords={[searchText]}
+                    autoEscape
+                    textToHighlight={text ? text.toString() : ''}
+                />
+            ) : (
+                text
+            ),
+    });
+
+    //Header for table
+    const columns = [
+        {
+            title: 'No.',
+            dataIndex: 'key',
+        },
+        {
+            title: 'USERNAME',
+            dataIndex: 'username',
+            sorter: (a, b) => a.username.localeCompare(b.username),
+            sortDirections: ['ascend', 'descend'],
+            ...getColumnSearchProps('username'),
+        },
+        {
+            title: 'GENDER',
+            dataIndex: 'gender',
+            defaultSortOrder: 'descend',
+            filters: [
+                {
+                    text: 'Male',
+                    value: 'Male',
+                },
+                {
+                    text: 'Female',
+                    value: 'Female',
+                },
+            ],
+            onFilter: (value, record) => record.gender.indexOf(value) === 0,
+        },
+        {
+            title: 'EMAIL',
+            dataIndex: 'email',
+            sorter: (a, b) => a.username.localeCompare(b.username),
+            sortDirections: ['ascend', 'descend'],
+            ...getColumnSearchProps('email'),
+        },
+        {
+            title: 'CREATED AT',
+            dataIndex: 'created',
+        },
+    ];
+
+    //Data for table
+    const data = [];
+    users?.map((item, index) => {
+        let userData = {
+            key: `${index + 1}`,
+            username: item.username,
+            gender: item.gender,
+            email: item.email,
+            created: isAdmin === false ? (
+                <>
+                    {changeFormatDate(item.createdAt)} &nbsp;&nbsp;
+                    <Dropdown overlay={itemNormalUser} trigger={['click']}>
+                        <Button onClick={() => userChosen(item._id)}>
+                            <Space>
+                                <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
+                            </Space>
+                        </Button>
+                    </Dropdown>
+                </>
+
+            ) : (
+                <>
+                    {changeFormatDate(item.createdAt)} &nbsp;&nbsp;
+                    <Dropdown menu={{ items }} trigger={['click']}>
+                        <Button onClick={() => { userChosen(item._id); }}>
+                            <Space>
+                                <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
+                            </Space>
+                        </Button>
+                    </Dropdown>
+                </>
+
+            )
+        }
+        data.push(userData);
+    })
+
+    //Function onChange for table
+    const onChangeTable = (pagination, filters, sorter, extra) => {
+        console.log('params', pagination, filters, sorter, extra);
+    };
+
     useEffect(() => {
         //Get all users
         async function getData() {
@@ -182,9 +372,6 @@ function Students() {
                 .then(data => {
                     console.log(data);
                     setUsers(data);
-                    let userPage = getPaginatedData(currentPage, 7, data);
-                    console.log(userPage);
-                    setPaginateUser(userPage);
                 })
         }
 
@@ -205,19 +392,23 @@ function Students() {
                 })
         }
 
-        console.log(isAdmin);
         getData();
         if (userId && userId != "") {
             getUserChosen();
         }
-        console.log(isDeleted);
         setIsDeleted(false);
         setIsUpdated(false);
     }, [currentPage, collapsedContent, userId, isDeleted, isUpdated])
 
     return (
         <div className='allAcountContent'>
+            <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} users.</h3>
             <div className='accountTable'>
+                <Table columns={columns} dataSource={data} onChange={onChangeTable} pagination={{ pageSize: 7}} scroll={{
+                    x: 'calc(700px + 50%)',
+                }} className='p-3' />
+            </div>
+            {/* <div className='accountTable'>
                 <form className='border-0 ps-2 py-1 m-4 d-flex justify-content-between searchForm'>
                     <input type="text" name="search" id="search" className='border-0' placeholder='Search... ' />
                     <button type="submit" className='border-0'><FontAwesomeIcon icon={faSearch} /></button>
@@ -229,7 +420,7 @@ function Students() {
                             <thead>
                                 <tr>
                                     <th scope="col"><p>No.</p></th>
-                                    <th scope="col"><p>NAME</p></th>
+                                    <th scope="col"><p>USERNAME</p></th>
                                     <th scope="col"><p>GENDER</p></th>
                                     <th scope="col"><p>EMAIL</p></th>
                                     <th scope="col"><p>CREATED AT</p></th>
@@ -275,7 +466,7 @@ function Students() {
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> 
 
             <Pagination
                 defaultCurrent={1}
@@ -283,7 +474,7 @@ function Students() {
                 total={users?.length}
                 pageSize={7}
                 onChange={onChange} className="text-center pb-2 paginateBar"
-            />
+            />*/}
 
             {/* Modal user information */}
             <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={[
@@ -336,21 +527,22 @@ function Students() {
                     <h4 className='text-center fw-bolder titleEdit'>Account Setting</h4>
                     <div className='row pt-3'>
                         <div className="col-sm-12 col-lg-4 text-center">
-                            <Image src={chosenUser?.avatar} className='avatar rounded-circle border border-2'></Image>
+                            <Image src={chosenUser?.avatar} className='avatar rounded-circle border border-2 me-sm-3'></Image>
+                            <button className='btn btn-secondary mt-lg-3'>Update Avatar</button>
                         </div>
                         <div className="col">
                             <form className="mb-2" onSubmit={handleUpdate}>
                                 <div className="row">
                                     <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">First name</label>
-                                    <input type="text" className="form-control border border-2" name="" id="" value={firstname} placeholder="First name" onChange={(e) => setFirstname(e.target.value)}></input>
+                                        <label for="" className="form-label text-secondary">First name</label>
+                                        <input type="text" className="form-control border border-2" name="" id="" value={firstname} placeholder="First name" onChange={(e) => setFirstname(e.target.value)}></input>
                                     </div>                   <div className="col mb-2">
-                                    <label for="" className="form-label text-secondary">Last name</label>
-                                    <input type="text" className="border border-2 form-control" name="" id="" value={lastname} placeholder="Last name" onChange={(e) => setLastname(e.target.value)}></input>
-                                    </div>     
+                                        <label for="" className="form-label text-secondary">Last name</label>
+                                        <input type="text" className="border border-2 form-control" name="" id="" value={lastname} placeholder="Last name" onChange={(e) => setLastname(e.target.value)}></input>
+                                    </div>
                                 </div>
                                 <div className="mb-2">
-                                    
+
                                 </div>
                                 <div className="mb-2">
                                     <label for="" className="form-label text-secondary">Username</label>
@@ -376,9 +568,6 @@ function Students() {
                                     <label for="" className="form-label text-secondary">Address</label>
                                     <input type="text" className="border border-2 form-control" name="" id="" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
                                 </div>
-                                <button onClick={handleCancelUpdate} className="py-2 px-3 me-3 fw-bolder border-0 rounded-3 bg-secondary fw-bolder text-white">
-                                    CANCEL
-                                </button>
                                 <button type="submit" className="okBtnModal py-2 px-3 mt-3 fw-bolder text-white rounded-3">SAVE CHANGES</button>
                             </form>
                         </div>

@@ -38,3 +38,11 @@ div.userInfo{
 .inconInfo{
     width: 30px;
 }
+
+.avatar-uploader {
+    width: 128px;
+    height: 128px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

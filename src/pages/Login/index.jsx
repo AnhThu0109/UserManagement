@@ -38,7 +38,7 @@ const Login = () => {
         localStorage.setItem("active", 1);
         localStorage.setItem("isAdmin", data.isAdmin);
         setToken(data.accessToken);
-        navigate("/");
+        navigate("/home");
       }   
       else if (response.status === 404) { // handle 404 error
       setIsAuth(false);
@@ -56,8 +56,9 @@ const Login = () => {
   return (
     <div className='p-5 ms-lg-5 ms-sm-3 mt-lg-4 mt-sm-3'>
       <div className='loginForm'>
-        <h4 className='fw-bolder text-center'>Login to your account</h4>
-        <p className='fw-bolder text-center'>Please log in to see more information.</p>
+        <h4 className='fw-lighter text-center'>Login to your account<br></br>
+          <small className='text-black-50 textLogin'>Please log in to see more information.</small>
+        </h4>     
         <div>
         <form onSubmit={handleSubmit} className="pt-4 border p-sm-3 p-lg-4 rounded-3 bg-white">
           <div className='mb-sm-2 mb-lg-3'>

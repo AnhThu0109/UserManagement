@@ -23,7 +23,7 @@ const publicRoutes = [
 const userRoutes = [
     {
         element: DashBoard,
-        path: "/"
+        path: "/home"
     },
     {
         element: MyAccount,

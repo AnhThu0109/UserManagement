@@ -2,12 +2,12 @@ import { Outlet } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquarePollVertical, faUserGroup, faUser, faRightToBracket, faRightFromBracket, faUserTie } from '@fortawesome/free-solid-svg-icons';
-import { Switch, Button } from "antd";
-import {logOut} from '../../utils/logout';
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { faSquarePollVertical, faUserGroup, faUser, faRightToBracket, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { Switch, Button, Avatar, Space, Menu, Dropdown } from "antd";
+import { logOut } from '../../utils/logout';
+import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from "@ant-design/icons";
 import("./style.css");
 
 const Layout = () => {
@@ -45,20 +45,31 @@ const Layout = () => {
   const logoutFunc = async () => {
     await logOut(t);
     setToken("");
+    setTitle("Dashboard");
     navigate("/login");
   }
 
   const titleSetting = () => {
-    if (activeItem == 1){
+    if (activeItem == 1) {
       setTitle("Dashboard");
-    } 
-    if (activeItem == 2){
+    }
+    if (activeItem == 2) {
       setTitle("Students List");
     }
-    if (activeItem == 3){
+    if (activeItem == 3) {
       setTitle("My Account");
     }
   }
+
+  const item = (
+    <Menu className='dropDownLogOut'>
+      <Menu.Item key="1">
+        <Link rel="noopener noreferrer" className='nav-link' onClick={logoutFunc}>
+          Logout
+        </Link>
+      </Menu.Item>
+    </Menu>
+  );
 
   useEffect(() => {
     setActive({
@@ -82,7 +93,7 @@ const Layout = () => {
                   onClick={toggleCollapsed}
                   className="border-0 btnCollapse d-flex align-items-center"
                 >
-                  {collapsed == true? <MenuUnfoldOutlined /> : (
+                  {collapsed == true ? <MenuUnfoldOutlined /> : (
                     <>
                       <MenuFoldOutlined />
                       <b className='ms-2'>Menu</b>
@@ -91,7 +102,7 @@ const Layout = () => {
                 </Button>
               </p>
               {
-                collapsed == true? (
+                collapsed == true ? (
                   <></>
                 ) : (
                   <>
@@ -100,9 +111,9 @@ const Layout = () => {
                       <ul className="navbar-nav">
                         <li className={active.activeDashboard == true || activeItem == 1 ? "active" : ""}>
                           <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
-                            <Link className="nav-link pe-2" to="/" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: true, activeStudents: false }); saveActiveItem(1); setTitle("Dashboard"); })}>
+                            <Link className="nav-link pe-2" to="/home" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: true, activeStudents: false }); saveActiveItem(1); setTitle("Dashboard"); })}>
                               <FontAwesomeIcon icon={faSquarePollVertical} className='me-2' />
-                            Dashboard
+                              Dashboard
                             </Link>
                           </div>
                         </li>
@@ -134,7 +145,7 @@ const Layout = () => {
           </div>
         </div>
         {
-          collapsed == true? (
+          collapsed == true ? (
             <></>
           ) : (
             <div className='text-center pb-5'>
@@ -145,9 +156,6 @@ const Layout = () => {
                 checkedChildren="Dark"
                 unCheckedChildren="Light"
               />
-              {/* <Link to="/register" className='nav-link'>
-                Register
-              </Link> */}
 
             </div>
           )
@@ -165,26 +173,26 @@ const Layout = () => {
             </div>
 
           ) : (
-            <div className="d-flex justify-content-between p-2 menuHorizontal">
+            <div className="d-flex justify-content-between p-2 menuHorizontal align-items-center">
               <h2 className={collapsed ? "titleActive  colorTitle fw-bolder ps-3 mt-2" : 'colorTitle fw-bolder ps-3 mt-2 mb-3'}>
                 {title}
               </h2>
               <div className="d-flex">
-
-                <div className="border-0 bg-white rounded-circle py-2 px-3 avatarLogin">
-                  <FontAwesomeIcon icon={faUserTie} />
+                <div className="logOutTitle">
+                  Hello,&nbsp;
+                  {firstname != "" ? (firstname) : ("User")}&nbsp;
                 </div>
-                <div className="dropdown">
-                  <button className=" border-0 mt-2 dropdown-toggle logOutTitle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Hello,&nbsp;
-                    {firstname != ""? (firstname): ("User")}
-                  </button>
-                  <ul className="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
-                    <Link onClick={logoutFunc} className='dropdown-item nav-link fw-lighter logOutTitle pt-2'>
-                      Logout
-                    </Link>
-                  </ul>
-                </div>
+                <Dropdown overlay={item} trigger={['click']}>
+                  <Space size={16} wrap>
+                    <Avatar className="avatarNavBar"
+                      style={{
+                        backgroundColor: '#51cbce',
+                        marginTop: -5,
+                      }}
+                      icon={<UserOutlined />}
+                    />
+                  </Space>
+                </Dropdown>
               </div>
             </div>
           )

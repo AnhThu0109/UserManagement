@@ -1,12 +1,12 @@
 .allAcountContent{
     height: -webkit-fill-available;
     background-color: #f2f2f2;
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
-    flex-direction: column;
+    flex-direction: column; */
 }
 
-.searchForm{
+/* .searchForm{
     width: 45%;
     background-color: hsla(0, 0%, 87%, 0.689);
 }
@@ -19,14 +19,14 @@ input#search {
 .searchForm button{
     background-color: transparent;
     color: grey;
-}
+} */
 
-table.allEmployees{
-    width: 100%;
+.accountTable .ant-table-content{
     box-shadow: 0 6px 10px -4px rgba(0,0,0,.15);
 }
 
-th>p{
+.accountTable .ant-table-wrapper th{
+    font-weight: bolder !important;
     color: #51cbce !important;
 }
 
@@ -34,9 +34,9 @@ tbody, td, tfoot, th, thead, tr {
     border-color: lightgrey !important;
 }
 
-.allAcountContent ul.ant-pagination.text-center.pb-2.paginateBar.css-dev-only-do-not-override-1me4733 {
+/* .allAcountContent ul.ant-pagination.text-center.pb-2.paginateBar.css-dev-only-do-not-override-1me4733 {
     background-color: #f2f2f2 !important;
-}
+} */
 
 .accountTable{
     background-color: #f2f2f2
@@ -78,14 +78,23 @@ tbody, td, tfoot, th, thead, tr {
 }
 
 .ant-popover.ant-popconfirm.css-dev-only-do-not-override-1me4733.css-dev-only-do-not-override-1me4733{
-    left: 45% !important;
+    position: fixed;
+    left: 35% !important;
     top: 1% !important;
+    width: 40%;
 }
 
 .titleEdit{
     color: #51cbce;
 }
 
+/* ul.ant-pagination.ant-table-pagination.ant-table-pagination-right.css-dev-only-do-not-override-1me4733 {
+    display: none !important;
+} */
+
+.navigationCollapsed button{
+    margin-left: 10px !important;
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -103,21 +112,30 @@ tbody, td, tfoot, th, thead, tr {
     #menu .logo{
         font-size: 25px !important;
     }
+    table td:last-child {
+        width: 20%;
+      }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-
     #menu .logo{
         font-size: 25px !important;
     }
+
+    table td:last-child {
+        width: 20%;
+      }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-
     #menu .logo{
         font-size: 25px !important;
+    }
+
+    .accountTable table{
+        width: 100% !important;
     }
 }
 

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getUserById } from "../../utils/getUser";
 import updateUser from "../../utils/updateUser";
-import { Image, notification, Space } from "antd";
+import { Image, message } from "antd";
+import { LoadingOutlined, PlusOutlined, CustomerServiceOutlined, CommentOutlined } from "@ant-design/icons";
 import changeFormatDate from "../../utils/formatDate";
 import "./../style.css";
 import "./style.css";
@@ -17,22 +18,7 @@ function MyAccount() {
   const [location, setLocation] = useState();
   const [email, setEmail] = useState();
   const [gender, setGender] = useState();
-  const [text, setText] = useState("");
-
-  //Show noti after update success
-  const Context = React.createContext({
-    name: 'Default',
-  });
-
-  //Show noti when delete successful
-  const [api, contextHolder] = notification.useNotification();
-  const openNotificationWithIcon = (type, placement) => {
-    notification[type]({
-      message: 'Notification',
-      description: `Hello, user's info is updated !!!`,
-      placement,
-    });
-  };
+  const [isUpdated, setIsUpdated] = useState(false);
 
   //Update function
   const handleUpdate = async (event) => {
@@ -51,12 +37,14 @@ function MyAccount() {
       const data = await updateUser(id, token, user);
       console.log(data);
       if (data) {
-        setText(data + ' !!!');
+        setIsUpdated(true);
+        message.success(`User ${user?.username} is updated successful !!!`);
       }
     } catch (error) {
       console.error(error);
     }
   }
+  
 
   useEffect(() => {
     async function getData() {
@@ -73,10 +61,11 @@ function MyAccount() {
       });
     }
     getData();
-  }, []);
+    setIsUpdated(false);
+  }, [isUpdated]);
 
   return (
-    <div className="row userInfo pt-lg-2">
+    <div className="row userInfo pt-lg-2 pb-lg-3">
       <div className="col-lg-4 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 ms-4 rounded-4 p-0">
         <div className="firstCol text-center">
           <Image src="https://demos.creative-tim.com/paper-dashboard/assets/img/damir-bosnjak.jpg" alt="" className="w-100 bgInfoImg"></Image>
@@ -132,7 +121,7 @@ function MyAccount() {
             </div>
             <div className="col-lg-6 col-sm-12">
               <label for="" className="form-label text-secondary">Phone</label>
-              <input type="tel" className="form-control" name="" id="" value={phone} placeholder="0123456789" onChange={(e) => setPhone(e.target.value)} pattern="[0-9]{10}"></input>
+              <input type="tel" className="form-control" name="" id="" value={phone} placeholder="Ex: 0123456789" onChange={(e) => setPhone(e.target.value)} pattern="[0-9]{10}"></input>
             </div>
           </div>
           <div className="row mb-3">
@@ -141,12 +130,7 @@ function MyAccount() {
               <input type="text" className="form-control" name="" id="" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
             </div>
           </div>
-          <Context.Provider>
-            {contextHolder}
-            <Space>
-              <button type="submit" className="border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn" onClick={() => openNotificationWithIcon("success", "bottomRight")}>UPDATE PROFILE</button>
-            </Space>
-          </Context.Provider>
+          <button type="submit" className="float-end border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn">UPDATE PROFILE</button>
         </form>
       </div>
     </div>
