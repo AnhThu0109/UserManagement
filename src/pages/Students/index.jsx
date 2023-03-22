@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown, Button, Space, Modal, Image, Menu, message, Popconfirm, Table, Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { SearchOutlined, UploadOutlined } from "@ant-design/icons";
 import Highlighter from 'react-highlight-words';
 import "./style.css";
 import "./../style.css"
@@ -282,19 +282,6 @@ function Students() {
                         type="link"
                         size="small"
                         onClick={() => {
-                            confirm({
-                                closeDropdown: false,
-                            });
-                            setSearchText(selectedKeys[0]);
-                            setSearchedColumn(dataIndex);
-                        }}
-                    >
-                        Filter
-                    </Button>
-                    <Button
-                        type="link"
-                        size="small"
-                        onClick={() => {
                             close();
                         }}
                     >
@@ -519,7 +506,7 @@ function Students() {
                     <div className='row pt-3'>
                         <div className="col-sm-12 col-lg-4 text-center">
                             <Image src={chosenUser?.avatar} className='avatar rounded-circle border border-2 me-sm-3'></Image>
-                            <button className='btn btn-secondary mt-lg-3'>Update Avatar</button>
+                            <Button icon={<UploadOutlined />}>Upload Avatar</Button>
                         </div>
                         <div className="col">
                             <form className="mb-2" onSubmit={handleUpdate}>
@@ -563,8 +550,6 @@ function Students() {
                             </form>
                         </div>
                     </div>
-
-
                 </div>
             </Modal>
 
@@ -601,7 +586,7 @@ function Students() {
                                     <input type="password" className="border border-2 form-control" name="" id="" value={password1} placeholder="Password" required onChange={(e) => setPassword1(e.target.value)}></input>
                                 </div>
                                 <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">Gender</label>
+                                    <label for="" className="form-label text-secondary">Gender (Optional)</label>
                                     <select className="border border-2 form-select" value={gender1} onChange={(e) => setGender1(e.target.value)}>
                                         <option value="Male" readOnly>Male</option>
                                         <option value="Female" readOnly>Female</option>
@@ -612,16 +597,16 @@ function Students() {
 
                             <div className='row'>
                                 <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">Phone</label>
+                                    <label for="" className="form-label text-secondary">Phone (Optional)</label>
                                     <input type="tel" className="border border-2 form-control" name="" id="" value={phone1} placeholder="0123456789" onChange={(e) => setPhone1(e.target.value)} pattern="[0-9]{10}"></input>
                                 </div>
                                 <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">Address</label>
+                                    <label for="" className="form-label text-secondary">Address (Optional)</label>
                                     <input type="text" className="border border-2 form-control" name="" id="" value={location1} placeholder="Home Address" onChange={(e) => setLocation1(e.target.value)}></input>
                                 </div>
                             </div>
 
-                            <button type="submit" className="okBtnModal py-2 px-3 mt-3 fw-bolder text-white rounded-3">ADD</button>
+                            <button type="submit" className="okBtnModal py-2 px-3 mt-3 fw-bolder text-white rounded-3 float-end">ADD</button>
                         </form>
                     </div>
                 </div>

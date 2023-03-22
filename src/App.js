@@ -1,13 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DashBoard from "./pages/DashBoard";
-import AllAccounts from "./pages/Students";
-import Login from "./pages/Login";
-import User from "./pages/MyAccount";
-import NotFound from "./pages/NotFoundPage";
-import Register from "./pages/Register";
 import Layout from "./pages/subParts/Layout";
-import { publicRoutes, userRoutes, adminRoutes } from "./routes";
-import UserRoutes from "./utils/userRoutes";
+import { publicRoutes, userRoutes } from "./routes";
+import {UserRoutes} from "./utils/userRoutes";
 import "./index.css";
 import WelcomePage from "./pages/Welcome";
 

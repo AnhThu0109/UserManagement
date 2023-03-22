@@ -10,7 +10,7 @@ const isLogin = () => {
 
 const UserRoutes = ({Component}) => {
     const result = isLogin();
-    return result? <Component />: <Navigate to="/login"/>;
+    return result == true? <Component />: <Navigate to="/login"/>;
 };
 
-export default UserRoutes;
+export {isLogin, UserRoutes};

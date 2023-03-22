@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getUserById } from "../../utils/getUser";
 import updateUser from "../../utils/updateUser";
-import { Image, message } from "antd";
-import { LoadingOutlined, PlusOutlined, CustomerServiceOutlined, CommentOutlined } from "@ant-design/icons";
+import { Image, message, Button, Modal, Segmented } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 import changeFormatDate from "../../utils/formatDate";
 import "./../style.css";
 import "./style.css";
@@ -44,6 +44,24 @@ function MyAccount() {
       console.error(error);
     }
   }
+
+  //Show modal to update avatar
+  const [activeOption, setActiveOption] = useState("Illustrate Images");
+  const handleOptionChange = (value) => {
+    setActiveOption(value);
+    console.log(activeOption);
+  };
+  const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+  const showModalUpdate = () => {
+      setIsModalUpdateOpen(true);
+  };
+  const handleOkUpdate = () => {
+      setIsModalUpdateOpen(false);
+  };
+  const handleCancelUpdate = () => {
+      setIsModalUpdateOpen(false);
+      message.error('Upload avatar is canceled !!!');
+  };
   
 
   useEffect(() => {
@@ -72,7 +90,8 @@ function MyAccount() {
           <Image src={user?.avatar} className="avatar rounded-circle border border-2"></Image>
         </div>
 
-        <div className="firstColInfo text-center">
+        <div className="firstColInfo text-center pt-2">
+        <Button icon={<UploadOutlined />} onClick={showModalUpdate}>Upload Avatar</Button>
           <h3 className="pt-3 pb-2">{user?.firstname != "" && user?.lastname != "" ? (<>{user?.firstname} {user?.lastname}</>) : ("Unknown")}</h3>
           <p>{user?.email}</p>
         </div>
@@ -133,6 +152,15 @@ function MyAccount() {
           <button type="submit" className="float-end border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn">UPDATE PROFILE</button>
         </form>
       </div>
+
+      <Modal open={isModalUpdateOpen} onOk={handleOkUpdate} onCancel={handleCancelUpdate} footer={[]}>
+          <Segmented
+          options={['Illustrate Images', 'URL']}
+          selectedIndex={activeOption}
+          onChange={handleOptionChange}>
+
+          </Segmented>
+      </Modal>
     </div>
 
   );

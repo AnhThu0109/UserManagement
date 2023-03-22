@@ -4,8 +4,13 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import NotFound from "../pages/NotFoundPage";
 import MyAccount from "../pages/MyAccount";
+import WelcomePage from "../pages/Welcome";
 
 const publicRoutes = [
+    {
+        element: <WelcomePage/>,
+        path: "/"
+    },
     {
         element: <Login/>,
         path: "/login"
@@ -36,14 +41,4 @@ const userRoutes = [
     
 ]
 
-const adminRoutes = [
-    {
-        element: <MyAccount/>,
-        path: "/students/:id"
-    },
-    {
-        element: <AllAccounts/>,
-        path: "/students"
-    },
-]
-export {publicRoutes, userRoutes, adminRoutes};
+export {publicRoutes, userRoutes};

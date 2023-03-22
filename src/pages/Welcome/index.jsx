@@ -2,13 +2,34 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
+import { isLogin } from "../../utils/userRoutes";
 function WelcomePage() {
     const [showProcess, setShowProcess] = useState(false);
     const navigate = useNavigate();
+    const activePage = localStorage.getItem("active");    
+    const id = localStorage.getItem("id");
+    const login = isLogin();
+
+    const route = (index) => {
+        if(login == false){
+            return "/login";
+        }
+        else{
+            if (activePage == 2){
+                return "/students";
+            }
+            if (activePage == 3){
+                return `/students/${index}`;
+            }
+            if (activePage == 1){
+                return `/home`;
+            }
+        }
+    }
 
     const myFunction = () => {
         setTimeout(() => {
-            navigate("/login");
+            navigate(route(id));
         }, 6000);
     };
 
@@ -49,9 +70,9 @@ function WelcomePage() {
             ) : (
                 <div className="welcomePage2">
                     <img src="https://www.icegif.com/wp-content/uploads/icegif-500.gif"></img>
-                    <div class="containerProgress">    
-                        <div class="progress progress-striped">
-                            <div class="progress-bar">
+                    <div className="containerProgress">    
+                        <div className="progress progress-striped">
+                            <div className="progress-bar">
                             </div>                       
                         </div> 
                     </div>
