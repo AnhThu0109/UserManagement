@@ -55,7 +55,6 @@ div.menuList {
 
 .navigation .menu ul li.active div.darkTheme{
     background-color: #6C7375;
-    border-left: 5px solid #76bbd2;
 }
 
 .navigation .menu ul li.active div.lightTheme a{

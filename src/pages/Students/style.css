@@ -88,6 +88,14 @@ tbody, td, tfoot, th, thead, tr {
     color: #51cbce;
 }
 
+.addUser{
+    width: 30px;
+    height: 30px;
+    margin-top: 20px;
+    margin-right: 15px;
+    color: grey;
+}
+
 /* ul.ant-pagination.ant-table-pagination.ant-table-pagination-right.css-dev-only-do-not-override-1me4733 {
     display: none !important;
 } */

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown, Button, Space, Modal, Image, Menu, message, Popconfirm, Table, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
@@ -12,6 +12,7 @@ import changeFormatDate from '../../utils/formatDate';
 import deleteUser from '../../utils/deleteUser';
 import { logOut } from '../../utils/logout';
 import updateUser from '../../utils/updateUser';
+import registerUser from '../../utils/registerUser';
 
 function Students() {
     const navigate = useNavigate();
@@ -27,6 +28,7 @@ function Students() {
     const id = localStorage.getItem("userChosenId");
     const loginUserId = localStorage.getItem("id");
 
+    //State for update user
     const [username, setUsername] = useState();
     const [firstname, setFirstname] = useState();
     const [lastname, setLastname] = useState();
@@ -103,6 +105,56 @@ function Students() {
     const cancel = (e) => {
         console.log(e);
         message.error('Delete request is canceled !!!');
+    };
+
+    //Show modal to add new user
+    const [isModalNewOpen, setIsModalNewOpen] = useState(false);
+    const showModalNew = () => {
+        setIsModalNewOpen(true);
+    };
+    const handleOkNew = () => {
+        setIsModalNewOpen(false);
+    };
+    const handleCancelNew = () => {
+        setIsModalNewOpen(false);
+        message.error('New user request is canceled !!!');
+    };
+
+    //State for add new user
+    const [username1, setUsername1] = useState();
+    const [firstname1, setFirstname1] = useState();
+    const [lastname1, setLastname1] = useState();
+    const [password1, setPassword1] = useState();
+    const [phone1, setPhone1] = useState();
+    const [location1, setLocation1] = useState();
+    const [email1, setEmail1] = useState();
+    const [gender1, setGender1] = useState("Male");
+    const [isAddNew, setIsAddNew] = useState(false);
+
+    const handleAddNew = async e => {
+        e.preventDefault();
+        try {
+            let user = {
+                "firstname": firstname1,
+                "lastname": lastname1,
+                "username": username1,
+                "email": email1,
+                "password": password1,
+                "gender": gender1,
+                "phone": phone1,
+                "location": location1
+            }
+            const response = await registerUser(user);
+            if (response.ok) {
+                setIsAddNew(true);
+                message.success(`New user is added successful !!!`);
+                handleOkNew();
+            } else {
+                message.error(`Fail when adding new user !!!`);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     //Items in dropdown button of each user row
@@ -398,83 +450,22 @@ function Students() {
         }
         setIsDeleted(false);
         setIsUpdated(false);
-    }, [currentPage, collapsedContent, userId, isDeleted, isUpdated])
+        setIsAddNew(false);
+    }, [currentPage, collapsedContent, userId, isDeleted, isUpdated, isAddNew])
 
     return (
         <div className='allAcountContent'>
-            <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} users.</h3>
+            <div className='d-flex justify-content-between'>
+                <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} users.</h3>
+                <Link onClick={showModalNew}>
+                    <FontAwesomeIcon icon={faUserPlus} className='addUser'></FontAwesomeIcon>
+                </Link>
+            </div>
             <div className='accountTable'>
-                <Table columns={columns} dataSource={data} onChange={onChangeTable} pagination={{ pageSize: 7}} scroll={{
+                <Table columns={columns} dataSource={data} onChange={onChangeTable} pagination={{ pageSize: 7 }} scroll={{
                     x: 'calc(700px + 50%)',
                 }} className='p-3' />
             </div>
-            {/* <div className='accountTable'>
-                <form className='border-0 ps-2 py-1 m-4 d-flex justify-content-between searchForm'>
-                    <input type="text" name="search" id="search" className='border-0' placeholder='Search... ' />
-                    <button type="submit" className='border-0'><FontAwesomeIcon icon={faSearch} /></button>
-                </form>
-
-                <div className='px-sm-2 px-lg-4'>
-                    <div className="table-responsive">
-                        <table className="table border-0 bg-white rounded-3 allEmployees">
-                            <thead>
-                                <tr>
-                                    <th scope="col"><p>No.</p></th>
-                                    <th scope="col"><p>USERNAME</p></th>
-                                    <th scope="col"><p>GENDER</p></th>
-                                    <th scope="col"><p>EMAIL</p></th>
-                                    <th scope="col"><p>CREATED AT</p></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    paginateUser && paginateUser?.map((item, index) => (
-                                        <tr key={index}>
-                                            <td scope="row" className='py-3'>
-                                                {index + 1}
-                                            </td>
-                                            <td className='py-3'>{item.username}</td>
-                                            <td className='py-3'>{item.gender != null ? (item.gender) : (<>Unknown</>)}</td>
-                                            <td className='py-3'>{item.email}</td>
-                                            <td className='d-flex py-3 justify-content-between'>{changeFormatDate(item.createdAt)}
-                                                {
-                                                    isAdmin == "false" ? (
-                                                        <Dropdown overlay={itemNormalUser} trigger={['click']}>
-                                                            <Button onClick={() => userChosen(item._id)}>
-                                                                <Space>
-                                                                    <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
-                                                                </Space>
-                                                            </Button>
-                                                        </Dropdown>
-                                                    ) : (
-                                                        <Dropdown
-                                                            menu={{ items, }} trigger={['click']}
-                                                        >
-                                                            <Button onClick={() => { userChosen(item._id); }}>
-                                                                <Space>
-                                                                    <FontAwesomeIcon icon={faEllipsisVertical} className="text-black" />
-                                                                </Space>
-                                                            </Button>
-                                                        </Dropdown>
-                                                    )
-                                                }
-                                            </td>
-                                        </tr>
-                                    ))
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> 
-
-            <Pagination
-                defaultCurrent={1}
-                showTotal={(total) => `Total ${total} users`}
-                total={users?.length}
-                pageSize={7}
-                onChange={onChange} className="text-center pb-2 paginateBar"
-            />*/}
 
             {/* Modal user information */}
             <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={[
@@ -574,6 +565,65 @@ function Students() {
                     </div>
 
 
+                </div>
+            </Modal>
+
+            {/* Modal add new user */}
+            <Modal open={isModalNewOpen} onOk={handleOkNew} onCancel={handleCancelNew} footer={[]}>
+                <div>
+                    <h4 className='text-center fw-bolder titleEdit'>Add New User</h4>
+                    <div className='row pt-3'>
+                        <form className="mb-2" onSubmit={handleAddNew}>
+                            <div className="row">
+                                <div className="col-sm-12 col-lg-6 mb-2">
+                                    <label for="" className="form-label text-secondary">First name</label>
+                                    <input type="text" className="form-control border border-2" name="" id="" value={firstname1} placeholder="First name" onChange={(e) => setFirstname1(e.target.value)}></input>
+                                </div>                   <div className="col-sm-12 col-lg-6 mb-2">
+                                    <label for="" className="form-label text-secondary">Last name</label>
+                                    <input type="text" className="border border-2 form-control" name="" id="" value={lastname1} placeholder="Last name" onChange={(e) => setLastname1(e.target.value)}></input>
+                                </div>
+                            </div>
+                            <div className='row'>
+                                <div className="col-sm-12 col-lg-6 mb-2">
+                                    <label for="" className="form-label text-secondary">Username</label>
+                                    <input type="text" className="border border-2 form-control" name="" id="" value={username1} placeholder="Username" required onChange={(e) => setUsername1(e.target.value)}></input>
+                                </div>
+                                <div className="col-sm-12 col-lg-6 mb-2">
+                                    <label for="" className="form-label text-secondary">Email</label>
+                                    <input type="email" className="border border-2 form-control" name="" id="" value={email1} placeholder="Email" required onChange={(e) => setEmail1(e.target.value)}></input>
+                                </div>
+
+                            </div>
+
+                            <div className="row">
+                                <div className="col-sm-12 col-lg-6 mb-2">
+                                    <label for="" className="form-label text-secondary">Password</label>
+                                    <input type="password" className="border border-2 form-control" name="" id="" value={password1} placeholder="Password" required onChange={(e) => setPassword1(e.target.value)}></input>
+                                </div>
+                                <div className="col-sm-12 col-lg-6 mb-2">
+                                    <label for="" className="form-label text-secondary">Gender</label>
+                                    <select className="border border-2 form-select" value={gender1} onChange={(e) => setGender1(e.target.value)}>
+                                        <option value="Male" readOnly>Male</option>
+                                        <option value="Female" readOnly>Female</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div className='row'>
+                                <div className="col-sm-12 col-lg-6 mb-2">
+                                    <label for="" className="form-label text-secondary">Phone</label>
+                                    <input type="tel" className="border border-2 form-control" name="" id="" value={phone1} placeholder="0123456789" onChange={(e) => setPhone1(e.target.value)} pattern="[0-9]{10}"></input>
+                                </div>
+                                <div className="col-sm-12 col-lg-6 mb-2">
+                                    <label for="" className="form-label text-secondary">Address</label>
+                                    <input type="text" className="border border-2 form-control" name="" id="" value={location1} placeholder="Home Address" onChange={(e) => setLocation1(e.target.value)}></input>
+                                </div>
+                            </div>
+
+                            <button type="submit" className="okBtnModal py-2 px-3 mt-3 fw-bolder text-white rounded-3">ADD</button>
+                        </form>
+                    </div>
                 </div>
             </Modal>
         </div>
