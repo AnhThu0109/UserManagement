@@ -4,7 +4,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquarePollVertical, faUserGroup, faUser, faRightToBracket, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { faSquarePollVertical, faUserGroup, faUser, faRightToBracket, faBars } from '@fortawesome/free-solid-svg-icons';
 import { Switch, Button, Avatar, Space, Menu, Dropdown } from "antd";
 import { logOut } from '../../utils/logout';
 import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from "@ant-design/icons";
@@ -27,12 +27,6 @@ const Layout = () => {
   const [isChangeTheme, setIsChangeTheme] = useState(false);
   const [title, setTitle] = useState("Dashboard");
   const [user1stName, set1stName] = useState("");
-
-  const changeTheme = (value) => {
-    console.log(value);
-    setTheme(value ? "dark" : "light");
-    setIsChangeTheme(value);
-  };
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
@@ -82,87 +76,27 @@ const Layout = () => {
     titleSetting();
   }, [token])
   return (
-    <div id="innerContent" className={isChangeTheme == true ? "darkTheme" : "lightTheme"}>
-      <div className={collapsed ? "navigationCollapsed navigation" : "navigation"}>
-        <div >
-          <div id="menu">
-            <nav className="navbar flex-column">
-              <p className='px-2 logo mt-3'>
-                <Button
-                  onClick={toggleCollapsed}
-                  className="border-0 btnCollapse d-flex align-items-center"
-                >
-                  {collapsed == true ? <MenuUnfoldOutlined /> : (
-                    <>
-                      <MenuFoldOutlined />
-                      <b className='ms-2'>Menu</b>
-                    </>
-                  )}
-                </Button>
-              </p>
-              {
-                collapsed == true ? (
-                  <></>
-                ) : (
-                  <>
-                    <hr className="hrLogo"></hr>
-                    <div className='menu'>
-                      <ul className="navbar-nav">
-                        <li className={active.activeDashboard == true || activeItem == 1 ? "active" : ""}>
-                          <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
-                            <Link className="nav-link pe-2" to="/home" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: true, activeStudents: false }); saveActiveItem(1); setTitle("Dashboard"); })}>
-                              <FontAwesomeIcon icon={faSquarePollVertical} className='me-2' />
-                              Dashboard
-                            </Link>
-                          </div>
-                        </li>
-
-                        <li className={active.activeStudents == true || activeItem == 2 ? "active" : ""}>
-                          <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
-                            <Link className="nav-link pe-2" to="/students" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: false, activeStudents: true }); saveActiveItem(2); setTitle("Students"); })}>
-                              <FontAwesomeIcon icon={faUserGroup} className='me-2' />
-                              Students
-                            </Link>
-                          </div>
-                        </li>
-
-                        {
-                          t != null &&
-                          <li className={active.activeAccount == true || activeItem == 3 ? "active" : ""}>
-                            <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
-                              <Link className="nav-link pe-2" to={`/students/${id}`} onClick={t != null && (() => { setActive({ activeAccount: true, activeDashboard: false, activeStudents: false }); saveActiveItem(3); setTitle("My Account"); })}><FontAwesomeIcon icon={faUser} className='me-2' />My Account</Link>
-                            </div>
-                          </li>
-                        }
-                      </ul>
-                    </div>
-                  </>
-                )
-              }
-
-            </nav>
-          </div>
+    <div className={collapsed == true ? "sb-nav-fixed" : "sb-nav-fixed sb-sidenav-toggled"}>
+      <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark d-flex justify-content-between">
+        <div className="d-flex align-items-center">
+          {
+            (t == null || token == "")? (
+              <></>
+            ) : (
+              <p className="ps-3 titleActive fw-bolder mt-2" href="#">{title}</p>
+            )
+          }
+          
+          
+          <Button
+            onClick={toggleCollapsed}
+            className="border-0 btnCollapse d-flex align-items-center" id="sidebarToggle"
+          >
+            {collapsed == true ? <MenuUnfoldOutlined /> : (
+              <MenuFoldOutlined />
+            )}
+          </Button>
         </div>
-        {
-          collapsed == true ? (
-            <></>
-          ) : (
-            <div className='text-center pb-5'>
-              <Switch
-                className="m-3"
-                checked={theme === "dark"}
-                onChange={changeTheme}
-                checkedChildren="Dark"
-                unCheckedChildren="Light"
-              />
-
-            </div>
-          )
-        }
-
-      </div>
-
-      <div className={collapsed == true ? "collapsedContent" : "content"}>
         {
           (t == null || token == "") ? (
             <div className="float-end p-3">
@@ -172,10 +106,7 @@ const Layout = () => {
             </div>
 
           ) : (
-            <div className="d-flex justify-content-between p-2 menuHorizontal align-items-center">
-              <h2 className={collapsed ? "titleActive  colorTitle fw-bolder ps-3 mt-2" : 'colorTitle fw-bolder ps-3 mt-2 mb-3'}>
-                {title}
-              </h2>
+            <div className="d-flex justify-content-between p-2 align-items-center">
               <div className="d-flex">
                 <div className="logOutTitle">
                   Hello,&nbsp;
@@ -196,9 +127,45 @@ const Layout = () => {
             </div>
           )
         }
+      </nav>
 
-        <hr className="hrLogin"></hr>
-        <div className="contentOutlet">
+      <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+          <nav className="sb-sidenav accordion sb-sidenav-dark">
+            <div className="sb-sidenav-menu">
+              <div className="nav">
+                <li className={active.activeDashboard == true || activeItem == 1 ? "active" : ""}>
+                  <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
+                    <Link className="nav-link pe-2" to="/home" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: true, activeStudents: false }); saveActiveItem(1); setTitle("Dashboard"); })}>
+                      <FontAwesomeIcon icon={faSquarePollVertical} className='me-2' />
+                      Dashboard
+                    </Link>
+                  </div>
+                </li>
+
+                <li className={active.activeStudents == true || activeItem == 2 ? "active" : ""}>
+                  <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
+                    <Link className="nav-link pe-2" to="/students" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: false, activeStudents: true }); saveActiveItem(2); setTitle("Students"); })}>
+                      <FontAwesomeIcon icon={faUserGroup} className='me-2' />
+                      Students
+                    </Link>
+                  </div>
+                </li>
+
+                {
+                  t != null &&
+                  <li className={active.activeAccount == true || activeItem == 3 ? "active" : ""}>
+                    <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
+                      <Link className="nav-link pe-2" to={`/students/${id}`} onClick={t != null && (() => { setActive({ activeAccount: true, activeDashboard: false, activeStudents: false }); saveActiveItem(3); setTitle("My Account"); })}><FontAwesomeIcon icon={faUser} className='me-2' />My Account</Link>
+                    </div>
+                  </li>
+                }
+              </div>
+            </div>
+          </nav>
+        </div>
+
+        <div id="layoutSidenav_content">
           <Outlet />
         </div>
       </div>

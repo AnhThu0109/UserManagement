@@ -110,13 +110,8 @@ function MyAccount() {
   }, [isUpdated]);
 
   return (
-    <div className="row userInfo pt-lg-2 pb-lg-3">
-      <div>
-      <label htmlFor="avatar-input">Upload Avatar:</label>
-      <input type="file" id="avatar-input" accept="image/*" onChange={handleFileSelect} />    
-    </div>
-
-      <div className="col-lg-4 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 ms-4 rounded-4 p-0">
+    <div className="row userInfo pt-lg-2 pb-lg-3 d-flex justify-content-center">
+      <div className="col-lg-4 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 me-lg-4 rounded-4 p-0">
         <div className="firstCol text-center">
           <Image src="https://demos.creative-tim.com/paper-dashboard/assets/img/damir-bosnjak.jpg" alt="" className="w-100 bgInfoImg"></Image>
 
@@ -138,7 +133,7 @@ function MyAccount() {
           {changeFormatDate(user?.updatedAt)}
         </div>
       </div>
-      <div className="col-lg-7 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 ms-4 rounded-4 p-3 mb-sm-3 mb-lg-0">
+      <div className="col-lg-7 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 rounded-4 p-3 mb-sm-3 mb-lg-0">
         <h3 className="fw-lighter">Edit Profile</h3>
         <form className="mb-3" onSubmit={handleUpdate}>
           <div className="row mb-2">

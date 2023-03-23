@@ -53,22 +53,13 @@ div.menuList {
     padding: 10px 0px 10px 15px;
 }
 
-.navigation .menu ul li.active div.darkTheme{
-    background-color: #6C7375;
+li.active{
+    background-color: #51cbce;
 }
 
-.navigation .menu ul li.active div.lightTheme a{
-    color:#ef8157 !important;
-    font-weight: lighter;
-}
-
-.navigation .menu ul li.active div.darkTheme a{
-    color:#0d1317 !important;
-}
-
-.navigation .menu ul li div>a{
-    color: #66615b !important;
-    font-weight: lighter;
+li.active a{
+    color: black !important;
+    font-weight: bolder;
 }
 
 hr{
@@ -93,7 +84,7 @@ button.ant-switch-checked{
 }
 
 .logInTitle{
-    color: #66615b !important;
+    color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .logOutTitle{
@@ -120,12 +111,9 @@ button.ant-switch-checked{
     color: black;
 }
 
-h2.titleActive{
-    margin-left: 40px !important;
-}
-
-.colorTitle{
-    color: #66615b;
+.titleActive{
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 25px;
 }
 
 #menu nav button{  
