@@ -65,7 +65,7 @@ function WelcomePage() {
                         </button>
                     </div>
 
-                    <p className="copyright">@NguyenNgocAnhThu - 2023</p>
+                    <p className="copyright">Copyright &copy; NguyenNgocAnhThu - 2023</p>
                 </div>
             ) : (
                 <div className="welcomePage2">

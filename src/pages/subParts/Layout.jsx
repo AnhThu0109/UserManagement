@@ -88,7 +88,6 @@ const Layout = () => {
           <div id="menu">
             <nav className="navbar flex-column">
               <p className='px-2 logo mt-3'>
-                {/* <img src='https://cdn-icons-png.flaticon.com/512/3773/3773713.png' className='logoIcon me-2'></img> */}
                 <Button
                   onClick={toggleCollapsed}
                   className="border-0 btnCollapse d-flex align-items-center"

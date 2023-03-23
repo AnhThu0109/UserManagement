@@ -46,3 +46,7 @@ div.userInfo{
     justify-content: center;
     align-items: center;
   }
+
+.activeImg{
+    border: 3px solid black;
+}

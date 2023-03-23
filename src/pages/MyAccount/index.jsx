@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import { getUserById } from "../../utils/getUser";
 import updateUser from "../../utils/updateUser";
 import { Image, message, Button, Modal, Segmented } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import changeFormatDate from "../../utils/formatDate";
+import Avatar from "../../utils/avatar";
 import "./../style.css";
 import "./style.css";
 
@@ -35,7 +38,7 @@ function MyAccount() {
     console.log(user);
     try {
       const data = await updateUser(id, token, user);
-      console.log(data);
+      // console.log(data);
       if (data) {
         setIsUpdated(true);
         message.success(`User ${user?.username} is updated successful !!!`);
@@ -47,27 +50,51 @@ function MyAccount() {
 
   //Show modal to update avatar
   const [activeOption, setActiveOption] = useState("Illustrate Images");
+  const [avatarSrc, setAvatarSrc] = useState("");
+  const [activeIndex, setActiveIndex] = useState(-1);
+
   const handleOptionChange = (value) => {
     setActiveOption(value);
     console.log(activeOption);
   };
+
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const showModalUpdate = () => {
-      setIsModalUpdateOpen(true);
+    setIsModalUpdateOpen(true);
   };
+
   const handleOkUpdate = () => {
-      setIsModalUpdateOpen(false);
+    setIsModalUpdateOpen(false);
   };
+
   const handleCancelUpdate = () => {
-      setIsModalUpdateOpen(false);
-      message.error('Upload avatar is canceled !!!');
+    setIsModalUpdateOpen(false);
+    message.error('Upload avatar is canceled !!!');
   };
-  
+
+  //Update avatar function
+  const handleUpdateAvatar = async () => {
+    let user = {
+      "avatar": avatarSrc,
+    }
+    try {
+      const data = await updateUser(id, token, user);
+      console.log(data);
+      if (data) {
+        setIsUpdated(true);
+        handleOkUpdate();
+        message.success(`Avatar is updated successful !!!`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   useEffect(() => {
     async function getData() {
       await getUserById(id, token).then((data) => {
-        console.log(data);
+        // console.log(data);
         setUser(data);
         setFirstname(data.firstname);
         setLastname(data.lastname);
@@ -84,14 +111,20 @@ function MyAccount() {
 
   return (
     <div className="row userInfo pt-lg-2 pb-lg-3">
+      <div>
+      <label htmlFor="avatar-input">Upload Avatar:</label>
+      <input type="file" id="avatar-input" accept="image/*" onChange={handleFileSelect} />    
+    </div>
+
       <div className="col-lg-4 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 ms-4 rounded-4 p-0">
         <div className="firstCol text-center">
           <Image src="https://demos.creative-tim.com/paper-dashboard/assets/img/damir-bosnjak.jpg" alt="" className="w-100 bgInfoImg"></Image>
-          <Image src={user?.avatar} className="avatar rounded-circle border border-2"></Image>
+
+          <Image src={user?.avatar} alt="Uploaded Image" className="avatar rounded-circle border border-2"/>
         </div>
 
         <div className="firstColInfo text-center pt-2">
-        <Button icon={<UploadOutlined />} onClick={showModalUpdate}>Upload Avatar</Button>
+          <Button icon={<UploadOutlined />} onClick={() => { showModalUpdate(); console.log(activeOption); }}>Change Avatar</Button>
           <h3 className="pt-3 pb-2">{user?.firstname != "" && user?.lastname != "" ? (<>{user?.firstname} {user?.lastname}</>) : ("Unknown")}</h3>
           <p>{user?.email}</p>
         </div>
@@ -153,13 +186,31 @@ function MyAccount() {
         </form>
       </div>
 
-      <Modal open={isModalUpdateOpen} onOk={handleOkUpdate} onCancel={handleCancelUpdate} footer={[]}>
-          <Segmented
-          options={['Illustrate Images', 'URL']}
-          selectedIndex={activeOption}
+      <Modal open={isModalUpdateOpen} onOk={handleOkUpdate} onCancel={handleCancelUpdate} footer={[
+        <Button key="close" className="okBtnModal fw-bolder" onClick={handleUpdateAvatar}>
+          SAVE
+        </Button>,
+      ]}>
+        <Segmented
+          options={['Illustrate Images', 'Upload']}
+          // selectedIndex={activeOption}
           onChange={handleOptionChange}>
-
-          </Segmented>
+        </Segmented><br></br>
+        {
+          activeOption === "Illustrate Images" ? (
+           <div className="row mt-2">
+            {
+              Avatar.map((item, index) => (
+                <div key={index} className="col-3 px-1 pb-2">
+                  <img src={item} className={index === activeIndex? "activeImg rounded-2 w-100" : "rounded-2 w-100"} onClick={() => {setAvatarSrc(item); setActiveIndex(index);}}></img>
+                </div>
+              ))
+            }
+           </div>
+          ) : (
+            <></>
+          )
+        }
       </Modal>
     </div>
 

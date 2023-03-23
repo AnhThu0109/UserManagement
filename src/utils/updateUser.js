@@ -2,7 +2,7 @@ import { GET_USERS } from "./API";
 
 async function updateUser(id, token, body) {
   let a = `${GET_USERS}${id}/update`;
-  console.log(JSON.stringify(body))
+  // console.log(JSON.stringify(body))
   return fetch(`${GET_USERS}${id}/update`, {
     method: "PUT",
     headers: { 'token': `Bearer ${token}`, 'Content-type': 'application/json'},

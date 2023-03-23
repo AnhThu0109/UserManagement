@@ -8,7 +8,9 @@ const Avatar = [
     "https://lh3.googleusercontent.com/LIKYV0YEfFAcnYCF6Eh2rAseP6Q1s_mynmmxoiE2s5TnCINqYUnA1QLYymHpdo2F4Pjpfd_-PDErU8zydf16pgVcNQ",
     "https://lh3.googleusercontent.com/WjFUFz5NDHeNZYiakIRz2Nas6Z-3jXMHcyCUmN5IBbBD7ZvsEjM-F0ePjqxiRZO7Bc9V7OvYaFmxHlpL-KPitW5JTA",
     "https://lh3.googleusercontent.com/CXJ89PcCSDQAdqL1xpyAhwfdz8nsICwJQRnuZ6Qq_2j5rgFUlezb40rt6EsR-7lJTfE2tWiZn5vLj4WA6VG2bxoBQA",
-    "https://lh3.googleusercontent.com/EPi93-LPlVSs4uM941_z_CkZBbMLPflmKkUdxczujseUAO8hTuRUzZonwoopUoRqWHveN29aihgHBFMx2NW4c4uBb_M"
+    "https://lh3.googleusercontent.com/EPi93-LPlVSs4uM941_z_CkZBbMLPflmKkUdxczujseUAO8hTuRUzZonwoopUoRqWHveN29aihgHBFMx2NW4c4uBb_M",
+    "https://lh3.googleusercontent.com/nVMZWsanNEcFhP3KT7GBUmAhP1DDBxo7O9yDFrrReT-t3j_BpIXFlfrSA7gkY8SVmClwkVdWLCMxavoyRXbyFEsdHQ",
+    "https://lh3.googleusercontent.com/MmUGFVYgNkEyktuqBEptwOwSp3gmMCmJbC8_-JDK0cpEkgu1jyJ1CD_EldYYoCqelIjLmtOI_8Gi33uP6pRCMu1yECc"
 ]
 
 export default Avatar;

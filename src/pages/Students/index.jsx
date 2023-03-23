@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown, Button, Space, Modal, Image, Menu, message, Popconfirm, Table, Input } from "antd";
-import { SearchOutlined, UploadOutlined } from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from 'react-highlight-words';
 import "./style.css";
 import "./../style.css"
@@ -11,7 +11,6 @@ import { getAllUser, getUserById } from '../../utils/getUser';
 import changeFormatDate from '../../utils/formatDate';
 import deleteUser from '../../utils/deleteUser';
 import { logOut } from '../../utils/logout';
-import updateUser from '../../utils/updateUser';
 import registerUser from '../../utils/registerUser';
 
 function Students() {
