@@ -80,7 +80,7 @@ tbody, td, tfoot, th, thead, tr {
 .ant-popover.ant-popconfirm.css-dev-only-do-not-override-1me4733.css-dev-only-do-not-override-1me4733{
     position: fixed;
     left: 35% !important;
-    top: 1% !important;
+    top: 10% !important;
     width: 40%;
 }
 
@@ -96,9 +96,9 @@ tbody, td, tfoot, th, thead, tr {
     color: grey;
 }
 
-/* ul.ant-pagination.ant-table-pagination.ant-table-pagination-right.css-dev-only-do-not-override-1me4733 {
-    display: none !important;
-} */
+.ant-message.ant-message-top.css-dev-only-do-not-override-1me4733 {
+    top: 10% !important;
+}
 
 .navigationCollapsed button{
     margin-left: 10px !important;

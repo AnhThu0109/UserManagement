@@ -23,7 +23,6 @@ const Layout = () => {
   const firstname = localStorage.getItem("userFirstName");
   const activeItem = localStorage.getItem("active");
   const [collapsed, setCollapsed] = useState(false);
-  const [theme, setTheme] = useState("light");
   const [isChangeTheme, setIsChangeTheme] = useState(false);
   const [title, setTitle] = useState("Dashboard");
   const [user1stName, set1stName] = useState("");

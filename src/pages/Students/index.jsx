@@ -313,7 +313,7 @@ function Students() {
             username: item.username,
             gender: item.gender,
             email: item.email,
-            created: isAdmin === false ? (
+            created: isAdmin == "false" ? (
                 <>
                     {changeFormatDate(item.createdAt)} &nbsp;&nbsp;
                     <Dropdown overlay={itemNormalUser} trigger={['click']}>
@@ -379,9 +379,15 @@ function Students() {
         <div className='allAcountContent'>
             <div className='d-flex justify-content-between'>
                 <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} users.</h3>
-                <Link onClick={showModalNew}>
-                    <FontAwesomeIcon icon={faUserPlus} className='addUser'></FontAwesomeIcon>
-                </Link>
+                {
+                    isAdmin == "false" ? (
+                        <></>
+                    ) : (
+                        <Link onClick={showModalNew}>
+                            <FontAwesomeIcon icon={faUserPlus} className='addUser'></FontAwesomeIcon>
+                        </Link>
+                    )
+                }
             </div>
             <div className='accountTable'>
                 <Table columns={columns} dataSource={data} onChange={onChangeTable} pagination={{ pageSize: 7 }} scroll={{

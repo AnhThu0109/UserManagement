@@ -187,7 +187,7 @@ function MyAccount() {
         </Button>,
       ]}>
         <Segmented
-          options={['Illustrate Images', 'Upload']}
+          options={['Illustrate Images', 'URL']}
           // selectedIndex={activeOption}
           onChange={handleOptionChange}>
         </Segmented><br></br>

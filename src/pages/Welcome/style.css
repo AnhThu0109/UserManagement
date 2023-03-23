@@ -23,7 +23,7 @@
 }
 
 #container {
-    color: #FFC0C7;
+    color: #ffb703;
     text-transform: uppercase;
     font-size: 36px;
     font-weight: bold;
@@ -40,7 +40,7 @@
 }
 
 #flip>div>div {
-    color: #fff;
+    color: #219ebc;
     padding: 4px 12px;
     height: 45px;
     margin-bottom: 45px;
@@ -51,7 +51,7 @@
     animation: show 5s linear infinite;
 }
 
-#flip div div {
+/* #flip div div {
     background: #42c58a;
 }
 
@@ -61,7 +61,7 @@
 
 #flip div:last-child div {
     background: #DC143C;
-}
+} */
 
 @keyframes show {
     0% {

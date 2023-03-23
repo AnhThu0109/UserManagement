@@ -4,6 +4,7 @@
 
 button.savechangeBtn{
     background-color: #51cbce;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 button.savechangeBtn:hover{
@@ -49,4 +50,13 @@ div.userInfo{
 
 .activeImg{
     border: 3px solid black;
+}
+
+.firstColInfo button svg{
+    margin-bottom: 6px;
+}
+
+.firstColInfo button {
+    border: 0px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
