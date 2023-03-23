@@ -28,16 +28,6 @@ function Students() {
     const id = localStorage.getItem("userChosenId");
     const loginUserId = localStorage.getItem("id");
 
-    //State for update user
-    const [username, setUsername] = useState();
-    const [firstname, setFirstname] = useState();
-    const [lastname, setLastname] = useState();
-    const [phone, setPhone] = useState();
-    const [location, setLocation] = useState();
-    const [email, setEmail] = useState();
-    const [gender, setGender] = useState();
-    const [isUpdated, setIsUpdated] = useState(false);
-
     //Get id of chosen user
     const userChosen = (id) => {
         console.log(id);
@@ -57,44 +47,6 @@ function Students() {
         setIsModalOpen(false);
     };
 
-    //Show modal to update user info
-    const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
-    const showModalUpdate = () => {
-        setIsModalUpdateOpen(true);
-    };
-    const handleOkUpdate = () => {
-        setIsModalUpdateOpen(false);
-    };
-    const handleCancelUpdate = () => {
-        setIsModalUpdateOpen(false);
-        message.error('Edit request is canceled !!!');
-    };
-
-    //Update info user function
-    const handleUpdate = async (event) => {
-        event.preventDefault();
-        let user = {
-            "firstname": firstname,
-            "lastname": lastname,
-            "username": username,
-            "email": email,
-            "phone": phone,
-            "location": location,
-            "gender": gender,
-        }
-        console.log(user);
-        try {
-            const data = await updateUser(id, token, user);
-            console.log(data);
-            if (data) {
-                setIsUpdated(true);
-                handleOkUpdate();
-                message.success(`User ${chosenUser?.username} is updated successful !!!`);
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     //Confirm delete and show message when cancel delete or delete successful
     const confirm = (e) => {
@@ -170,14 +122,6 @@ function Students() {
         },
         {
             key: '2',
-            label: (
-                <Link rel="noopener noreferrer" className='nav-link' onClick={showModalUpdate}>
-                    Edit
-                </Link>
-            ),
-        },
-        {
-            key: '3',
             label: (
                 <Popconfirm
                     placement=""
@@ -421,13 +365,6 @@ function Students() {
                     setChosenUser(data);
                     localStorage.setItem("chosenUsername", data.username);
                     console.log("chosen user", data);
-                    setUsername(data.username);
-                    setFirstname(data.firstname);
-                    setLastname(data.lastname);
-                    setEmail(data.email);
-                    setPhone(data.phone);
-                    setLocation(data.location);
-                    setGender(data.gender);
                 })
         }
 
@@ -436,9 +373,8 @@ function Students() {
             getUserChosen();
         }
         setIsDeleted(false);
-        setIsUpdated(false);
         setIsAddNew(false);
-    }, [currentPage, collapsedContent, userId, isDeleted, isUpdated, isAddNew])
+    }, [currentPage, collapsedContent, userId, isDeleted, isAddNew])
 
     return (
         <div className='allAcountContent'>
@@ -496,60 +432,6 @@ function Students() {
                     </div>
                     <p><b>Created at:</b> {changeFormatDate(chosenUser?.createdAt)}</p>
                     <p><b>Last updated at:</b> {changeFormatDate(chosenUser?.updatedAt)}</p>
-                </div>
-            </Modal>
-
-            {/* Modal update user information */}
-            <Modal open={isModalUpdateOpen} onOk={handleOkUpdate} onCancel={handleCancelUpdate} footer={[]}>
-                <div>
-                    <h4 className='text-center fw-bolder titleEdit'>Account Setting</h4>
-                    <div className='row pt-3'>
-                        <div className="col-sm-12 col-lg-4 text-center">
-                            <Image src={chosenUser?.avatar} className='avatar rounded-circle border border-2 me-sm-3'></Image>
-                            <Button icon={<UploadOutlined />}>Upload Avatar</Button>
-                        </div>
-                        <div className="col">
-                            <form className="mb-2" onSubmit={handleUpdate}>
-                                <div className="row">
-                                    <div className="col-sm-12 col-lg-6 mb-2">
-                                        <label for="" className="form-label text-secondary">First name</label>
-                                        <input type="text" className="form-control border border-2" name="" id="" value={firstname} placeholder="First name" onChange={(e) => setFirstname(e.target.value)}></input>
-                                    </div>                   <div className="col mb-2">
-                                        <label for="" className="form-label text-secondary">Last name</label>
-                                        <input type="text" className="border border-2 form-control" name="" id="" value={lastname} placeholder="Last name" onChange={(e) => setLastname(e.target.value)}></input>
-                                    </div>
-                                </div>
-                                <div className="mb-2">
-
-                                </div>
-                                <div className="mb-2">
-                                    <label for="" className="form-label text-secondary">Username</label>
-                                    <input type="text" className="border border-2 form-control" name="" id="" value={username} placeholder="Username" required onChange={(e) => setUsername(e.target.value)}></input>
-                                </div>
-                                <div className="mb-2">
-                                    <label for="" className="form-label text-secondary">Gender</label>
-                                    <select className="border border-2 form-select" value={gender} onChange={(e) => setGender(e.target.value)}>
-                                        <option value="Male" readOnly>Male</option>
-                                        <option value="Female" readOnly>Female</option>
-                                    </select>
-                                </div>
-
-                                <div className="mb-2">
-                                    <label for="" className="form-label text-secondary">Email</label>
-                                    <input type="email" className="border border-2 form-control" name="" id="" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
-                                </div>
-                                <div className="mb-2">
-                                    <label for="" className="form-label text-secondary">Phone</label>
-                                    <input type="tel" className="border border-2 form-control" name="" id="" value={phone} placeholder="0123456789" onChange={(e) => setPhone(e.target.value)} pattern="[0-9]{10}"></input>
-                                </div>
-                                <div className="mb-2">
-                                    <label for="" className="form-label text-secondary">Address</label>
-                                    <input type="text" className="border border-2 form-control" name="" id="" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
-                                </div>
-                                <button type="submit" className="okBtnModal py-2 px-3 mt-3 fw-bolder text-white rounded-3">SAVE CHANGES</button>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </Modal>
 
