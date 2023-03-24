@@ -402,7 +402,7 @@ function Students() {
     return (
         <div className='allAcountContent'>
             <div className='d-flex justify-content-between'>
-                <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} users.</h3>
+                <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} students.</h3>
                 {
                     isAdmin == "false" ? (
                         <></>
