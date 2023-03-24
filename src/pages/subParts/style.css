@@ -50,7 +50,13 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
 
 ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733{
     position: fixed !important;
-    right: 2%;
+    right: 2.4%;
+}
+
+:where(.css-dev-only-do-not-override-1me4733).ant-dropdown {
+    /* position: static !important;  */
+    top: 44px !important;
+    right: 0px !important;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -84,6 +90,26 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
         margin-bottom: 0px !important;
     }
 }
+
+/* Galaxy Fold + iphone SE*/
+@media only screen and (min-width: 280px) and (max-width: 600px) {
+    .card-item {
+        height: 200px;
+    }
+
+    .avatarUserChosen {
+        margin-top: -60%;
+    }
+
+    .modalSeeInfo .ant-modal-content {
+        top: 10px;
+    }
+
+    input.form-control.border.border-2.rounded-3.px-4.py-1.ms-3 {
+        width: 93%;
+    }
+}
+
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px)  {
@@ -122,6 +148,10 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
 
     .barChart{
         margin-bottom: 0px !important;
+    }
+
+    .card-item div {
+        font-size: 14px !important;
     }
 }
 

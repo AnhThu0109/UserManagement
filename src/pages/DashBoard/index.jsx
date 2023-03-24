@@ -108,12 +108,12 @@ function DashBoard() {
                             <img src='https://cdn-icons-png.flaticon.com/512/10156/10156019.png' className="dashboardIcon"></img>
                         </p>
                         <hr></hr>
-                        <p>{users?.length} students</p>
+                        <div>{users?.length} students</div>
                     </div>
                 </div>
                 <div className="col-lg-4 col-sm-12 mb-3">
                     <div className="bg-white border-0 rounded-3 card-item p-3">
-                        <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Students Added Recently
+                        <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Added Students
                             <img src='https://cdn-icons-png.flaticon.com/512/10155/10155992.png' className="dashboardIcon"></img>
                         </p>
                         <hr></hr>
@@ -144,7 +144,7 @@ function DashBoard() {
                 </div>
                 <div className="col-lg-4 col-sm-12 mb-3">
                     <div className="bg-white border-0 rounded-3 card-item p-3">
-                        <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Students Updated Recently
+                        <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Updated Students 
                             <img src='https://cdn-icons-png.flaticon.com/512/10155/10155970.png' className="dashboardIcon"></img>
                         </p>
                         <hr></hr>
@@ -180,9 +180,9 @@ function DashBoard() {
                 <div className="barChart col-sm-12 col-lg-8">
                     <div className="col-xl-6 chartContent">
                         <div className="card mb-3 chartBody">
-                            <div className="card-header">
+                            <div className="card-header fw-bolder">
                                 <FontAwesomeIcon icon={faChartColumn} className='me-2'></FontAwesomeIcon>
-                                Top Active Students
+                                Top Ten Active Students
                             </div>
                             <div style={{ height: "100%" }}>
                                 {

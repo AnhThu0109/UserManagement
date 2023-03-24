@@ -57,7 +57,7 @@ const Layout = () => {
   const item = (
     <Menu className='dropDownLogOut'>
       <Menu.Item key="1">
-        <Link rel="noopener noreferrer" className='nav-link' onClick={logoutFunc}>
+        <Link  className='nav-link' onClick={logoutFunc}>
           Logout
         </Link>
       </Menu.Item>
@@ -112,6 +112,7 @@ const Layout = () => {
                   {firstname != "" ? (firstname) : ("User")}&nbsp;
                 </div>
                 <Dropdown overlay={item} trigger={['click']}>
+                  <div>
                   <Space size={16} wrap>
                     <Avatar className="avatarNavBar"
                       style={{
@@ -121,6 +122,7 @@ const Layout = () => {
                       icon={<UserOutlined />}
                     />
                   </Space>
+                  </div>
                 </Dropdown>
               </div>
             </div>
