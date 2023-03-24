@@ -6,12 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartColumn } from '@fortawesome/free-solid-svg-icons';
 import { Calendar, theme } from "antd";
 import { getAllUser } from "../../utils/getUser";
+import changeFormatDate from "../../utils/formatDate";
 import "./style.css";
 
 function DashBoard() {
     const userToken = localStorage.getItem("token");
     const [users, setUsers] = useState();
     const [dataTopActiveChart, setDataTopActiveChart] = useState();
+    const [recentAddedUser, setRecentAddedUser] = useState();
+    const [recentUpdatedUser, setRecentUpdatedUser] = useState();
 
     //Using antd calendar
     const onPanelChange = (value, mode) => {
@@ -24,6 +27,25 @@ function DashBoard() {
         borderRadius: token.borderRadiusLG,
     };
 
+    //Function to get recently user added/updated
+    const getRecentlyUser = (propertyFilter, users, todayTime) => {
+        let arr = users.filter(person => {
+            const time = new Date(person[propertyFilter]); 
+            return time.getDate() === todayTime.getDate() && time.getMonth() === todayTime.getMonth() && time.getFullYear() === todayTime.getFullYear();
+        });
+        console.log("dfds", arr);
+        //Sort property desc
+        arr = arr.sort((a, b) => { return new Date(b[propertyFilter]) - new Date(a[propertyFilter])});
+        console.log("sort", arr);
+
+        //Take 3 top users
+        const newArr = [];
+        for(let i = 0; i<3; i++){
+            newArr.push(arr[i]);
+        }
+        return newArr;
+    }
+
     useEffect(() => {
         //Get all users
         async function getData() {
@@ -31,9 +53,19 @@ function DashBoard() {
                 .then(data => {
                     console.log(data);
                     setUsers(data);
-                    const arr = [];
+                    const today = new Date();
 
+                    //Take 3 recently added users (who was added today)
+                    let recentAddedArr = getRecentlyUser("createdAt", data, today);
+                    setRecentAddedUser(recentAddedArr);
+
+                    //Take 3 recently updated users (who was updated today)
+                    let recentUpdatedArr = getRecentlyUser("updatedAt", data, today);
+                    setRecentUpdatedUser(recentUpdatedArr);
+
+                    //Chart data
                     //Sort data based on logintime desc
+                    const arr = [];
                     data.sort((a, b) => b.logintime - a.logintime);
                     console.log("datasort", data);
                     //Take 10 top activity users
@@ -85,16 +117,60 @@ function DashBoard() {
                             <img src='https://cdn-icons-png.flaticon.com/512/10155/10155992.png' className="dashboardIcon"></img>
                         </p>
                         <hr></hr>
-                        <p>{users?.length} students</p>
+
+                        {/* Display 3 user recently created today */}
+                        <div>
+                            {
+                                recentAddedUser?.length == 0? (
+                                    <>There is no student added today.</>
+                                ) : (
+                                    recentAddedUser?.map((item, index) => (
+                                        <div key={index} className='d-flex justify-content-between'>
+                                            <div>
+                                                {item?.firstname}&nbsp;
+                                                {item?.lastname}
+                                            </div>
+                                            <div>
+                                                {
+                                                    changeFormatDate(item?.createdAt)
+                                                }
+                                            </div>
+                                        </div>
+                                    ))
+                                )
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className="col-lg-4 col-sm-12 mb-3">
                     <div className="bg-white border-0 rounded-3 card-item p-3">
-                        <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Students Deleted Recently
+                        <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Students Updated Recently
                             <img src='https://cdn-icons-png.flaticon.com/512/10155/10155970.png' className="dashboardIcon"></img>
                         </p>
                         <hr></hr>
-                        <p>{users?.length} students</p>
+
+                        {/* Display 3 user recently updated today */}
+                        <div>
+                        {
+                                recentAddedUser?.length == 0? (
+                                    <>There is no student updated their infomation today.</>
+                                ) : (
+                                    recentUpdatedUser?.map((item, index) => (
+                                        <div key={index} className='d-flex justify-content-between'>
+                                            <div>
+                                                {item?.firstname}&nbsp;
+                                                {item?.lastname}
+                                            </div>
+                                            <div>
+                                                {
+                                                    changeFormatDate(item?.updatedAt)
+                                                }
+                                            </div>
+                                        </div>
+                                    ))
+                                )
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,7 +184,7 @@ function DashBoard() {
                                 <FontAwesomeIcon icon={faChartColumn} className='me-2'></FontAwesomeIcon>
                                 Top Active Students
                             </div>
-                            <div style={{height: "100%"}}>
+                            <div style={{ height: "100%" }}>
                                 {
                                     dataTopActiveChart &&
                                     <Bar data={dataTopActiveChart} />
