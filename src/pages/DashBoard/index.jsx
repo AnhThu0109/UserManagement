@@ -43,6 +43,7 @@ function DashBoard() {
         for(let i = 0; i<3; i++){
             newArr.push(arr[i]);
         }
+        console.log("arr", arr.length);
         return newArr;
     }
 
@@ -57,11 +58,15 @@ function DashBoard() {
 
                     //Take 3 recently added users (who was added today)
                     let recentAddedArr = getRecentlyUser("createdAt", data, today);
-                    setRecentAddedUser(recentAddedArr);
+                    //Just take undefined user
+                    let addedArr = recentAddedArr.filter( user => user !== undefined);
+                    setRecentAddedUser(addedArr);
 
                     //Take 3 recently updated users (who was updated today)
                     let recentUpdatedArr = getRecentlyUser("updatedAt", data, today);
-                    setRecentUpdatedUser(recentUpdatedArr);
+                    //Just take undefined user
+                    let updatedArr = recentUpdatedArr.filter( user => user !== undefined);
+                    setRecentUpdatedUser(updatedArr);
 
                     //Chart data
                     //Sort data based on logintime desc
@@ -118,12 +123,12 @@ function DashBoard() {
                         </p>
                         <hr></hr>
 
+                        <div>{console.log(recentAddedUser)}</div>
+
                         {/* Display 3 user recently created today */}
                         <div>
                             {
-                                recentAddedUser?.length == 0? (
-                                    <>There is no student added today.</>
-                                ) : (
+                                recentAddedUser && recentAddedUser?.length != 0 ? (
                                     recentAddedUser?.map((item, index) => (
                                         <div key={index} className='d-flex justify-content-between'>
                                             <div>
@@ -137,7 +142,9 @@ function DashBoard() {
                                             </div>
                                         </div>
                                     ))
-                                )
+                                ) : (
+                                    <>There is no student added today.</>
+                                ) 
                             }
                         </div>
                     </div>
@@ -152,9 +159,7 @@ function DashBoard() {
                         {/* Display 3 user recently updated today */}
                         <div>
                         {
-                                recentAddedUser?.length == 0? (
-                                    <>There is no student updated their infomation today.</>
-                                ) : (
+                                recentUpdatedUser && recentUpdatedUser?.length != 0 ? (
                                     recentUpdatedUser?.map((item, index) => (
                                         <div key={index} className='d-flex justify-content-between'>
                                             <div>
@@ -168,7 +173,9 @@ function DashBoard() {
                                             </div>
                                         </div>
                                     ))
-                                )
+                                ) : (
+                                    <>There is no student updated their infomation today.</>
+                                ) 
                             }
                         </div>
                     </div>
@@ -184,7 +191,7 @@ function DashBoard() {
                                 <FontAwesomeIcon icon={faChartColumn} className='me-2'></FontAwesomeIcon>
                                 Top Ten Active Students
                             </div>
-                            <div style={{ height: "100%" }}>
+                            <div style={{ height: "88%" }}>
                                 {
                                     dataTopActiveChart &&
                                     <Bar data={dataTopActiveChart} />

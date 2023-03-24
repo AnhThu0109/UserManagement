@@ -53,7 +53,7 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
     right: 2.4%;
 }
 
-:where(.css-dev-only-do-not-override-1me4733).ant-dropdown {
+.dropDownLogOut:where(.css-dev-only-do-not-override-1me4733).ant-dropdown {
     /* position: static !important;  */
     top: 44px !important;
     right: 0px !important;
@@ -89,6 +89,10 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
     .barChart{
         margin-bottom: 0px !important;
     }
+
+    ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
+        right: 2.6%;
+    }
 }
 
 /* Galaxy Fold + iphone SE*/
@@ -116,6 +120,9 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
     .barChart{
         margin-bottom: 60px !important;
     }
+    ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
+        right: 1%;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -125,7 +132,7 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
     }
 
     .barChart .chartContent{
-        height: 350px;
+        height: 320px;
     }
 
     .barChart{
@@ -153,6 +160,10 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
     .card-item div {
         font-size: 14px !important;
     }
+
+    ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
+        right: 0.6%;
+    }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -160,6 +171,10 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
     .sb-sidenav-toggled .barChart canvas{
         position: relative;
         left: 10%;
+    }
+
+    ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
+        right: 0.6%;
     }
 }
 
