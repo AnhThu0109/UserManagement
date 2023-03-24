@@ -5,3 +5,33 @@
 .dashboardIcon{
     width: 50px;
 }
+
+.barChart .chartContent{
+    width: 100%;
+}
+
+.barChart .card-header{
+    background-color: #ef8157;
+    border: 0px;
+}
+
+.barChart .chartBody{
+    border: 0px;
+}
+
+.barChart canvas{
+    height: 100% !important;
+}
+
+.calendarBody {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.calendarBody .ant-picker-calendar.ant-picker-calendar-mini.css-dev-only-do-not-override-1me4733{
+    height: 100%;
+}
+
+.calendarBody .ant-picker-panel{
+    width: 100%;
+}

@@ -94,7 +94,7 @@ function MyAccount() {
   useEffect(() => {
     async function getData() {
       await getUserById(id, token).then((data) => {
-        // console.log(data);
+        console.log(data);
         setUser(data);
         setFirstname(data.firstname);
         setLastname(data.lastname);

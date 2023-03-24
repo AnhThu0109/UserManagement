@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import loginUser from '../../utils/loginUser';
+import { getUserById } from '../../utils/getUser';
+import updateUser from '../../utils/updateUser';
 import "./style.css";
 
 const Login = () => {
@@ -9,6 +11,7 @@ const Login = () => {
   const [isAuth, setIsAuth] = useState(true);
   const [errMess, setErrMess] = useState("");
   const [token, setToken] = useState(1);
+  const [user, setUser]  = useState();
   const navigate = useNavigate();
   let t = localStorage.getItem('token');
 
@@ -20,6 +23,32 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
+  //Update login time when user login to system --> logintime data use for chart in dashboard 
+  const handleUpdate = async (id, token) => {
+    let loginTime = 0;
+    //Get user by Id
+    await getUserById(id, token).then((data) => {
+      console.log("user", data);
+      setUser(data);
+
+      //Just update logintime for normal users
+      if(data.isAdmin == false){
+        loginTime = data.logintime + 1;
+      }
+    });
+    let user = {
+      "logintime": loginTime,
+    }
+    console.log(user);
+    //Update logintime to database
+    try {
+      await updateUser(id, token, user);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  //Submit function for login form
   const handleSubmit = async (event) => {
     event.preventDefault();
     let user = {
@@ -38,14 +67,15 @@ const Login = () => {
         localStorage.setItem("active", 1);
         localStorage.setItem("isAdmin", data.isAdmin);
         setToken(data.accessToken);
+        handleUpdate(data._id, data.accessToken);
         navigate("/home");
       }   
       else if (response.status === 404) { // handle 404 error
-      setIsAuth(false);
-      setErrMess("Incorrect password");
+        setIsAuth(false);
+        setErrMess("Incorrect password");
       } else {
-      setIsAuth(false);
-      setErrMess("User not found");
+        setIsAuth(false);
+        setErrMess("User not found");
       }
     } catch (error) {
       console.error(error);   
@@ -87,7 +117,7 @@ const Login = () => {
             />
           </div>
           <button type="submit" className='mt-3 mb-3 text-white btn btn-secondary formLoginBtn'>Login</button><br></br>
-          <small className='text-secondary'>Don't have an account?<Link to="/register" className='text-decoration-none'> Created here!</Link></small>
+          {/* <small className='text-secondary'>Don't have an account?<Link to="/register" className='text-decoration-none'> Created here!</Link></small> */}
         </form>
         </div>     
 

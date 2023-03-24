@@ -79,11 +79,17 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
         margin-top: 15px;
         width: 25px;
     }
+
+    .barChart{
+        margin-bottom: 0px !important;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    
+@media only screen and (min-width: 600px)  {
+    .barChart{
+        margin-bottom: 60px !important;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -91,15 +97,39 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
     div.userInfo {
         margin: -15px 0px 0px 0px;
     }
+
+    .barChart .chartContent{
+        height: 350px;
+    }
+
+    .barChart{
+        margin-bottom: 75px !important;
+    }    
+}
+
+/* Medium devices (912px and up) */
+@media only screen and (min-width: 912px) and (max-width: 992px) {
+    .barChart{
+        margin-bottom: 150px !important;
+    }    
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    
+    .barChart .chartBody{
+        height: 100%;
+    }
+
+    .barChart{
+        margin-bottom: 0px !important;
+    }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-
+    .sb-sidenav-toggled .barChart canvas{
+        position: relative;
+        left: 10%;
+    }
 }
 
