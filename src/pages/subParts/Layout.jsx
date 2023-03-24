@@ -4,11 +4,12 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquarePollVertical, faUserGroup, faUser, faRightToBracket, faBars } from '@fortawesome/free-solid-svg-icons';
-import { Switch, Button, Avatar, Space, Menu, Dropdown } from "antd";
+import { faSquarePollVertical, faUserGroup, faUser, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { Button, Avatar, Space, Menu, Dropdown } from "antd";
 import { logOut } from '../../utils/logout';
 import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from "@ant-design/icons";
 import("./style.css");
+import("../../index.css");
 
 const Layout = () => {
   const [active, setActive] = useState({
@@ -134,7 +135,7 @@ const Layout = () => {
             <div className="sb-sidenav-menu">
               <div className="nav">
                 <li className={active.activeDashboard == true || activeItem == 1 ? "active" : ""}>
-                  <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
+                  <div className="menuList">
                     <Link className="nav-link pe-2" to="/home" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: true, activeStudents: false }); saveActiveItem(1); setTitle("Dashboard"); })}>
                       <FontAwesomeIcon icon={faSquarePollVertical} className='me-2' />
                       Dashboard
@@ -143,7 +144,7 @@ const Layout = () => {
                 </li>
 
                 <li className={active.activeStudents == true || activeItem == 2 ? "active" : ""}>
-                  <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
+                  <div className="menuList">
                     <Link className="nav-link pe-2" to="/students" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: false, activeStudents: true }); saveActiveItem(2); setTitle("Students"); })}>
                       <FontAwesomeIcon icon={faUserGroup} className='me-2' />
                       Students
@@ -154,7 +155,7 @@ const Layout = () => {
                 {
                   t != null &&
                   <li className={active.activeAccount == true || activeItem == 3 ? "active" : ""}>
-                    <div className={isChangeTheme == true ? "menuList darkTheme" : "menuList lightTheme"}>
+                    <div className="menuList">
                       <Link className="nav-link pe-2" to={`/students/${id}`} onClick={t != null && (() => { setActive({ activeAccount: true, activeDashboard: false, activeStudents: false }); saveActiveItem(3); setTitle("My Account"); })}><FontAwesomeIcon icon={faUser} className='me-2' />My Account</Link>
                     </div>
                   </li>

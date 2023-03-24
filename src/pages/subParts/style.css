@@ -1,7 +1,3 @@
-.logoIcon{
-    width: 35px;
-}
-
 .btnCollapse{
     background-color: transparent;
     font-size: 20px;
@@ -12,71 +8,18 @@
     margin-bottom: 8px;
 }
 
-.navigation{
-    position: fixed;
-    width: fit-content;
-    height: 100%;   
-    color: #66615b !important;
-    font-weight: bolder !important;
-}
-
-.navigationCollapsed{
-    height: 7% !important;
-    position: relative;
-    margin-bottom: -10%;
-}
-
-.navigation.lightTheme{
-    background-color: white;
-}
-
-.navigation.darkTheme{
-    background-color: rgb(24, 23, 23);
-}
-
-.navigation #menu {
-    height: 75%;
-}
-
-.navigation #menu nav{
-    height: 100%;
-    justify-content: flex-start;
-}
-
-.navigation .menu{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
 div.menuList {
     padding: 10px 0px 10px 15px;
 }
 
 li.active{
     background-color: #51cbce;
+    border-left: 3px solid greenyellow;
 }
 
 li.active a{
     color: black !important;
     font-weight: bolder;
-}
-
-hr{
-    color: #d1ccc5 !important;
-    margin: 0px;
-}
-
-hr.hrLogin {
-    border-top: 1px solid;
-    opacity: 1;
-    width: 100%;
-}
-
-hr.hrLogo{
-    border-top: 2px solid;
-    opacity: 1;
-    width: 80%;
 }
 
 button.ant-switch-checked{
@@ -91,53 +34,9 @@ button.ant-switch-checked{
     color: #ef8157 !important;
 }
 
-#innerContent{
-    height: 100%;
-}
-
-#innerContent.darkTheme{
-    background-color: #353839;
-    color: white !important;
-}
-
-#innerContent.darkTheme table{
-    background-color: #91a9b2;
-    /* color: white !important; */
-    border-radius: 10px;
-}
-
-#innerContent.lightTheme{
-    background-color: white;
-    color: black;
-}
-
 .titleActive{
     color: rgba(255, 255, 255, 0.5);
     font-size: 25px;
-}
-
-#menu nav button{  
-    background-color: white;
-    padding-top: 10px;
-    margin-top: -2px !important;
-}
-
-#menu nav button.ant-btn-default:not(:disabled):hover{
-    color: #51cbce !important;
-}
-
-/* Pagination */
-#innerContent.darkTheme ul.ant-pagination{
-    color: white;
-}
-
-#innerContent.darkTheme li.ant-pagination-item-active {
-    color: black;
-    border: none;
-}
-
-#innerContent.darkTheme button.ant-pagination-item-link {
-    color: white !important;
 }
 
 a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
@@ -145,115 +44,62 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
     padding: 0px !important;
 }
 
-#innerContent ul.dropdown-menu.text-center.show {
-    min-width: fit-content;
-    padding: 8px 10px;
-}
-
-div.menuHorizontal{
-    height: 12%;
-    background-color: #f2f2f2
-}
-
-div.contentOutlet{
-    height: 88%;
-    background-color: #f2f2f2;
-}
-
 .avatarNavBar svg {
     margin-top: -10px;
+}
+
+ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733{
+    position: fixed !important;
+    right: 2%;
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     body {
-        font-size: 10px;
+        font-size: 14px;
     }
 
-    .logoIcon, #menu .logo b.ms-2 {
-        width: 15px;
-        font-size: 15px;
+    .titleActive {
+        display: none;
     }
 
-    #menu .logo button{
-        padding-left: 0px;
-        padding-right: 0px;
+    input{
+        font-size: 14px !important;
     }
 
-    #menu .logo{
-        font-size: 12px !important;
+    .userInfo>div.col-lg-4.col-sm-11.border-0.bg-white.mt-lg-4.mt-sm-3.me-lg-4.rounded-4.p-0 {
+        margin: 10px 0px !important;
     }
 
-    .navigation .menu ul li{
-        padding: 10px 0px 10px 9px !important;
+    div.userInfo {
+        margin: 0px 10px 10px 10px;
     }
 
-    .navigation{
-        background-color: white;
-    }
-
-    div.menuList {
-        padding: 5px 0px 5px 0px;
-    }
-
-    .menuHorizontal h2.colorTitle.fw-bolder.ps-3.mt-2 {
-        font-size: 15px;
-        margin-left: 25px !important;
-    }
-
-    div.menuHorizontal {
-        height: auto;
-    }
-    .navigation #menu nav {
-        padding: 0;
-    }
-
-    .accountTable {
-        padding: 0px 5px;
-    }
-
-    span.anticon.anticon-menu-unfold {
-        padding: 0px 5px;
+    .addUser {
+        margin-top: 15px;
+        width: 25px;
     }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .collapsedContent .menuHorizontal h2.colorTitle.fw-bolder.ps-3.mt-2 {
-        margin-left: 55px !important;
-    }
-
-    .content .menuHorizontal h2.colorTitle.fw-bolder.ps-3.mt-2 {
-        margin-left: 5px !important;
-    }
-
-    div.menuHorizontal {
-        height: auto;
-    }
-    .navigationCollapsed{
-        margin-bottom: -42px !important;
-    }
+    
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    #menu .logo{
-        font-size: 25px !important;
+    div.userInfo {
+        margin: -15px 0px 0px 0px;
     }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    #menu .logo{
-        font-size: 25px !important;
-    }
+    
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 
-    #menu .logo{
-        font-size: 25px !important;
-    }
 }
 
