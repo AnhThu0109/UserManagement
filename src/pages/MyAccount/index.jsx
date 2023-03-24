@@ -49,14 +49,8 @@ function MyAccount() {
   }
 
   //Show modal to update avatar
-  const [activeOption, setActiveOption] = useState("Illustrate Images");
   const [avatarSrc, setAvatarSrc] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
-
-  const handleOptionChange = (value) => {
-    setActiveOption(value);
-    console.log(activeOption);
-  };
 
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const showModalUpdate = () => {
@@ -115,11 +109,11 @@ function MyAccount() {
         <div className="firstCol text-center">
           <Image src="https://demos.creative-tim.com/paper-dashboard/assets/img/damir-bosnjak.jpg" alt="" className="w-100 bgInfoImg"></Image>
 
-          <Image src={user?.avatar} alt="Uploaded Image" className="avatar rounded-circle border border-2"/>
+          <Image src={user?.avatar} alt="Uploaded Image" className="avatar rounded-circle border border-2" />
         </div>
 
         <div className="firstColInfo text-center pt-2">
-          <Button icon={<UploadOutlined />} onClick={() => { showModalUpdate(); console.log(activeOption); }}>Change Avatar</Button>
+          <Button icon={<UploadOutlined />} onClick={showModalUpdate}>Change Avatar</Button>
           <h3 className="pt-3 pb-2">{user?.firstname != "" && user?.lastname != "" ? (<>{user?.firstname} {user?.lastname}</>) : ("Unknown")}</h3>
           <p>{user?.email}</p>
         </div>
@@ -181,31 +175,22 @@ function MyAccount() {
         </form>
       </div>
 
+      {/* Modal to update avatar */}
       <Modal open={isModalUpdateOpen} onOk={handleOkUpdate} onCancel={handleCancelUpdate} footer={[
         <Button key="close" className="okBtnModal fw-bolder" onClick={handleUpdateAvatar}>
           SAVE
         </Button>,
       ]}>
-        <Segmented
-          options={['Illustrate Images', 'URL']}
-          // selectedIndex={activeOption}
-          onChange={handleOptionChange}>
-        </Segmented><br></br>
-        {
-          activeOption === "Illustrate Images" ? (
-           <div className="row mt-2">
-            {
-              Avatar.map((item, index) => (
-                <div key={index} className="col-3 px-1 pb-2">
-                  <img src={item} className={index === activeIndex? "activeImg rounded-2 w-100" : "rounded-2 w-100"} onClick={() => {setAvatarSrc(item); setActiveIndex(index);}}></img>
-                </div>
-              ))
-            }
-           </div>
-          ) : (
-            <></>
-          )
-        }
+        <button className="btn border bg-black text-white btnTitleImages mb-2">Illustrate Images</button>
+        <div className="row mt-2">
+          {
+            Avatar.map((item, index) => (
+              <div key={index} className="col-3 px-1 pb-2">
+                <img src={item} className={index === activeIndex ? "activeImg rounded-2 w-100" : "rounded-2 w-100"} onClick={() => { setAvatarSrc(item); setActiveIndex(index); }}></img>
+              </div>
+            ))
+          }
+        </div>
       </Modal>
     </div>
 
