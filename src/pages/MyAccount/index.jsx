@@ -35,10 +35,10 @@ function MyAccount() {
       "location": location,
       "gender": gender,
     }
-    console.log(user);
+    // console.log(user);
+    localStorage.setItem("userFirstName", firstname);
     try {
       const data = await updateUser(id, token, user);
-      // console.log(data);
       if (data) {
         setIsUpdated(true);
         message.success(`User ${user?.username} is updated successful !!!`);

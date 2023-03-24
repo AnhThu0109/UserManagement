@@ -68,6 +68,8 @@ function Students() {
     };
     const handleCancelNew = () => {
         setIsModalNewOpen(false);
+        //Reset state of add new user
+        resetAddNew();
         message.error('New user request is canceled !!!');
     };
 
@@ -101,12 +103,31 @@ function Students() {
                 message.success(`New user is added successful !!!`);
                 handleOkNew();
             } else {
-                message.error(`Fail when adding new user !!!`);
+                const data = await response.json();
+                if(data.keyValue.username){
+                    message.error(`Username ${data.keyValue.username} is already taken. Please try another.`, [5]); 
+                }
+                if(data.keyValue.email){
+                    message.error(`Email ${data.keyValue.email} is already taken. Please try another.`, [5]); 
+                }
             }
         } catch (error) {
             console.error(error);
         }
     };
+
+    //Reset state of add new user
+    const resetAddNew = () => {
+        setUsername1("");
+        setFirstname1("");
+        setLastname1("");
+        setPassword1("");
+        setPhone1("");
+        setLocation1("");
+        setEmail1("");
+        setGender1("Male");
+        setIsAddNew(false);
+    }
 
     //Items in dropdown button of each user row
     //For admin
@@ -373,6 +394,9 @@ function Students() {
         }
         setIsDeleted(false);
         setIsAddNew(false);
+
+        //Reset state of add new user
+        resetAddNew();
     }, [currentPage, collapsedContent, userId, isDeleted, isAddNew])
 
     return (

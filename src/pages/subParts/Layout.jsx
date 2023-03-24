@@ -24,7 +24,6 @@ const Layout = () => {
   const firstname = localStorage.getItem("userFirstName");
   const activeItem = localStorage.getItem("active");
   const [collapsed, setCollapsed] = useState(false);
-  const [isChangeTheme, setIsChangeTheme] = useState(false);
   const [title, setTitle] = useState("Dashboard");
   const [user1stName, set1stName] = useState("");
 
@@ -74,7 +73,7 @@ const Layout = () => {
     setToken(t);
     set1stName(firstname);
     titleSetting();
-  }, [token])
+  }, [token, firstname])
   return (
     <div className={collapsed == true ? "sb-nav-fixed" : "sb-nav-fixed sb-sidenav-toggled"}>
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark d-flex justify-content-between">

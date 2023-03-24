@@ -14,7 +14,7 @@ div.menuList {
 
 li.active{
     background-color: #51cbce;
-    border-left: 3px solid greenyellow;
+    border-left: 3px solid #ef8157;
 }
 
 li.active a{
