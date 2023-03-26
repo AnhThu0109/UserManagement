@@ -13,7 +13,6 @@ const Login = () => {
   const [token, setToken] = useState(1);
   const [user, setUser]  = useState();
   const navigate = useNavigate();
-  let t = localStorage.getItem('token');
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
