@@ -5,7 +5,7 @@ async function addLoginTimes(id) {
     const userId = {
         "userId": id
     }
-  return fetch(LOGINTIMES, {
+  return fetch(`${LOGINTIMES}add`, {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(userId),
@@ -20,7 +20,8 @@ async function addLoginTimes(id) {
 //Get all login times of users
 async function getAllLoginTimes() {
   return fetch(LOGINTIMES)
-  .then(response => {return response;})
+  .then(response => response.json())
+  .then(data => {return data})
   .catch(error => {
     console.error(error);
     throw error;
@@ -38,13 +39,13 @@ async function getLoginTimesByUserId(id) {
   }
 
 //Update login times whenever user login to system (new = old + 1)
-async function updateLoginTimes(id) {
+async function updateLoginTimes(id, times) {
     const body = {
-        "userId": "642299c4af441679234af417",
-        "logintime": 1
+        "userId": id,
+        "logintime": times + 1
     }
-    return fetch(LOGINTIMES, {
-        method: "POST",
+    return fetch(`${LOGINTIMES}update`, {
+        method: "PUT",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
@@ -55,4 +56,4 @@ async function updateLoginTimes(id) {
       });
 }
 
-export {addLoginTimes, getAllLoginTimes, getLoginTimesByUserId};
+export {addLoginTimes, getAllLoginTimes, getLoginTimesByUserId, updateLoginTimes};

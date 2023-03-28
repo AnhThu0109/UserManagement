@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import loginUser from '../../utils/loginUser';
-import { getUserById } from '../../utils/getUser';
-import updateUser from '../../utils/updateUser';
+import { addLoginTimes, getLoginTimesByUserId, updateLoginTimes } from '../../utils/loginTimes';
 import "./style.css";
 
 const Login = () => {
@@ -11,7 +10,6 @@ const Login = () => {
   const [isAuth, setIsAuth] = useState(true);
   const [errMess, setErrMess] = useState("");
   const [token, setToken] = useState(1);
-  const [user, setUser]  = useState();
   const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
@@ -23,25 +21,18 @@ const Login = () => {
   };
 
   //Update login time when user login to system --> logintime data use for chart in dashboard 
-  const handleUpdate = async (id, token) => {
-    let loginTime = 0;
-    //Get user by Id
-    await getUserById(id, token).then((data) => {
-      console.log("user", data);
-      setUser(data);
-
-      //Just update logintime for normal users
-      if(data.isAdmin == false){
-        loginTime = data.logintime + 1;
+  const handleUpdateLoginTimes = async (id) => {
+    try{
+      //check for login times of this user existed or not
+      const response = await getLoginTimesByUserId(id)
+      if(response.ok){
+        const data = await response.json();
+        const loginTimes = data.logintime;
+        await updateLoginTimes(id, loginTimes);
       }
-    });
-    let user = {
-      "logintime": loginTime,
-    }
-    console.log(user);
-    //Update logintime to database
-    try {
-      await updateUser(id, token, user);
+      else{
+        await addLoginTimes(id);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -59,14 +50,14 @@ const Login = () => {
       console.log(response);
       if (response.ok){
         const data = await response.json();
+        handleUpdateLoginTimes(data._id);
         localStorage.setItem("token", data.accessToken);
         setToken(data.accessToken);
         localStorage.setItem("id", data._id);
         localStorage.setItem("userFirstName", data.firstname);
         localStorage.setItem("active", 1);
         localStorage.setItem("isAdmin", data.isAdmin);
-        setToken(data.accessToken);
-        handleUpdate(data._id, data.accessToken);
+        setToken(data.accessToken);       
         navigate("/home");
       }   
       else if (response.status === 404) { // handle 404 error

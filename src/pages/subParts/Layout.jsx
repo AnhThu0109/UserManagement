@@ -111,7 +111,7 @@ const Layout = () => {
                   Hello,&nbsp;
                   {firstname != "" ? (firstname) : ("User")}&nbsp;
                 </div>
-                <Dropdown overlay={item} trigger={['click']}>
+                <Dropdown overlay={item}>
                   <div>
                   <Space size={16} wrap>
                     <Avatar className="avatarNavBar"

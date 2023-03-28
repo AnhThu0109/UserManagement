@@ -48,10 +48,11 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
     margin-top: -10px;
 }
 
-ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733{
+/* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733{
     position: fixed !important;
-    right: 2.4%;
-}
+    right: 2.4%; 
+} */
+
 
 .dropDownLogOut:where(.css-dev-only-do-not-override-1me4733).ant-dropdown {
     /* position: static !important;  */
@@ -90,9 +91,9 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
         margin-bottom: 0px !important;
     }
 
-    ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
+    /* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
         right: 2.6%;
-    }
+    } */
 }
 
 /* Galaxy Fold + iphone SE*/
@@ -120,9 +121,9 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
     /* .barChart{
         margin-bottom: 60px !important;
     } */
-    ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
+    /* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
         right: 1%;
-    }
+    } */
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -161,9 +162,9 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
         font-size: 14px !important;
     }
 
-    ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
+    /* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
         right: 0.6%;
-    }
+    } */
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -178,8 +179,8 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
         left: 4%;
     }
 
-    ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
+    /* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
         right: 0.6%;
-    }
+    } */
 }
 

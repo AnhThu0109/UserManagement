@@ -7,6 +7,7 @@ import { faChartColumn } from '@fortawesome/free-solid-svg-icons';
 import { Calendar, theme } from "antd";
 import { getAllUser } from "../../utils/getUser";
 import changeFormatDate from "../../utils/formatDate";
+import { getAllLoginTimes } from "../../utils/loginTimes";
 import "./style.css";
 
 function DashBoard() {
@@ -47,6 +48,22 @@ function DashBoard() {
         return newArr;
     }
 
+    //Function to get username of top active users
+    const getUsername = async(arr) => {
+        const data = await getAllUser(userToken);
+        const username = [];
+        console.log("alluser", data);
+        arr.map((item) => {
+            data.map(user => {
+            if(item.userId == user._id){
+                username.push(user.username);
+            }
+            })
+        })
+        console.log("usernameLabel",username);
+        return username;
+    }
+
     useEffect(() => {
         //Get all users
         async function getData() {
@@ -67,10 +84,18 @@ function DashBoard() {
                     //Just take undefined user
                     let updatedArr = recentUpdatedArr.filter( user => user !== undefined);
                     setRecentUpdatedUser(updatedArr);
+                })
+        }
 
+        //Get all login times of top 10 users for map data
+        async function getAllLoginTimesOfUsers(){
+            await getAllLoginTimes()
+                .then(async data => {
+                    console.log("logintimesdata",data)
                     //Chart data
                     //Sort data based on logintime desc
                     const arr = [];
+                    
                     data.sort((a, b) => b.logintime - a.logintime);
                     console.log("datasort", data);
                     //Take 10 top activity users
@@ -78,16 +103,17 @@ function DashBoard() {
                         arr.push(data[i]);
                     }
 
-                    let labels = [];
+                    const username = await getUsername(arr);
+                    console.log("usernameArr",username);
+                    
                     let dataLoginTime = [];
                     //Take labels as username and data as logintimes for chart
                     arr.map((item) => {
-                        labels.push(item.username);
                         dataLoginTime.push(item.logintime);
                     })
 
                     let dataChart = {
-                        labels: labels,
+                        labels: username,
                         datasets: [
                             {
                                 label: "Number of logins",
@@ -102,6 +128,8 @@ function DashBoard() {
                 })
         }
         getData();
+        getAllLoginTimesOfUsers();
+
     }, [])
 
     return (
