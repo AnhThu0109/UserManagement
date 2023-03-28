@@ -5,7 +5,7 @@ import { getUserById } from "../../utils/getUser";
 import updateUser from "../../utils/updateUser";
 import { Image, message, Button, Modal, Segmented } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import changeFormatDate from "../../utils/formatDate";
+import {changeFormatDate} from "../../utils/formatDate";
 import Avatar from "../../utils/avatar";
 import "./../style.css";
 import "./style.css";

@@ -181,11 +181,6 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
         left: 10%;
     }
 
-    .sb-nav-fixed .barChart canvas {
-        position: relative;
-        left: 4%;
-    }
-
     div.notFound img {
         width: 35% !important;
         height: 70% !important;

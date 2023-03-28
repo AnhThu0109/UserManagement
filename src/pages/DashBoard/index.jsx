@@ -6,9 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartColumn } from '@fortawesome/free-solid-svg-icons';
 import { Calendar, theme } from "antd";
 import { getAllUser } from "../../utils/getUser";
-import changeFormatDate from "../../utils/formatDate";
+import {changeFormatDate, changeFormatDate1} from "../../utils/formatDate";
 import { getAllLoginTimes } from "../../utils/loginTimes";
 import "./style.css";
+import {fetchDataWeather, showIcon} from "../../utils/weather";
 
 function DashBoard() {
     const userToken = localStorage.getItem("token");
@@ -18,15 +19,15 @@ function DashBoard() {
     const [recentUpdatedUser, setRecentUpdatedUser] = useState();
 
     //Using antd calendar
-    const onPanelChange = (value, mode) => {
-        console.log(value.format('YYYY-MM-DD'), mode);
-    };
-    const { token } = theme.useToken();
-    const wrapperStyle = {
-        width: 300,
-        border: `1px solid ${token.colorBorderSecondary}`,
-        borderRadius: token.borderRadiusLG,
-    };
+    // const onPanelChange = (value, mode) => {
+    //     console.log(value.format('YYYY-MM-DD'), mode);
+    // };
+    // const { token } = theme.useToken();
+    // const wrapperStyle = {
+    //     width: 300,
+    //     border: `1px solid ${token.colorBorderSecondary}`,
+    //     borderRadius: token.borderRadiusLG,
+    // };
 
     //Function to get recently user added/updated
     const getRecentlyUser = (propertyFilter, users, todayTime) => {
@@ -34,17 +35,14 @@ function DashBoard() {
             const time = new Date(person[propertyFilter]); 
             return time.getDate() === todayTime.getDate() && time.getMonth() === todayTime.getMonth() && time.getFullYear() === todayTime.getFullYear();
         });
-        console.log("dfds", arr);
         //Sort property desc
         arr = arr.sort((a, b) => { return new Date(b[propertyFilter]) - new Date(a[propertyFilter])});
-        console.log("sort", arr);
 
         //Take 3 top users
         const newArr = [];
         for(let i = 0; i<3; i++){
             newArr.push(arr[i]);
         }
-        console.log("arr", arr.length);
         return newArr;
     }
 
@@ -52,7 +50,6 @@ function DashBoard() {
     const getUsername = async(arr) => {
         const data = await getAllUser(userToken);
         const username = [];
-        console.log("alluser", data);
         arr.map((item) => {
             data.map(user => {
             if(item.userId == user._id){
@@ -60,9 +57,29 @@ function DashBoard() {
             }
             })
         })
-        console.log("usernameLabel",username);
         return username;
     }
+
+    //Fetching weather in 3 days
+    const [weather, setWeather] = useState();
+    const [currentIcon, setCurrentIcon] = useState();
+    const [displayIcon, setDisplayIcon] = useState([]);
+
+    //Fetch data weather
+    const fetchWeather = async () => {
+        const json = await fetchDataWeather();
+        if (json) {
+            console.log("weather",json);
+          setWeather(json);
+          setCurrentIcon(showIcon(json.current.condition.text));
+          let newArr = [];
+          json.forecast.forecastday.map((item) => {
+            let source = showIcon(item.day.condition.text);
+            newArr.push(source);
+          });
+          setDisplayIcon(newArr);
+        }
+      };
 
     useEffect(() => {
         //Get all users
@@ -91,20 +108,19 @@ function DashBoard() {
         async function getAllLoginTimesOfUsers(){
             await getAllLoginTimes()
                 .then(async data => {
-                    console.log("logintimesdata",data)
                     //Chart data
                     //Sort data based on logintime desc
                     const arr = [];
                     
                     data.sort((a, b) => b.logintime - a.logintime);
-                    console.log("datasort", data);
+
                     //Take 10 top activity users
                     for (let i = 0; i < 10; i++) {
                         arr.push(data[i]);
                     }
 
+                    //labels for chart by username
                     const username = await getUsername(arr);
-                    console.log("usernameArr",username);
                     
                     let dataLoginTime = [];
                     //Take labels as username and data as logintimes for chart
@@ -129,7 +145,7 @@ function DashBoard() {
         }
         getData();
         getAllLoginTimesOfUsers();
-
+        fetchWeather()
     }, [])
 
     return (
@@ -217,7 +233,7 @@ function DashBoard() {
 
             {/* Chart of top ten active students */}
             <div className="row">
-                <div className="barChart col-sm-12 col-lg-8">
+                <div className="barChart col-sm-12 col-lg-7">
                     <div className="col-xl-6 chartContent">
                         <div className="card mb-3 chartBody">
                             <div className="card-header fw-bolder">
@@ -233,12 +249,55 @@ function DashBoard() {
                         </div>
                     </div>
                 </div>
-                <div className="col-sm-12 col-lg-4 calendar">
-                    <div style={wrapperStyle} className='calendarBody'>
+                <div className="col-sm-12 col-lg-5">
+                    {/* <div style={wrapperStyle} className='calendarBody'>
                         <Calendar fullscreen={false} onPanelChange={onPanelChange} />
+                    </div> */}
+                    <div className="weatherForcast bg-white rounded-3 p-3">
+                        <h4 style={{color: "gray"}} className="fw-bolder">{weather?.location?.name} - {weather?.location?.country}</h4>
+                        <hr></hr>
+                        <div className="row mx-2 text-white weatherItems">
+                            <div className="col text-center pt-2 rounded-4 weatherItem2 me-2">
+                                <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[0]?.date)}</p>
+                                <img src={currentIcon} className="weatherIcon"></img>
+                                <p>
+                                    {weather?.current?.temp_c}
+                                    <sup>o</sup>
+                                    <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
+                                </p>
+                                <small>
+                                    {weather?.current?.condition.text}
+                                </small>
+                            </div>
+                            <div className="col text-center pt-2 rounded-4 weatherItem me-2">
+                                <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[1]?.date)}</p>
+                                <img src={displayIcon && displayIcon[1]} className="weatherIcon"></img>
+                                <p>
+                                    {weather?.forecast?.forecastday[1]?.day?.avgtemp_c}
+                                    <sup>o</sup>
+                                    <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
+                                </p>
+                                <small>
+                                    {weather?.forecast?.forecastday[1]?.day?.condition?.text}
+                                </small>
+                            </div>
+                            <div className="col text-center pt-2 rounded-4 weatherItem">
+                                <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[2]?.date)}</p>
+                                <img src={displayIcon && displayIcon[2]} className="weatherIcon"></img>
+                                <p>
+                                    {weather?.forecast?.forecastday[2]?.day?.avgtemp_c}
+                                    <sup>o</sup>
+                                    <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
+                                </p>
+                                <small>
+                                    {weather?.forecast?.forecastday[2]?.day?.condition?.text}
+                                </small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     )
 }

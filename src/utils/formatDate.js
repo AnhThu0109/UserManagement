@@ -11,4 +11,10 @@ const changeFormatDate = (date) => {
     return newDate.toLocaleDateString("en-us", options);
   };
 
-export default changeFormatDate;
+  const changeFormatDate1 = (date) => {
+    let newDate = new Date(date);
+    let options = { weekday: 'short', day: 'numeric' };
+    return newDate.toLocaleDateString("en-us", options);
+  };
+
+export {changeFormatDate, changeFormatDate1};

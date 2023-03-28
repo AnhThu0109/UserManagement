@@ -8,7 +8,7 @@ import Highlighter from 'react-highlight-words';
 import "./style.css";
 import "./../style.css"
 import { getAllUser, getUserById } from '../../utils/getUser';
-import changeFormatDate from '../../utils/formatDate';
+import {changeFormatDate} from '../../utils/formatDate';
 import deleteUser from '../../utils/deleteUser';
 import { logOut } from '../../utils/logout';
 import registerUser from '../../utils/registerUser';
@@ -425,7 +425,7 @@ function Students() {
                 }
             </div>
 
-            {/* Show table */}
+            {/* Show add new user icon if isAdmin */}
             <div className='accountTable'>
                 <Table columns={columns} dataSource={data} onChange={onChangeTable} pagination={{ pageSize: 7 }} scroll={{
                     x: 'calc(700px + 50%)',
