@@ -83,11 +83,13 @@ function Students() {
     const [isAddNew, setIsAddNew] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
 
+    //Handle change of check box "is admin?"
     const handleCheckboxChange = (event) => {
         setIsChecked(event.target.checked);
         console.log(event.target.checked);
     };
 
+    //Handle add new user
     const handleAddNew = async e => {
         e.preventDefault();
         try {
@@ -199,7 +201,7 @@ function Students() {
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
 
-    //Search user
+    //Search user using ant design 
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
         setSearchText(selectedKeys[0]);
@@ -410,6 +412,8 @@ function Students() {
         <div className='allAcountContent'>
             <div className='d-flex justify-content-between'>
                 <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} students.</h3>
+
+                {/* Show add new user icon if isAdmin */}
                 {
                     isAdmin == "false" ? (
                         <></>
@@ -420,6 +424,8 @@ function Students() {
                     )
                 }
             </div>
+
+            {/* Show table */}
             <div className='accountTable'>
                 <Table columns={columns} dataSource={data} onChange={onChangeTable} pagination={{ pageSize: 7 }} scroll={{
                     x: 'calc(700px + 50%)',
@@ -458,7 +464,7 @@ function Students() {
                         <div className="col-lg-6 col-sm-12">
                             <img src="https://cdn-icons-png.flaticon.com/128/9533/9533758.png" className="modalIcon"></img>
                             <span className=''></span>
-                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.phone == "" ? ("Unkown") : (chosenUser?.phone)} readOnly></input>
+                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.phone == "" || chosenUser?.phone == undefined ? ("Unkown") : (chosenUser?.phone)} readOnly></input>
                         </div>
                     </div>
                     <div className="col mb-3">

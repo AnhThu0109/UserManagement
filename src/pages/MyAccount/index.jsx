@@ -35,13 +35,13 @@ function MyAccount() {
       "location": location,
       "gender": gender,
     }
-    // console.log(user);
+
     localStorage.setItem("userFirstName", firstname);
     try {
       const data = await updateUser(id, token, user);
       if (data) {
         setIsUpdated(true);
-        message.success(`User ${user?.username} is updated successful !!!`);
+        message.success(`User ${user?.username} is updated successful !!!`); //Show successful message after updating
       }
     } catch (error) {
       console.error(error);
@@ -77,7 +77,7 @@ function MyAccount() {
       if (data) {
         setIsUpdated(true);
         handleOkUpdate();
-        message.success(`Avatar is updated successful !!!`);
+        message.success(`Avatar is updated successful !!!`); //Show successful message after changing avatar
       }
     } catch (error) {
       console.error(error);
@@ -87,6 +87,7 @@ function MyAccount() {
 
   useEffect(() => {
     async function getData() {
+      //get user info
       await getUserById(id, token).then((data) => {
         console.log(data);
         setUser(data);
@@ -175,7 +176,7 @@ function MyAccount() {
         </form>
       </div>
 
-      {/* Modal to update avatar */}
+      {/* Modal of update avatar */}
       <Modal open={isModalUpdateOpen} onOk={handleOkUpdate} onCancel={handleCancelUpdate} footer={[
         <Button key="close" className="okBtnModal fw-bolder" onClick={handleUpdateAvatar}>
           SAVE

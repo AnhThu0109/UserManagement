@@ -1,7 +1,6 @@
 import AllAccounts from "../pages/Students";
 import DashBoard from "../pages/DashBoard";
 import Login from "../pages/Login";
-import Register from "../pages/Register";
 import NotFound from "../pages/NotFoundPage";
 import MyAccount from "../pages/MyAccount";
 import WelcomePage from "../pages/Welcome";
@@ -18,10 +17,6 @@ const publicRoutes = [
     {
         element: <NotFound/>,
         path: "/*"
-    },
-    {
-        element: <Register/>,
-        path: "/register"
     }
 ]
 

@@ -10,6 +10,7 @@ function WelcomePage() {
     const id = localStorage.getItem("id");
     const login = isLogin();
 
+    //if login before ==> redirect to old page || direct to login page
     const route = (index) => {
         if(login == false){
             return "/login";
@@ -27,6 +28,7 @@ function WelcomePage() {
         }
     }
 
+    //Set 6s for processing bar before redirect to login page/ home page
     const myFunction = () => {
         setTimeout(() => {
             navigate(route(id));

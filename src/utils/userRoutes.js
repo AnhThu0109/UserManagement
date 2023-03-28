@@ -8,6 +8,7 @@ const isLogin = () => {
     else return false;
 }
 
+{/* if login successful ==> link to chosen component || link to login page */}
 const UserRoutes = ({Component}) => {
     const result = isLogin();
     return result == true? <Component />: <Navigate to="/login"/>;

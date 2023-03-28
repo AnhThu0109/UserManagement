@@ -31,10 +31,12 @@ const Layout = () => {
     setCollapsed(!collapsed);
   };
 
+  //Save active item of side nav 
   const saveActiveItem = (item) => {
     localStorage.setItem("active", item);
   }
 
+  //Logout func ==> when click login, page redirect to "/login"
   const logoutFunc = async () => {
     await logOut(t);
     setToken("");
@@ -74,10 +76,12 @@ const Layout = () => {
     set1stName(firstname);
     titleSetting();
   }, [token, firstname])
+
   return (
     <div className={collapsed == true ? "sb-nav-fixed" : "sb-nav-fixed sb-sidenav-toggled"}>
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark d-flex justify-content-between">
         <div className="d-flex align-items-center">
+          {/* Show title of corresponding chosen side nav item */}
           {
             (t == null || token == "")? (
               <></>
@@ -86,7 +90,7 @@ const Layout = () => {
             )
           }
           
-          
+          {/* Button collapsed menu */}
           <Button
             onClick={toggleCollapsed}
             className="border-0 btnCollapse d-flex align-items-center" id="sidebarToggle"
@@ -96,6 +100,8 @@ const Layout = () => {
             )}
           </Button>
         </div>
+
+        {/* Show login before giving credential and show icon with logout button after login successful */}
         {
           (t == null || token == "") ? (
             <div className="float-end p-3">
@@ -165,7 +171,7 @@ const Layout = () => {
             </div>
           </nav>
         </div>
-
+        
         <div id="layoutSidenav_content">
           <Outlet />
         </div>

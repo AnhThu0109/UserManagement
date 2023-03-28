@@ -51,6 +51,8 @@ const Login = () => {
       if (response.ok){
         const data = await response.json();
         handleUpdateLoginTimes(data._id);
+
+        //Set needed localStorage (token, id, firstname, active of side nav, isAdmin)
         localStorage.setItem("token", data.accessToken);
         setToken(data.accessToken);
         localStorage.setItem("id", data._id);
@@ -60,7 +62,7 @@ const Login = () => {
         setToken(data.accessToken);       
         navigate("/home");
       }   
-      else if (response.status === 404) { // handle 404 error
+      else if (response.status === 404) { // handle 404 error for checking wrong username/password
         setIsAuth(false);
         setErrMess("Incorrect password");
       } else {
@@ -111,6 +113,7 @@ const Login = () => {
         </form>
         </div>     
 
+        {/* Show error message if wrong username or wrong password */}
         {
           isAuth == false && (
             <h5 className='text-danger pt-4 text-center'>{errMess}. Please type again.</h5>

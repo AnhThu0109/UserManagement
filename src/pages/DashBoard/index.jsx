@@ -135,6 +135,7 @@ function DashBoard() {
     return (
         <div className="p-3">
             <div className="row">
+                {/* Show card of total number students */}
                 <div className="col-lg-4 col-sm-12 mb-3">
                     <div className="bg-white border-0 rounded-3 card-item p-3">
                         <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Total Number of Students
@@ -144,6 +145,8 @@ function DashBoard() {
                         <div>{users?.length} students</div>
                     </div>
                 </div>
+
+                {/* Show card of recently added students */}
                 <div className="col-lg-4 col-sm-12 mb-3">
                     <div className="bg-white border-0 rounded-3 card-item p-3">
                         <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Added Students
@@ -177,6 +180,8 @@ function DashBoard() {
                         </div>
                     </div>
                 </div>
+
+                {/* Show card of recently updated students */}
                 <div className="col-lg-4 col-sm-12 mb-3">
                     <div className="bg-white border-0 rounded-3 card-item p-3">
                         <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Updated Students 
@@ -210,7 +215,7 @@ function DashBoard() {
                 </div>
             </div>
 
-            {/* Chart */}
+            {/* Chart of top ten active students */}
             <div className="row">
                 <div className="barChart col-sm-12 col-lg-8">
                     <div className="col-xl-6 chartContent">
