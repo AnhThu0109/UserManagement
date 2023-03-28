@@ -117,9 +117,9 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px)  {
-    .barChart{
+    /* .barChart{
         margin-bottom: 60px !important;
-    }
+    } */
     ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
         right: 1%;
     }
@@ -168,9 +168,14 @@ ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropd
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    .sb-sidenav-toggled .barChart canvas{
+    .sb-nav-fixed.sb-sidenav-toggled .barChart canvas{
         position: relative;
         left: 10%;
+    }
+
+    .sb-nav-fixed .barChart canvas {
+        position: relative;
+        left: 4%;
     }
 
     ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {

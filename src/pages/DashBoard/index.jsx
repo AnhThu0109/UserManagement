@@ -119,7 +119,7 @@ function DashBoard() {
                 <div className="col-lg-4 col-sm-12 mb-3">
                     <div className="bg-white border-0 rounded-3 card-item p-3">
                         <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Added Students
-                            <img src='https://cdn-icons-png.flaticon.com/512/10155/10155992.png' className="dashboardIcon"></img>
+                            <img src='https://cdn-icons-png.flaticon.com/512/4951/4951228.png' className="dashboardIcon"></img>
                         </p>
                         <hr></hr>
 
@@ -152,7 +152,7 @@ function DashBoard() {
                 <div className="col-lg-4 col-sm-12 mb-3">
                     <div className="bg-white border-0 rounded-3 card-item p-3">
                         <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Updated Students 
-                            <img src='https://cdn-icons-png.flaticon.com/512/10155/10155970.png' className="dashboardIcon"></img>
+                            <img src='https://cdn-icons-png.flaticon.com/512/5511/5511397.png' className="dashboardIcon"></img>
                         </p>
                         <hr></hr>
 

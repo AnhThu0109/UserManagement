@@ -16,7 +16,6 @@ import registerUser from '../../utils/registerUser';
 function Students() {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
-    // const collapsed = localStorage.getItem("collapsed");
     const isAdmin = localStorage.getItem("isAdmin");
     const [users, setUsers] = useState();
     const [currentPage, setCurrentPage] = useState(1);
@@ -29,7 +28,6 @@ function Students() {
 
     //Get id of chosen user
     const userChosen = (id) => {
-        console.log(id);
         localStorage.setItem("userChosenId", id);
         setUserId(id);
     }
@@ -74,29 +72,37 @@ function Students() {
     };
 
     //State for add new user
-    const [username1, setUsername1] = useState();
-    const [firstname1, setFirstname1] = useState();
-    const [lastname1, setLastname1] = useState();
-    const [password1, setPassword1] = useState();
-    const [phone1, setPhone1] = useState();
-    const [location1, setLocation1] = useState();
-    const [email1, setEmail1] = useState();
-    const [gender1, setGender1] = useState("Male");
+    const [username, setUsername] = useState();
+    const [firstname, setFirstname] = useState();
+    const [lastname, setLastname] = useState();
+    const [password, setPassword] = useState();
+    const [phone, setPhone] = useState();
+    const [location, setLocation] = useState();
+    const [email, setEmail] = useState();
+    const [gender, setGender] = useState("Male");
     const [isAddNew, setIsAddNew] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleCheckboxChange = (event) => {
+        setIsChecked(event.target.checked);
+        console.log(event.target.checked);
+    };
 
     const handleAddNew = async e => {
         e.preventDefault();
         try {
             let user = {
-                "firstname": firstname1,
-                "lastname": lastname1,
-                "username": username1,
-                "email": email1,
-                "password": password1,
-                "gender": gender1,
-                "phone": phone1,
-                "location": location1
+                "firstname": firstname,
+                "lastname": lastname,
+                "username": username,
+                "email": email,
+                "password": password,
+                "gender": gender,
+                "phone": phone,
+                "location": location,
+                "isAdmin": isChecked
             }
+            console.log(user);
             const response = await registerUser(user);
             if (response.ok) {
                 setIsAddNew(true);
@@ -118,14 +124,15 @@ function Students() {
 
     //Reset state of add new user
     const resetAddNew = () => {
-        setUsername1("");
-        setFirstname1("");
-        setLastname1("");
-        setPassword1("");
-        setPhone1("");
-        setLocation1("");
-        setEmail1("");
-        setGender1("Male");
+        setUsername("");
+        setFirstname("");
+        setLastname("");
+        setPassword("");
+        setPhone("");
+        setLocation("");
+        setEmail("");
+        setGender("Male");
+        setIsChecked(false);
         setIsAddNew(false);
     }
 
@@ -468,25 +475,32 @@ function Students() {
             <Modal open={isModalNewOpen} onOk={handleOkNew} onCancel={handleCancelNew} footer={[]}>
                 <div>
                     <h4 className='text-center fw-bolder titleEdit'>Add New User</h4>
+
+                    <input className="form-check-input me-2" type="checkbox" name="isAdmin" id="isAdmin" checked={isChecked}
+                    onChange={handleCheckboxChange}/>
+                    <label className="form-check-label" for="isAdmin">
+                        Is Admin?
+                    </label>
+
                     <div className='row pt-3'>
                         <form className="mb-2" onSubmit={handleAddNew}>
                             <div className="row">
                                 <div className="col-sm-12 col-lg-6 mb-2">
                                     <label for="" className="form-label text-secondary">First name</label>
-                                    <input type="text" className="form-control border border-2" name="" id="" value={firstname1} placeholder="First name" onChange={(e) => setFirstname1(e.target.value)}></input>
+                                    <input type="text" className="form-control border border-2" name="" id="firstname" value={firstname} placeholder="First name" onChange={(e) => setFirstname(e.target.value)}></input>
                                 </div>                   <div className="col-sm-12 col-lg-6 mb-2">
                                     <label for="" className="form-label text-secondary">Last name</label>
-                                    <input type="text" className="border border-2 form-control" name="" id="" value={lastname1} placeholder="Last name" onChange={(e) => setLastname1(e.target.value)}></input>
+                                    <input type="text" className="border border-2 form-control" name="" id="lastname" value={lastname} placeholder="Last name" onChange={(e) => setLastname(e.target.value)}></input>
                                 </div>
                             </div>
                             <div className='row'>
                                 <div className="col-sm-12 col-lg-6 mb-2">
                                     <label for="" className="form-label text-secondary">Username</label>
-                                    <input type="text" className="border border-2 form-control" name="" id="" value={username1} placeholder="Username" required onChange={(e) => setUsername1(e.target.value)}></input>
+                                    <input type="text" className="border border-2 form-control" name="" id="username" value={username} placeholder="Username" required onChange={(e) => setUsername(e.target.value)}></input>
                                 </div>
                                 <div className="col-sm-12 col-lg-6 mb-2">
                                     <label for="" className="form-label text-secondary">Email</label>
-                                    <input type="email" className="border border-2 form-control" name="" id="" value={email1} placeholder="Email" required onChange={(e) => setEmail1(e.target.value)}></input>
+                                    <input type="email" className="border border-2 form-control" name="" id="email" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
                                 </div>
 
                             </div>
@@ -494,11 +508,11 @@ function Students() {
                             <div className="row">
                                 <div className="col-sm-12 col-lg-6 mb-2">
                                     <label for="" className="form-label text-secondary">Password</label>
-                                    <input type="password" className="border border-2 form-control" name="" id="" value={password1} placeholder="Password" required onChange={(e) => setPassword1(e.target.value)}></input>
+                                    <input type="password" className="border border-2 form-control" name="" id="password" value={password} placeholder="Password" required onChange={(e) => setPassword(e.target.value)}></input>
                                 </div>
                                 <div className="col-sm-12 col-lg-6 mb-2">
                                     <label for="" className="form-label text-secondary">Gender (Optional)</label>
-                                    <select className="border border-2 form-select" value={gender1} onChange={(e) => setGender1(e.target.value)}>
+                                    <select className="border border-2 form-select" value={gender} onChange={(e) => setGender(e.target.value)}>
                                         <option value="Male" readOnly>Male</option>
                                         <option value="Female" readOnly>Female</option>
                                     </select>
@@ -509,11 +523,11 @@ function Students() {
                             <div className='row'>
                                 <div className="col-sm-12 col-lg-6 mb-2">
                                     <label for="" className="form-label text-secondary">Phone (Optional)</label>
-                                    <input type="tel" className="border border-2 form-control" name="" id="" value={phone1} placeholder="0123456789" onChange={(e) => setPhone1(e.target.value)} pattern="[0-9]{10}"></input>
+                                    <input type="tel" className="border border-2 form-control" name="" id="phone" value={phone} placeholder="0123456789" onChange={(e) => setPhone(e.target.value)} pattern="[0-9]{10}"></input>
                                 </div>
                                 <div className="col-sm-12 col-lg-6 mb-2">
                                     <label for="" className="form-label text-secondary">Address (Optional)</label>
-                                    <input type="text" className="border border-2 form-control" name="" id="" value={location1} placeholder="Home Address" onChange={(e) => setLocation1(e.target.value)}></input>
+                                    <input type="text" className="border border-2 form-control" name="" id="address" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
                                 </div>
                             </div>
 
