@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import "./style.css";
 import "./../style.css"
 
@@ -8,7 +11,12 @@ function NotFound(){
             <div className="text-center">
                 <p>Awww...Don't Cry</p>
                 <p className="border border-3 border-warning p-2">It's just a 404 Error!</p>
-                <p>The requested URL was not found on this server. That’s all we know.</p>
+                <p>The requested URL was not found on this server.</p>
+                <button className="btn btn-primary fw-bolder">
+                    <Link to="/home" className='text-white text-decoration-none'>
+                        <FontAwesomeIcon icon={faHouse}/> Go to Homepage
+                    </Link>
+                </button>
             </div>     
         </div>
     )

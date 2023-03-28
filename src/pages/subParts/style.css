@@ -113,17 +113,20 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
     input.form-control.border.border-2.rounded-3.px-4.py-1.ms-3 {
         width: 93%;
     }
+
+    div.notFound img {
+        width: 35% !important;
+        height: 30% !important;
+    }
 }
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px)  {
-    /* .barChart{
-        margin-bottom: 60px !important;
-    } */
-    /* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
-        right: 1%;
-    } */
+    div.notFound img {
+        width: 35% !important;
+        height: 35% !important;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -165,6 +168,10 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
     /* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
         right: 0.6%;
     } */
+    div.notFound img {
+        width: 35% !important;
+        height: 50% !important;
+    }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -179,6 +186,10 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
         left: 4%;
     }
 
+    div.notFound img {
+        width: 35% !important;
+        height: 70% !important;
+    }
     /* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
         right: 0.6%;
     } */
