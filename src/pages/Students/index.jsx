@@ -2,13 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { Dropdown, Button, Space, Modal, Image, Menu, message, Popconfirm, Table, Input } from "antd";
+import { Dropdown, Button, Space, Modal, Image, Menu, message, Popconfirm, Table, Input, Spin } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from 'react-highlight-words';
 import "./style.css";
 import "./../style.css"
 import { getAllUser, getUserById } from '../../utils/getUser';
-import {changeFormatDate} from '../../utils/formatDate';
+import { changeFormatDate } from '../../utils/formatDate';
 import deleteUser from '../../utils/deleteUser';
 import { logOut } from '../../utils/logout';
 import registerUser from '../../utils/registerUser';
@@ -82,6 +82,13 @@ function Students() {
     const [gender, setGender] = useState("Male");
     const [isAddNew, setIsAddNew] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
+    const [isLoad, setIsLoad] = useState(false);
+
+    const setLoading = () => {
+        setTimeout(() => {
+            setIsLoad(true);
+        }, 1500);
+    };
 
     //Handle change of check box "is admin?"
     const handleCheckboxChange = (event) => {
@@ -112,11 +119,11 @@ function Students() {
                 handleOkNew();
             } else {
                 const data = await response.json();
-                if(data.keyValue.username){
-                    message.error(`Username ${data.keyValue.username} is already taken. Please try another.`, [5]); 
+                if (data.keyValue.username) {
+                    message.error(`Username ${data.keyValue.username} is already taken. Please try another.`, [5]);
                 }
-                if(data.keyValue.email){
-                    message.error(`Email ${data.keyValue.email} is already taken. Please try another.`, [5]); 
+                if (data.keyValue.email) {
+                    message.error(`Email ${data.keyValue.email} is already taken. Please try another.`, [5]);
                 }
             }
         } catch (error) {
@@ -406,143 +413,168 @@ function Students() {
 
         //Reset state of add new user
         resetAddNew();
+
+        //Loading for 1.5s
+        setLoading();
+        clearTimeout(setLoading);
     }, [currentPage, collapsedContent, userId, isDeleted, isAddNew])
 
     return (
-        <div className='allAcountContent'>
-            <div className='d-flex justify-content-between'>
-                <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} students.</h3>
+        <>
+            {
+                isLoad == true ? (
+                    <div className='allAcountContent'>
+                        <div className='d-flex justify-content-between'>
+                            <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} students.</h3>
 
-                {/* Show add new user icon if isAdmin */}
-                {
-                    isAdmin == "false" ? (
-                        <></>
-                    ) : (
-                        <Link onClick={showModalNew}>
-                            <FontAwesomeIcon icon={faUserPlus} className='addUser'></FontAwesomeIcon>
-                        </Link>
-                    )
-                }
-            </div>
-
-            {/* Show add new user icon if isAdmin */}
-            <div className='accountTable'>
-                <Table columns={columns} dataSource={data} onChange={onChangeTable} pagination={{ pageSize: 7 }} scroll={{
-                    x: 'calc(700px + 50%)',
-                }} className='p-3' />
-            </div>
-
-            {/* Modal user information */}
-            <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={[
-                <Button key="close" onClick={handleOk} className="okBtnModal fw-bolder">
-                    OK
-                </Button>,
-            ]} className='modalSeeInfo'>
-                <div>
-                    <Image src={chosenUser?.avatar} className='avatarUserChosen rounded-circle border border-2'></Image>
-                    <h4>{chosenUser?.firstname != "" ? (
-                        <>{chosenUser?.firstname} {chosenUser?.lastname}</>
-                    ) : (<>Unknown</>)}</h4>
-                    <div className='row mt-3'>
-                        <div className="col-lg-6 col-sm-12 mb-1">
-                            <img src="https://cdn-icons-png.flaticon.com/128/9533/9533813.png" className="modalIcon"></img>
-                            <span className=''></span>
-                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.username} readOnly></input>
+                            {/* Show add new user icon if isAdmin */}
+                            {
+                                isAdmin == "false" ? (
+                                    <></>
+                                ) : (
+                                    <Link onClick={showModalNew}>
+                                        <FontAwesomeIcon icon={faUserPlus} className='addUser'></FontAwesomeIcon>
+                                    </Link>
+                                )
+                            }
                         </div>
-                        <div className="col-lg-6 col-sm-12">
-                            <img src="https://i.ibb.co/4MSQKGX/Capture-removebg-preview.png" className="modalIcon"></img>
-                            <span className=''></span>
-                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.gender == null ? ("Unkown") : (chosenUser?.gender)} readOnly></input>
-                        </div>
-                    </div>
-                    <div className='row'>
-                        <div className="col-lg-6 col-sm-12 mb-1">
-                            <img src="https://cdn-icons-png.flaticon.com/128/9533/9533772.png" className="modalIcon"></img>
-                            <span className=''></span>
-                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.email} readOnly></input>
-                        </div>
-                        <div className="col-lg-6 col-sm-12">
-                            <img src="https://cdn-icons-png.flaticon.com/128/9533/9533758.png" className="modalIcon"></img>
-                            <span className=''></span>
-                            <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.phone == "" || chosenUser?.phone == undefined ? ("Unkown") : (chosenUser?.phone)} readOnly></input>
-                        </div>
-                    </div>
-                    <div className="col mb-3">
-                        <img src="https://cdn-icons-png.flaticon.com/128/9533/9533739.png" className="modalIcon"></img>
-                        <span className=''></span>
-                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.location == "" ? ("Unkown") : (chosenUser?.location)} readOnly></input>
-                    </div>
-                    <p><b>Created at:</b> {changeFormatDate(chosenUser?.createdAt)}</p>
-                    <p><b>Last updated at:</b> {changeFormatDate(chosenUser?.updatedAt)}</p>
-                </div>
-            </Modal>
 
-            {/* Modal add new user */}
-            <Modal open={isModalNewOpen} onOk={handleOkNew} onCancel={handleCancelNew} footer={[]}>
-                <div>
-                    <h4 className='text-center fw-bolder titleEdit'>Add New User</h4>
+                        {/* Show add new user icon if isAdmin */}
+                        <div className='accountTable'>
+                            <Table columns={columns} dataSource={data} onChange={onChangeTable} pagination={{ pageSize: 7 }} scroll={{
+                                x: 'calc(700px + 50%)',
+                            }} className='p-3' />
+                        </div>
 
-                    <input className="form-check-input me-2" type="checkbox" name="isAdmin" id="isAdmin" checked={isChecked}
-                    onChange={handleCheckboxChange}/>
-                    <label className="form-check-label" for="isAdmin">
-                        Is Admin?
-                    </label>
+                        {/* Modal user information */}
+                        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={[
+                            <Button key="close" onClick={handleOk} className="okBtnModal fw-bolder">
+                                OK
+                            </Button>,
+                        ]} className='modalSeeInfo'>
+                            <div>
+                                <Image src={chosenUser?.avatar} className='avatarUserChosen rounded-circle border border-2'></Image>
+                                <h4>{chosenUser?.firstname != "" ? (
+                                    <>{chosenUser?.firstname} {chosenUser?.lastname}</>
+                                ) : (<>Unknown</>)}</h4>
+                                <div className='row mt-3'>
+                                    <div className="col-lg-6 col-sm-12 mb-1">
+                                        <img src="https://cdn-icons-png.flaticon.com/128/9533/9533813.png" className="modalIcon"></img>
+                                        <span className=''></span>
+                                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.username} readOnly></input>
+                                    </div>
+                                    <div className="col-lg-6 col-sm-12">
+                                        <img src="https://i.ibb.co/4MSQKGX/Capture-removebg-preview.png" className="modalIcon"></img>
+                                        <span className=''></span>
+                                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.gender == null ? ("Unkown") : (chosenUser?.gender)} readOnly></input>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className="col-lg-6 col-sm-12 mb-1">
+                                        <img src="https://cdn-icons-png.flaticon.com/128/9533/9533772.png" className="modalIcon"></img>
+                                        <span className=''></span>
+                                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.email} readOnly></input>
+                                    </div>
+                                    <div className="col-lg-6 col-sm-12">
+                                        <img src="https://cdn-icons-png.flaticon.com/128/9533/9533758.png" className="modalIcon"></img>
+                                        <span className=''></span>
+                                        <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.phone == "" || chosenUser?.phone == undefined ? ("Unkown") : (chosenUser?.phone)} readOnly></input>
+                                    </div>
+                                </div>
+                                <div className="col mb-3">
+                                    <img src="https://cdn-icons-png.flaticon.com/128/9533/9533739.png" className="modalIcon"></img>
+                                    <span className=''></span>
+                                    <input className='form-control border border-2 rounded-3 px-4 py-1 ms-3' value={chosenUser?.location == "" ? ("Unkown") : (chosenUser?.location)} readOnly></input>
+                                </div>
+                                <p><b>Created at:</b> {changeFormatDate(chosenUser?.createdAt)}</p>
+                                <p><b>Last updated at:</b> {changeFormatDate(chosenUser?.updatedAt)}</p>
+                            </div>
+                        </Modal>
 
-                    <div className='row pt-3'>
-                        <form className="mb-2" onSubmit={handleAddNew}>
-                            <div className="row">
-                                <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">First name</label>
-                                    <input type="text" className="form-control border border-2" name="" id="firstname" value={firstname} placeholder="First name" onChange={(e) => setFirstname(e.target.value)}></input>
-                                </div>                   <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">Last name</label>
-                                    <input type="text" className="border border-2 form-control" name="" id="lastname" value={lastname} placeholder="Last name" onChange={(e) => setLastname(e.target.value)}></input>
+                        {/* Modal add new user */}
+                        <Modal open={isModalNewOpen} onOk={handleOkNew} onCancel={handleCancelNew} footer={[]}>
+                            <div>
+                                <h4 className='text-center fw-bolder titleEdit'>Add New User</h4>
+
+                                <input className="form-check-input me-2" type="checkbox" name="isAdmin" id="isAdmin" checked={isChecked}
+                                    onChange={handleCheckboxChange} />
+                                <label className="form-check-label" for="isAdmin">
+                                    Is Admin?
+                                </label>
+
+                                <div className='row pt-3'>
+                                    <form className="mb-2" onSubmit={handleAddNew}>
+                                        <div className="row">
+                                            <div className="col-sm-12 col-lg-6 mb-2">
+                                                <label for="" className="form-label text-secondary">First name</label>
+                                                <input type="text" className="form-control border border-2" name="" id="firstname" value={firstname} placeholder="First name" onChange={(e) => setFirstname(e.target.value)}></input>
+                                            </div>                   <div className="col-sm-12 col-lg-6 mb-2">
+                                                <label for="" className="form-label text-secondary">Last name</label>
+                                                <input type="text" className="border border-2 form-control" name="" id="lastname" value={lastname} placeholder="Last name" onChange={(e) => setLastname(e.target.value)}></input>
+                                            </div>
+                                        </div>
+                                        <div className='row'>
+                                            <div className="col-sm-12 col-lg-6 mb-2">
+                                                <label for="" className="form-label text-secondary">Username</label>
+                                                <input type="text" className="border border-2 form-control" name="" id="username" value={username} placeholder="Username" required onChange={(e) => setUsername(e.target.value)}></input>
+                                            </div>
+                                            <div className="col-sm-12 col-lg-6 mb-2">
+                                                <label for="" className="form-label text-secondary">Email</label>
+                                                <input type="email" className="border border-2 form-control" name="" id="email" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
+                                            </div>
+
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-sm-12 col-lg-6 mb-2">
+                                                <label for="" className="form-label text-secondary">Password</label>
+                                                <input type="password" className="border border-2 form-control" name="" id="password" value={password} placeholder="Password" required onChange={(e) => setPassword(e.target.value)}></input>
+                                            </div>
+                                            <div className="col-sm-12 col-lg-6 mb-2">
+                                                <label for="" className="form-label text-secondary">Gender (Optional)</label>
+                                                <select className="border border-2 form-select" value={gender} onChange={(e) => setGender(e.target.value)}>
+                                                    <option value="Male" readOnly>Male</option>
+                                                    <option value="Female" readOnly>Female</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div className='row'>
+                                            <div className="col-sm-12 col-lg-6 mb-2">
+                                                <label for="" className="form-label text-secondary">Phone (Optional)</label>
+                                                <input type="tel" className="border border-2 form-control" name="" id="phone" value={phone} placeholder="0123456789" onChange={(e) => setPhone(e.target.value)} pattern="[0-9]{10}"></input>
+                                            </div>
+                                            <div className="col-sm-12 col-lg-6 mb-2">
+                                                <label for="" className="form-label text-secondary">Address (Optional)</label>
+                                                <input type="text" className="border border-2 form-control" name="" id="address" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" className="okBtnModal py-2 px-3 mt-3 fw-bolder text-white rounded-3 float-end">ADD</button>
+                                    </form>
                                 </div>
                             </div>
-                            <div className='row'>
-                                <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">Username</label>
-                                    <input type="text" className="border border-2 form-control" name="" id="username" value={username} placeholder="Username" required onChange={(e) => setUsername(e.target.value)}></input>
-                                </div>
-                                <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">Email</label>
-                                    <input type="email" className="border border-2 form-control" name="" id="email" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
-                                </div>
-
-                            </div>
-
-                            <div className="row">
-                                <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">Password</label>
-                                    <input type="password" className="border border-2 form-control" name="" id="password" value={password} placeholder="Password" required onChange={(e) => setPassword(e.target.value)}></input>
-                                </div>
-                                <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">Gender (Optional)</label>
-                                    <select className="border border-2 form-select" value={gender} onChange={(e) => setGender(e.target.value)}>
-                                        <option value="Male" readOnly>Male</option>
-                                        <option value="Female" readOnly>Female</option>
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div className='row'>
-                                <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">Phone (Optional)</label>
-                                    <input type="tel" className="border border-2 form-control" name="" id="phone" value={phone} placeholder="0123456789" onChange={(e) => setPhone(e.target.value)} pattern="[0-9]{10}"></input>
-                                </div>
-                                <div className="col-sm-12 col-lg-6 mb-2">
-                                    <label for="" className="form-label text-secondary">Address (Optional)</label>
-                                    <input type="text" className="border border-2 form-control" name="" id="address" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
-                                </div>
-                            </div>
-
-                            <button type="submit" className="okBtnModal py-2 px-3 mt-3 fw-bolder text-white rounded-3 float-end">ADD</button>
-                        </form>
+                        </Modal>
                     </div>
-                </div>
-            </Modal>
-        </div>
+                ) : (
+                    <Space
+                        direction="vertical"
+                        style={{
+                            width: "100%",
+                        }}
+                        className="text-center p-5"
+                    >
+                        <Space className="pt-5">
+                            <Spin tip="Loading" size="large">
+                                <div className="content" />
+                            </Spin>
+                        </Space>
+                    </Space>
+                )
+            }
+        </>
+
     )
 }
 export default Students;

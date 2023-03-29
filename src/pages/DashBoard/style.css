@@ -56,3 +56,7 @@ div.weatherForcast{
     display: flex;
     justify-content: space-between;
 }
+
+.ant-spin-text {
+    margin-left: -22px;
+}

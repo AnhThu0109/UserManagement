@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Spin, Space } from "antd";
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,6 +17,13 @@ function DashBoard() {
     const [dataTopActiveChart, setDataTopActiveChart] = useState();
     const [recentAddedUser, setRecentAddedUser] = useState();
     const [recentUpdatedUser, setRecentUpdatedUser] = useState();
+    const [isLoad, setIsLoad] = useState(false);
+
+    const setLoading = () => {
+        setTimeout(() => {
+            setIsLoad(true);
+        }, 1500);
+    };
 
     //Function to get recently user added/updated
     const getRecentlyUser = (propertyFilter, users, todayTime) => {
@@ -146,166 +154,189 @@ function DashBoard() {
             setErrorMess("Location is not found. Please type again!!!");
         });
         setIsError(false)
+        setLoading();
+        clearTimeout(setLoading);
     }, [keyWord])
 
     return (
-        <div className="px-3 pt-3">
-            <div className="row">
-                {/* Show card of total number students */}
-                <div className="col-lg-4 col-sm-12 mb-3">
-                    <div className="bg-white border-0 rounded-3 card-item p-3">
-                        <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Total Number of Students
-                            <img src='https://cdn-icons-png.flaticon.com/512/10156/10156019.png' className="dashboardIcon"></img>
-                        </p>
-                        <hr></hr>
-                        <div>{users?.length} students</div>
-                    </div>
-                </div>
-
-                {/* Show card of recently added students */}
-                <div className="col-lg-4 col-sm-12 mb-3">
-                    <div className="bg-white border-0 rounded-3 card-item p-3">
-                        <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Added Students
-                            <img src='https://cdn-icons-png.flaticon.com/512/4951/4951228.png' className="dashboardIcon"></img>
-                        </p>
-                        <hr></hr>
-
-                        <div>{console.log(recentAddedUser)}</div>
-
-                        {/* Display 3 user recently created today */}
-                        <div>
-                            {
-                                recentAddedUser && recentAddedUser?.length != 0 ? (
-                                    recentAddedUser?.map((item, index) => (
-                                        <div key={index} className='d-flex justify-content-between'>
-                                            <div>
-                                                {item?.firstname}&nbsp;
-                                                {item?.lastname}
-                                            </div>
-                                            <div>
-                                                {
-                                                    changeFormatDate(item?.createdAt)
-                                                }
-                                            </div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <>There is no student added today.</>
-                                )
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                {/* Show card of recently updated students */}
-                <div className="col-lg-4 col-sm-12 mb-3">
-                    <div className="bg-white border-0 rounded-3 card-item p-3">
-                        <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Updated Students
-                            <img src='https://cdn-icons-png.flaticon.com/512/5511/5511397.png' className="dashboardIcon"></img>
-                        </p>
-                        <hr></hr>
-
-                        {/* Display 3 user recently updated today */}
-                        <div>
-                            {
-                                recentUpdatedUser && recentUpdatedUser?.length != 0 ? (
-                                    recentUpdatedUser?.map((item, index) => (
-                                        <div key={index} className='d-flex justify-content-between'>
-                                            <div>
-                                                {item?.firstname}&nbsp;
-                                                {item?.lastname}
-                                            </div>
-                                            <div>
-                                                {
-                                                    changeFormatDate(item?.updatedAt)
-                                                }
-                                            </div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <>There is no student updated their infomation today.</>
-                                )
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Chart of top ten active students */}
-            <div className="row">
-                <div className="barChart col-sm-12 col-lg-7">
-                    <div className="col-xl-6 chartContent">
-                        <div className="card chartBody">
-                            <div className="card-header fw-bolder">
-                                <FontAwesomeIcon icon={faChartColumn} className='me-2'></FontAwesomeIcon>
-                                Top Ten Active Students
+        <>
+            {
+                isLoad == true ? (
+                    <div className="px-3 pt-3">
+                        <div className="row">
+                            {/* Show card of total number students */}
+                            <div className="col-lg-4 col-sm-12 mb-3">
+                                <div className="bg-white border-0 rounded-3 card-item p-3">
+                                    <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Total Number of Students
+                                        <img src='https://cdn-icons-png.flaticon.com/512/10156/10156019.png' className="dashboardIcon"></img>
+                                    </p>
+                                    <hr></hr>
+                                    <div>{users?.length} students</div>
+                                </div>
                             </div>
-                            <div style={{ height: "88%" }}>
-                                {
-                                    dataTopActiveChart &&
-                                    <Bar data={dataTopActiveChart} />
-                                }
+
+                            {/* Show card of recently added students */}
+                            <div className="col-lg-4 col-sm-12 mb-3">
+                                <div className="bg-white border-0 rounded-3 card-item p-3">
+                                    <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Added Students
+                                        <img src='https://cdn-icons-png.flaticon.com/512/4951/4951228.png' className="dashboardIcon"></img>
+                                    </p>
+                                    <hr></hr>
+
+                                    <div>{console.log(recentAddedUser)}</div>
+
+                                    {/* Display 3 user recently created today */}
+                                    <div>
+                                        {
+                                            recentAddedUser && recentAddedUser?.length != 0 ? (
+                                                recentAddedUser?.map((item, index) => (
+                                                    <div key={index} className='d-flex justify-content-between'>
+                                                        <div>
+                                                            {item?.firstname}&nbsp;
+                                                            {item?.lastname}
+                                                        </div>
+                                                        <div>
+                                                            {
+                                                                changeFormatDate(item?.createdAt)
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <>There is no student added today.</>
+                                            )
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Show card of recently updated students */}
+                            <div className="col-lg-4 col-sm-12 mb-3">
+                                <div className="bg-white border-0 rounded-3 card-item p-3">
+                                    <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Updated Students
+                                        <img src='https://cdn-icons-png.flaticon.com/512/5511/5511397.png' className="dashboardIcon"></img>
+                                    </p>
+                                    <hr></hr>
+
+                                    {/* Display 3 user recently updated today */}
+                                    <div>
+                                        {
+                                            recentUpdatedUser && recentUpdatedUser?.length != 0 ? (
+                                                recentUpdatedUser?.map((item, index) => (
+                                                    <div key={index} className='d-flex justify-content-between'>
+                                                        <div>
+                                                            {item?.firstname}&nbsp;
+                                                            {item?.lastname}
+                                                        </div>
+                                                        <div>
+                                                            {
+                                                                changeFormatDate(item?.updatedAt)
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <>There is no student updated their infomation today.</>
+                                            )
+                                        }
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="col-sm-12 col-lg-5 mb-2">
-                    <div className="weatherForcast bg-white rounded-3 p-3">
-                        <form className="searchFormLocation ms-2 mb-4" onSubmit={handleSubmit}>
-                            <input className="border-0 fw-bolder text-black-50" type="text" name="keyword" id="keyword" value={keyWord} onChange={(e) => setKeyWord(e.target.value)} />
-                            <button type="submit" className="border-0 bg-white"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-                        </form>
 
-                        {
-                            isError == true ? (
-                                <p className="text-danger">{errorMess}</p>
-                             ) : (
-                                < div className="row mx-2 text-white weatherItems">
-                        <div className="col text-center pt-2 rounded-4 weatherItem2 me-2 mb-2">
-                            <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[0]?.date)}</p>
-                            <img src={currentIcon} className="weatherIcon"></img>
-                            <p className="temperature">
-                                {weather?.current?.temp_c}
-                                <sup>o</sup>
-                                <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
-                            </p>
-                            <small className="textCondition">
-                                {weather?.current?.condition.text}
-                            </small>
-                        </div>
-                        <div className="col text-center pt-2 rounded-4 weatherItem me-2">
-                            <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[1]?.date)}</p>
-                            <img src={displayIcon && displayIcon[1]} className="weatherIcon"></img>
-                            <p className="temperature">
-                                {weather?.forecast?.forecastday[1]?.day?.avgtemp_c}
-                                <sup>o</sup>
-                                <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
-                            </p>
-                            <small className="textCondition">
-                                {weather?.forecast?.forecastday[1]?.day?.condition?.text}
-                            </small>
-                        </div>
-                        <div className="col text-center pt-2 rounded-4 weatherItem">
-                            <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[2]?.date)}</p>
-                            <img src={displayIcon && displayIcon[2]} className="weatherIcon"></img>
-                            <p className="temperature">
-                                {weather?.forecast?.forecastday[2]?.day?.avgtemp_c}
-                                <sup>o</sup>
-                                <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
-                            </p>
-                            <small className="textCondition">
-                                {weather?.forecast?.forecastday[2]?.day?.condition?.text}
-                            </small>
-                        </div>
-                    </div>
-                             )
-                        }
+                        {/* Chart of top ten active students */}
+                        <div className="row">
+                            <div className="barChart col-sm-12 col-lg-7">
+                                <div className="col-xl-6 chartContent">
+                                    <div className="card chartBody">
+                                        <div className="card-header fw-bolder">
+                                            <FontAwesomeIcon icon={faChartColumn} className='me-2'></FontAwesomeIcon>
+                                            Top Ten Active Students
+                                        </div>
+                                        <div style={{ height: "88%" }}>
+                                            {
+                                                dataTopActiveChart &&
+                                                <Bar data={dataTopActiveChart} />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-sm-12 col-lg-5 mb-2">
+                                <div className="weatherForcast bg-white rounded-3 p-3">
+                                    <form className="searchFormLocation ms-2 mb-4" onSubmit={handleSubmit}>
+                                        <input className="border-0 fw-bolder text-black-50" type="text" name="keyword" id="keyword" value={keyWord} onChange={(e) => setKeyWord(e.target.value)} />
+                                        <button type="submit" className="border-0 bg-white"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                                    </form>
 
-                </div>
-            </div>
-        </div>
+                                    {
+                                        isError == true ? (
+                                            <p className="text-danger">{errorMess}</p>
+                                        ) : (
+                                            < div className="row mx-2 text-white weatherItems">
+                                                <div className="col text-center pt-2 rounded-4 weatherItem2 me-2 mb-2">
+                                                    <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[0]?.date)}</p>
+                                                    <img src={currentIcon} className="weatherIcon"></img>
+                                                    <p className="temperature">
+                                                        {weather?.current?.temp_c}
+                                                        <sup>o</sup>
+                                                        <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
+                                                    </p>
+                                                    <small className="textCondition">
+                                                        {weather?.current?.condition.text}
+                                                    </small>
+                                                </div>
+                                                <div className="col text-center pt-2 rounded-4 weatherItem me-2">
+                                                    <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[1]?.date)}</p>
+                                                    <img src={displayIcon && displayIcon[1]} className="weatherIcon"></img>
+                                                    <p className="temperature">
+                                                        {weather?.forecast?.forecastday[1]?.day?.avgtemp_c}
+                                                        <sup>o</sup>
+                                                        <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
+                                                    </p>
+                                                    <small className="textCondition">
+                                                        {weather?.forecast?.forecastday[1]?.day?.condition?.text}
+                                                    </small>
+                                                </div>
+                                                <div className="col text-center pt-2 rounded-4 weatherItem">
+                                                    <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[2]?.date)}</p>
+                                                    <img src={displayIcon && displayIcon[2]} className="weatherIcon"></img>
+                                                    <p className="temperature">
+                                                        {weather?.forecast?.forecastday[2]?.day?.avgtemp_c}
+                                                        <sup>o</sup>
+                                                        <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
+                                                    </p>
+                                                    <small className="textCondition">
+                                                        {weather?.forecast?.forecastday[2]?.day?.condition?.text}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
 
-        </div >
+                                </div>
+                            </div>
+                        </div>
+
+                    </div >
+                ) : (
+                    <Space
+                        direction="vertical"
+                        style={{
+                            width: "100%",
+                        }}
+                        className="text-center p-5"
+                    >
+                        <Space className="pt-5">
+                            <Spin tip="Loading" size="large">
+                                <div className="content" />
+                            </Spin>
+                        </Space>
+                    </Space>
+                )
+            }
+        </>
+
     )
 }
 export default DashBoard;

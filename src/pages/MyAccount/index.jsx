@@ -3,9 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import { getUserById } from "../../utils/getUser";
 import updateUser from "../../utils/updateUser";
-import { Image, message, Button, Modal, Segmented } from "antd";
+import { Image, message, Button, Modal, Spin, Space } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import {changeFormatDate} from "../../utils/formatDate";
+import { changeFormatDate } from "../../utils/formatDate";
 import Avatar from "../../utils/avatar";
 import "./../style.css";
 import "./style.css";
@@ -22,6 +22,13 @@ function MyAccount() {
   const [email, setEmail] = useState();
   const [gender, setGender] = useState();
   const [isUpdated, setIsUpdated] = useState(false);
+  const [isLoad, setIsLoad] = useState(false);
+
+  const setLoading = () => {
+    setTimeout(() => {
+      setIsLoad(true);
+    }, 1500);
+  };
 
   //Update function
   const handleUpdate = async (event) => {
@@ -102,99 +109,120 @@ function MyAccount() {
     }
     getData();
     setIsUpdated(false);
+    setLoading();
+    clearTimeout(setLoading);
   }, [isUpdated]);
 
   return (
-    <div className="row userInfo py-lg-2 d-flex justify-content-center">
-      <div className="col-lg-4 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 me-lg-4 rounded-4 p-0">
-        <div className="firstCol text-center">
-          <Image src="https://demos.creative-tim.com/paper-dashboard/assets/img/damir-bosnjak.jpg" alt="" className="w-100 bgInfoImg"></Image>
+    <>
+      {
+        isLoad == true ? (
+          <div className="row userInfo py-lg-2 d-flex justify-content-center">
+            <div className="col-lg-4 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 me-lg-4 rounded-4 p-0">
+              <div className="firstCol text-center">
+                <Image src="https://demos.creative-tim.com/paper-dashboard/assets/img/damir-bosnjak.jpg" alt="" className="w-100 bgInfoImg"></Image>
 
-          <Image src={user?.avatar} alt="Uploaded Image" className="avatar rounded-circle border border-2" />
-        </div>
-
-        <div className="firstColInfo text-center pt-2">
-          <Button icon={<UploadOutlined />} onClick={showModalUpdate}>Change Avatar</Button>
-          <h3 className="pt-3 pb-2">{user?.firstname != "" && user?.lastname != "" ? (<>{user?.firstname} {user?.lastname}</>) : ("Unknown")}</h3>
-          <p>{user?.email}</p>
-        </div>
-
-        <div className="ps-3 pb-3">
-          <img src="https://cdn-icons-png.flaticon.com/128/4112/4112187.png" className="inconInfo"></img> <b>Created: </b>
-          {changeFormatDate(user?.createdAt)}
-        </div>
-        <div className="ps-3 pb-3">
-          <img src="https://cdn-icons-png.flaticon.com/128/4112/4112347.png" className="inconInfo"></img> <b>Last updated: </b>
-          {changeFormatDate(user?.updatedAt)}
-        </div>
-      </div>
-      <div className="col-lg-7 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 rounded-4 p-3 mb-sm-3 mb-lg-0">
-        <h3 className="fw-lighter">Edit Profile</h3>
-        <form className="mb-3" onSubmit={handleUpdate}>
-          <div className="row mb-2">
-            <div className="col-lg-6 col-sm-12 mb-3">
-              <label for="" className="form-label text-secondary">First name</label>
-              <input type="text" className="form-control" name="" id="" value={firstname} placeholder="First name" onChange={(e) => setFirstname(e.target.value)}></input>
-            </div>
-            <div className="col">
-              <label for="" className="form-label text-secondary">Last name</label>
-              <input type="text" className="form-control" name="" id="" value={lastname} placeholder="Last name" onChange={(e) => setLastname(e.target.value)}></input>
-            </div>
-          </div>
-
-          <div className="row mb-2">
-            <div className="col-lg-6 col-sm-12 mb-3">
-              <label for="" className="form-label text-secondary">Username</label>
-              <input type="text" className="form-control" name="" id="" value={username} placeholder="Username" required onChange={(e) => setUsername(e.target.value)}></input>
-            </div>
-            <div className="col-lg-6 col-sm-12">
-              <label for="" className="form-label text-secondary">Gender</label>
-              <select className="form-select" value={gender} onChange={(e) => setGender(e.target.value)}>
-                <option value="Male" readOnly>Male</option>
-                <option value="Female" readOnly>Female</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="row mb-2">
-            <div className="col-lg-6 col-sm-12 mb-3">
-              <label for="" className="form-label text-secondary">Email</label>
-              <input type="email" className="form-control" name="" id="" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
-            </div>
-            <div className="col-lg-6 col-sm-12">
-              <label for="" className="form-label text-secondary">Phone</label>
-              <input type="tel" className="form-control" name="" id="" value={phone} placeholder="Ex: 0123456789" onChange={(e) => setPhone(e.target.value)} pattern="[0-9]{10}"></input>
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col">
-              <label for="" className="form-label text-secondary">Address</label>
-              <input type="text" className="form-control" name="" id="" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
-            </div>
-          </div>
-          <button type="submit" className="float-end border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn">UPDATE PROFILE</button>
-        </form>
-      </div>
-
-      {/* Modal of update avatar */}
-      <Modal open={isModalUpdateOpen} onOk={handleOkUpdate} onCancel={handleCancelUpdate} footer={[
-        <Button key="close" className="okBtnModal fw-bolder" onClick={handleUpdateAvatar}>
-          SAVE
-        </Button>,
-      ]}>
-        <button className="btn border bg-black text-white btnTitleImages mb-2">Illustrate Images</button>
-        <div className="row mt-2">
-          {
-            Avatar.map((item, index) => (
-              <div key={index} className="col-3 px-1 pb-2">
-                <img src={item} className={index === activeIndex ? "activeImg rounded-2 w-100" : "rounded-2 w-100"} onClick={() => { setAvatarSrc(item); setActiveIndex(index); }}></img>
+                <Image src={user?.avatar} alt="Uploaded Image" className="avatar rounded-circle border border-2" />
               </div>
-            ))
-          }
-        </div>
-      </Modal>
-    </div>
 
+              <div className="firstColInfo text-center pt-2">
+                <Button icon={<UploadOutlined />} onClick={showModalUpdate}>Change Avatar</Button>
+                <h3 className="pt-3 pb-2">{user?.firstname != "" && user?.lastname != "" ? (<>{user?.firstname} {user?.lastname}</>) : ("Unknown")}</h3>
+                <p>{user?.email}</p>
+              </div>
+
+              <div className="ps-3 pb-3">
+                <img src="https://cdn-icons-png.flaticon.com/128/4112/4112187.png" className="inconInfo"></img> <b>Created: </b>
+                {changeFormatDate(user?.createdAt)}
+              </div>
+              <div className="ps-3 pb-3">
+                <img src="https://cdn-icons-png.flaticon.com/128/4112/4112347.png" className="inconInfo"></img> <b>Last updated: </b>
+                {changeFormatDate(user?.updatedAt)}
+              </div>
+            </div>
+            <div className="col-lg-7 col-sm-11 border-0 bg-white mt-lg-4 mt-sm-3 rounded-4 p-3 mb-sm-3 mb-lg-0">
+              <h3 className="fw-lighter">Edit Profile</h3>
+              <form className="mb-3" onSubmit={handleUpdate}>
+                <div className="row mb-2">
+                  <div className="col-lg-6 col-sm-12 mb-3">
+                    <label for="" className="form-label text-secondary">First name</label>
+                    <input type="text" className="form-control" name="" id="" value={firstname} placeholder="First name" onChange={(e) => setFirstname(e.target.value)}></input>
+                  </div>
+                  <div className="col">
+                    <label for="" className="form-label text-secondary">Last name</label>
+                    <input type="text" className="form-control" name="" id="" value={lastname} placeholder="Last name" onChange={(e) => setLastname(e.target.value)}></input>
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-lg-6 col-sm-12 mb-3">
+                    <label for="" className="form-label text-secondary">Username</label>
+                    <input type="text" className="form-control" name="" id="" value={username} placeholder="Username" required onChange={(e) => setUsername(e.target.value)}></input>
+                  </div>
+                  <div className="col-lg-6 col-sm-12">
+                    <label for="" className="form-label text-secondary">Gender</label>
+                    <select className="form-select" value={gender} onChange={(e) => setGender(e.target.value)}>
+                      <option value="Male" readOnly>Male</option>
+                      <option value="Female" readOnly>Female</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="row mb-2">
+                  <div className="col-lg-6 col-sm-12 mb-3">
+                    <label for="" className="form-label text-secondary">Email</label>
+                    <input type="email" className="form-control" name="" id="" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
+                  </div>
+                  <div className="col-lg-6 col-sm-12">
+                    <label for="" className="form-label text-secondary">Phone</label>
+                    <input type="tel" className="form-control" name="" id="" value={phone} placeholder="Ex: 0123456789" onChange={(e) => setPhone(e.target.value)} pattern="[0-9]{10}"></input>
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col">
+                    <label for="" className="form-label text-secondary">Address</label>
+                    <input type="text" className="form-control" name="" id="" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
+                  </div>
+                </div>
+                <button type="submit" className="float-end border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn">UPDATE PROFILE</button>
+              </form>
+            </div>
+
+            {/* Modal of update avatar */}
+            <Modal open={isModalUpdateOpen} onOk={handleOkUpdate} onCancel={handleCancelUpdate} footer={[
+              <Button key="close" className="okBtnModal fw-bolder" onClick={handleUpdateAvatar}>
+                SAVE
+              </Button>,
+            ]}>
+              <button className="btn border bg-black text-white btnTitleImages mb-2">Illustrate Images</button>
+              <div className="row mt-2">
+                {
+                  Avatar.map((item, index) => (
+                    <div key={index} className="col-3 px-1 pb-2">
+                      <img src={item} className={index === activeIndex ? "activeImg rounded-2 w-100" : "rounded-2 w-100"} onClick={() => { setAvatarSrc(item); setActiveIndex(index); }}></img>
+                    </div>
+                  ))
+                }
+              </div>
+            </Modal>
+          </div>
+        ) : (
+          <Space
+            direction="vertical"
+            style={{
+              width: "100%",
+            }}
+            className="text-center p-5"
+          >
+            <Space className="pt-5">
+              <Spin tip="Loading" size="large">
+                <div className="content" />
+              </Spin>
+            </Space>
+          </Space>
+        )
+      }
+    </>
   );
 }
 
