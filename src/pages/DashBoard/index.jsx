@@ -149,7 +149,7 @@ function DashBoard() {
     }, [keyWord])
 
     return (
-        <div className="p-3">
+        <div className="px-3 pt-3">
             <div className="row">
                 {/* Show card of total number students */}
                 <div className="col-lg-4 col-sm-12 mb-3">
@@ -235,7 +235,7 @@ function DashBoard() {
             <div className="row">
                 <div className="barChart col-sm-12 col-lg-7">
                     <div className="col-xl-6 chartContent">
-                        <div className="card mb-3 chartBody">
+                        <div className="card chartBody">
                             <div className="card-header fw-bolder">
                                 <FontAwesomeIcon icon={faChartColumn} className='me-2'></FontAwesomeIcon>
                                 Top Ten Active Students
@@ -249,7 +249,7 @@ function DashBoard() {
                         </div>
                     </div>
                 </div>
-                <div className="col-sm-12 col-lg-5">
+                <div className="col-sm-12 col-lg-5 mb-2">
                     <div className="weatherForcast bg-white rounded-3 p-3">
                         <form className="searchFormLocation ms-2 mb-4" onSubmit={handleSubmit}>
                             <input className="border-0 fw-bolder text-black-50" type="text" name="keyword" id="keyword" value={keyWord} onChange={(e) => setKeyWord(e.target.value)} />
@@ -261,39 +261,39 @@ function DashBoard() {
                                 <p className="text-danger">{errorMess}</p>
                              ) : (
                                 < div className="row mx-2 text-white weatherItems">
-                        <div className="col text-center pt-2 rounded-4 weatherItem2 me-2">
+                        <div className="col text-center pt-2 rounded-4 weatherItem2 me-2 mb-2">
                             <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[0]?.date)}</p>
                             <img src={currentIcon} className="weatherIcon"></img>
-                            <p>
+                            <p className="temperature">
                                 {weather?.current?.temp_c}
                                 <sup>o</sup>
                                 <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
                             </p>
-                            <small>
+                            <small className="textCondition">
                                 {weather?.current?.condition.text}
                             </small>
                         </div>
                         <div className="col text-center pt-2 rounded-4 weatherItem me-2">
                             <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[1]?.date)}</p>
                             <img src={displayIcon && displayIcon[1]} className="weatherIcon"></img>
-                            <p>
+                            <p className="temperature">
                                 {weather?.forecast?.forecastday[1]?.day?.avgtemp_c}
                                 <sup>o</sup>
                                 <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
                             </p>
-                            <small>
+                            <small className="textCondition">
                                 {weather?.forecast?.forecastday[1]?.day?.condition?.text}
                             </small>
                         </div>
                         <div className="col text-center pt-2 rounded-4 weatherItem">
                             <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[2]?.date)}</p>
                             <img src={displayIcon && displayIcon[2]} className="weatherIcon"></img>
-                            <p>
+                            <p className="temperature">
                                 {weather?.forecast?.forecastday[2]?.day?.avgtemp_c}
                                 <sup>o</sup>
                                 <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
                             </p>
-                            <small>
+                            <small className="textCondition">
                                 {weather?.forecast?.forecastday[2]?.day?.condition?.text}
                             </small>
                         </div>

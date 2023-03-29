@@ -14,12 +14,6 @@
 
 body {
   margin: 0;
-  /* font-family: var(--bs-body-font-family);
-  font-size: var(--bs-body-font-size);
-  font-weight: var(--bs-body-font-weight);
-  line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
-  text-align: var(--bs-body-text-align); */
   background-color: #f2f2f2 !important;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -81,11 +75,11 @@ h6, .h6 {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1030;
+  z-index: 1060;
 }
 
 .sb-nav-fixed .sb-topnav {
-  z-index: 1039;
+  z-index: 1060;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
   width: 225px;

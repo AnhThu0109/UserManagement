@@ -59,7 +59,7 @@ const Layout = () => {
   const item = (
     <Menu className='dropDownLogOut'>
       <Menu.Item key="1">
-        <Link  className='nav-link' onClick={logoutFunc}>
+        <Link className='nav-link' onClick={logoutFunc}>
           Logout
         </Link>
       </Menu.Item>
@@ -83,13 +83,13 @@ const Layout = () => {
         <div className="d-flex align-items-center">
           {/* Show title of corresponding chosen side nav item */}
           {
-            (t == null || token == "")? (
+            (t == null || token == "") ? (
               <></>
             ) : (
               <p className="ps-3 titleActive fw-bolder mt-2" href="#">{title}</p>
             )
           }
-          
+
           {/* Button collapsed menu */}
           <Button
             onClick={toggleCollapsed}
@@ -117,7 +117,7 @@ const Layout = () => {
                   Hello,&nbsp;
                   {firstname != "" ? (firstname) : ("User")}&nbsp;
                 </div>
-                <Dropdown overlay={item}>
+                {/* <Dropdown overlay={item}>
                   <div>
                   <Space size={16} wrap>
                     <Avatar className="avatarNavBar"
@@ -129,7 +129,21 @@ const Layout = () => {
                     />
                   </Space>
                   </div>
-                </Dropdown>
+                </Dropdown> */}
+                <div className="dropdown">
+                  <button className="border-0 bg-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{color: "rgba(255, 255, 255, 0.5)"}}> 
+                  <Avatar className="avatarNavBar"
+                      style={{
+                        backgroundColor: '#51cbce',
+                        marginTop: -5,
+                      }}
+                      icon={<UserOutlined />}
+                    />
+                  </button>
+                  <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><Link className="dropdown-item" onClick={logoutFunc}>Logout</Link></li>
+                  </ul>
+                </div>
               </div>
             </div>
           )
@@ -171,7 +185,7 @@ const Layout = () => {
             </div>
           </nav>
         </div>
-        
+
         <div id="layoutSidenav_content">
           <Outlet />
         </div>
