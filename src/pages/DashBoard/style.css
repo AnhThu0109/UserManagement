@@ -23,19 +23,6 @@
     height: 100% !important;
 }
 
-.calendarBody {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-.calendarBody .ant-picker-calendar.ant-picker-calendar-mini.css-dev-only-do-not-override-1me4733{
-    height: 100%;
-}
-
-.calendarBody .ant-picker-panel{
-    width: 100%;
-}
-
 div.weatherForcast{
     height: 320px;
 }
@@ -61,4 +48,11 @@ div.weatherForcast{
     height: 100%;
     border-top: 5px solid rgba(9, 30, 94, 0.858);
     border-bottom: 5px solid rgba(9, 30, 94, 0.858);box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.searchFormLocation{
+    border-bottom: 2px solid black;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
 }
