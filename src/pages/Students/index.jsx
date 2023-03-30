@@ -87,7 +87,7 @@ function Students() {
     const setLoading = () => {
         setTimeout(() => {
             setIsLoad(true);
-        }, 1500);
+        }, 700);
     };
 
     //Handle change of check box "is admin?"

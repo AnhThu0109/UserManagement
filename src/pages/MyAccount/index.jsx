@@ -30,7 +30,7 @@ function MyAccount() {
   const setLoading = () => {
     setTimeout(() => {
       setIsLoad(true);
-    }, 1500);
+    }, 700);
   };
 
   //Update function

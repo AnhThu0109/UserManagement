@@ -22,7 +22,7 @@ function DashBoard() {
     const setLoading = () => {
         setTimeout(() => {
             setIsLoad(true);
-        }, 1500);
+        }, 700);
     };
 
     //Function to get recently user added/updated
@@ -264,7 +264,7 @@ function DashBoard() {
                             </div>
                             <div className="col-sm-12 col-lg-5 mb-2">
                                 <div className="weatherForcast bg-white rounded-3 p-3">
-                                    <form className="searchFormLocation ms-2 mb-4" onSubmit={handleSubmit}>
+                                    <form className="searchFormLocation ms-2 mb-1" onSubmit={handleSubmit}>
                                         <input className="border-0 fw-bolder text-black-50" type="text" name="keyword" id="keyword" value={keyWord} onChange={(e) => setKeyWord(e.target.value)} />
                                         <button type="submit" className="border-0 bg-white"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                                     </form>
@@ -273,6 +273,8 @@ function DashBoard() {
                                         isError == true ? (
                                             <p className="text-danger">{errorMess}</p>
                                         ) : (
+                                            <>
+                                            <p className="text-center fw-bolder locationWeather">{weather?.location?.name} - {weather?.location?.country}</p>
                                             < div className="row mx-2 text-white weatherItems">
                                                 <div className="col text-center pt-2 rounded-4 weatherItem2 me-2 mb-2">
                                                     <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[0]?.date)}</p>
@@ -311,6 +313,8 @@ function DashBoard() {
                                                     </small>
                                                 </div>
                                             </div>
+                                            </>
+                                         
                                         )
                                     }
 

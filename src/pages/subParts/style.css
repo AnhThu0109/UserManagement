@@ -151,6 +151,13 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
     }
 }
 
+/* Surface Pro 7 */
+@media only screen and (width: 912px) and (height: 1368px) {
+    .barChart{
+        margin-bottom: 110px !important;
+    }
+}
+
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .barChart .chartBody{
@@ -165,14 +172,38 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
         font-size: 14px !important;
     }
 
-    /* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
-        right: 0.6%;
-    } */
     div.notFound img {
         width: 35% !important;
         height: 50% !important;
     }
     
+}
+
+/* Weather forecast for NestHub */
+@media only screen and (width: 1024px) and (height: 600px) {
+    .sb-nav-fixed .weatherItem2,.sb-nav-fixed .weatherItem {
+        height: 45%;
+    }
+
+    .sb-nav-fixed .weatherItem2 .temperature,.sb-nav-fixed .weatherItem .temperature, .sb-nav-fixed .weatherItem2 .textCondition,.sb-nav-fixed .weatherItem .textCondition{
+        display: none;
+    }
+
+    .sb-nav-fixed .weatherItem2 .weatherIcon,.sb-nav-fixed .weatherItem .weatherIcon{
+        margin-top: -18px;
+    }
+
+    .sb-nav-fixed.sb-sidenav-toggled .weatherItem2,.sb-nav-fixed.sb-sidenav-toggled .weatherItem {
+        height: 100%;
+    }
+
+    .sb-nav-fixed.sb-sidenav-toggled .weatherItem2 .temperature,.sb-nav-fixed.sb-sidenav-toggled .weatherItem .temperature, .sb-nav-fixed.sb-sidenav-toggled .weatherItem2 .textCondition,.sb-nav-fixed.sb-sidenav-toggled .weatherItem .textCondition{
+        display:block;
+    }
+
+    .sb-nav-fixed.sb-sidenav-toggled .weatherItem2 .weatherIcon,.sb-nav-fixed.sb-sidenav-toggled .weatherItem .weatherIcon{
+        margin-top: auto;
+    }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -186,8 +217,6 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
         width: 35% !important;
         height: 70% !important;
     }
-    /* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
-        right: 0.6%;
-    } */
+
 }
 
