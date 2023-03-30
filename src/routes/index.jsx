@@ -1,4 +1,4 @@
-import AllAccounts from "../pages/Students";
+import Users from "../pages/Users";
 import DashBoard from "../pages/DashBoard";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFoundPage";
@@ -27,11 +27,11 @@ const userRoutes = [
     },
     {
         element: MyAccount,
-        path: "/students/:id"
+        path: "/users/:id"
     },
     {
-        element: AllAccounts,
-        path: "/students"
+        element: Users,
+        path: "/users"
     },
     
 ]

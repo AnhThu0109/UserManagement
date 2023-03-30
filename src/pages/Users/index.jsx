@@ -13,7 +13,7 @@ import deleteUser from '../../utils/deleteUser';
 import { logOut } from '../../utils/logout';
 import registerUser from '../../utils/registerUser';
 
-function Students() {
+function Users() {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const isAdmin = localStorage.getItem("isAdmin");
@@ -425,7 +425,7 @@ function Students() {
                 isLoad == true ? (
                     <div className='allAcountContent'>
                         <div className='d-flex justify-content-between'>
-                            <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} students.</h3>
+                            <h3 className='px-3 pt-3 mb-0 fw-lighter text-black-50'>Total {users?.length} users.</h3>
 
                             {/* Show add new user icon if isAdmin */}
                             {
@@ -577,4 +577,4 @@ function Students() {
 
     )
 }
-export default Students;
+export default Users;

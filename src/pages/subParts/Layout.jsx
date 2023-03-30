@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePollVertical, faUserGroup, faUser, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
-import { Button, Avatar, Space, Menu, Dropdown } from "antd";
+import { Button, Avatar } from "antd";
 import { logOut } from '../../utils/logout';
 import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from "@ant-design/icons";
 import("./style.css");
@@ -14,7 +14,7 @@ import("../../index.css");
 const Layout = () => {
   const [active, setActive] = useState({
     activeDashboard: false,
-    activeStudents: false,
+    activeUsers: false,
     activeAccount: false,
   });
   const navigate = useNavigate();
@@ -49,27 +49,17 @@ const Layout = () => {
       setTitle("Dashboard");
     }
     if (activeItem == 2) {
-      setTitle("Students List");
+      setTitle("Users List");
     }
     if (activeItem == 3) {
       setTitle("My Account");
     }
   }
 
-  const item = (
-    <Menu className='dropDownLogOut'>
-      <Menu.Item key="1">
-        <Link className='nav-link' onClick={logoutFunc}>
-          Logout
-        </Link>
-      </Menu.Item>
-    </Menu>
-  );
-
   useEffect(() => {
     setActive({
       activeDashboard: false,
-      activeStudents: false,
+      activeUsers: false,
       activeAccount: false,
     });
     setToken(t);
@@ -117,19 +107,6 @@ const Layout = () => {
                   Hello,&nbsp;
                   {firstname != "" ? (firstname) : ("User")}&nbsp;
                 </div>
-                {/* <Dropdown overlay={item}>
-                  <div>
-                  <Space size={16} wrap>
-                    <Avatar className="avatarNavBar"
-                      style={{
-                        backgroundColor: '#51cbce',
-                        marginTop: -5,
-                      }}
-                      icon={<UserOutlined />}
-                    />
-                  </Space>
-                  </div>
-                </Dropdown> */}
                 <div className="dropdown">
                   <button className="border-0 bg-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style={{color: "rgba(255, 255, 255, 0.5)"}}> 
                   <Avatar className="avatarNavBar"
@@ -157,18 +134,18 @@ const Layout = () => {
               <div className="nav">
                 <li className={active.activeDashboard == true || activeItem == 1 ? "active" : ""}>
                   <div className="menuList">
-                    <Link className="nav-link pe-2" to="/home" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: true, activeStudents: false }); saveActiveItem(1); setTitle("Dashboard"); })}>
+                    <Link className="nav-link pe-2" to="/home" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: true, activeUsers: false }); saveActiveItem(1); setTitle("Dashboard"); })}>
                       <FontAwesomeIcon icon={faSquarePollVertical} className='me-2' />
                       Dashboard
                     </Link>
                   </div>
                 </li>
 
-                <li className={active.activeStudents == true || activeItem == 2 ? "active" : ""}>
+                <li className={active.activeUsers == true || activeItem == 2 ? "active" : ""}>
                   <div className="menuList">
-                    <Link className="nav-link pe-2" to="/students" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: false, activeStudents: true }); saveActiveItem(2); setTitle("Students"); })}>
+                    <Link className="nav-link pe-2" to="/users" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: false, activeUsers: true }); saveActiveItem(2); setTitle("Users List"); })}>
                       <FontAwesomeIcon icon={faUserGroup} className='me-2' />
-                      Students
+                      Total Users
                     </Link>
                   </div>
                 </li>
@@ -177,7 +154,7 @@ const Layout = () => {
                   t != null &&
                   <li className={active.activeAccount == true || activeItem == 3 ? "active" : ""}>
                     <div className="menuList">
-                      <Link className="nav-link pe-2" to={`/students/${id}`} onClick={t != null && (() => { setActive({ activeAccount: true, activeDashboard: false, activeStudents: false }); saveActiveItem(3); setTitle("My Account"); })}><FontAwesomeIcon icon={faUser} className='me-2' />My Account</Link>
+                      <Link className="nav-link pe-2" to={`/users/${id}`} onClick={t != null && (() => { setActive({ activeAccount: true, activeDashboard: false, activeUsers: false }); saveActiveItem(3); setTitle("My Account"); })}><FontAwesomeIcon icon={faUser} className='me-2' />My Account</Link>
                     </div>
                   </li>
                 }

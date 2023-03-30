@@ -17,10 +17,10 @@ function WelcomePage() {
         }
         else{
             if (activePage == 2){
-                return "/students";
+                return "/users";
             }
             if (activePage == 3){
-                return `/students/${index}`;
+                return `/users/${index}`;
             }
             if (activePage == 1){
                 return `/home`;

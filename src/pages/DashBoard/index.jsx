@@ -22,7 +22,7 @@ function DashBoard() {
     const setLoading = () => {
         setTimeout(() => {
             setIsLoad(true);
-        }, 700);
+        }, 1000);
     };
 
     //Function to get recently user added/updated
@@ -60,25 +60,57 @@ function DashBoard() {
     const [weather, setWeather] = useState();
     const [currentIcon, setCurrentIcon] = useState();
     const [displayIcon, setDisplayIcon] = useState([]);
-    const [keyWord, setKeyWord] = useState("Ho Chi Minh");
+    const [keyWord, setKeyWord] = useState("");
     const [isError, setIsError] = useState(false);
     const [errorMess, setErrorMess] = useState("");
+    const [fTemp, setFTemp] = useState(false);
 
     //Fetch data weather
-    const fetchWeather = async () => {
-        const json = await fetchDataWeather(keyWord);
-        if (json) {
-            console.log("weather", json);
-            setWeather(json);
-            setCurrentIcon(showIcon(json.current.condition.text));
-            let newArr = [];
-            json.forecast.forecastday.map((item) => {
+    const fetchWeather = async (location) => {
+        if (!location) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              fetchDataWeather(`${latitude},${longitude}`)
+                .then((json) => {
+                  setWeather(json);
+                  setCurrentIcon(showIcon(json.current.condition.text));
+                  let newArr = [];
+                  json.forecast.forecastday.map((item) => {
+                    let source = showIcon(item.day.condition.text);
+                    newArr.push(source);
+                  });
+                  setDisplayIcon(newArr);
+                })
+                .catch((error) => {
+                  setIsError(true);
+                  setErrorMess(error.message);
+                });
+            },
+            (error) => {
+              setIsError(true);
+              setErrorMess(error.message);
+            }
+          );
+        } else {
+          fetchDataWeather(location)
+            .then((json) => {
+              setWeather(json);
+              setCurrentIcon(showIcon(json.current.condition.text));
+              let newArr = [];
+              json.forecast.forecastday.map((item) => {
                 let source = showIcon(item.day.condition.text);
                 newArr.push(source);
+              });
+              setDisplayIcon(newArr);
+            })
+            .catch((error) => {
+              setIsError(true);
+              setErrorMess(error.message);
             });
-            setDisplayIcon(newArr);
         }
-    };
+      };
+      
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -148,11 +180,17 @@ function DashBoard() {
         }
         getData();
         getAllLoginTimesOfUsers();
-        fetchWeather(keyWord).catch((error) => {
-            console.log(error);
-            setIsError(true);
-            setErrorMess("Location is not found. Please type again!!!");
+        
+        //On first render, weather forecast will show current location of user
+        if(keyWord != ""){
+            fetchWeather(keyWord).catch((error) => {
+                setIsError(true);
+                setErrorMess("Location is not found. Please type again!!!");
         });
+        } else{
+            fetchWeather();
+        }    
+
         setIsError(false)
         setLoading();
         clearTimeout(setLoading);
@@ -164,21 +202,21 @@ function DashBoard() {
                 isLoad == true ? (
                     <div className="px-3 pt-3">
                         <div className="row">
-                            {/* Show card of total number students */}
+                            {/* Show card of total number users */}
                             <div className="col-lg-4 col-sm-12 mb-3">
                                 <div className="bg-white border-0 rounded-3 card-item p-3">
-                                    <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Total Number of Students
+                                    <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Total Number of Users
                                         <img src='https://cdn-icons-png.flaticon.com/512/10156/10156019.png' className="dashboardIcon"></img>
                                     </p>
                                     <hr></hr>
-                                    <div>{users?.length} students</div>
+                                    <div>{users?.length} users</div>
                                 </div>
                             </div>
 
-                            {/* Show card of recently added students */}
+                            {/* Show card of recently added users */}
                             <div className="col-lg-4 col-sm-12 mb-3">
                                 <div className="bg-white border-0 rounded-3 card-item p-3">
-                                    <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Added Students
+                                    <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Added Users
                                         <img src='https://cdn-icons-png.flaticon.com/512/4951/4951228.png' className="dashboardIcon"></img>
                                     </p>
                                     <hr></hr>
@@ -203,17 +241,17 @@ function DashBoard() {
                                                     </div>
                                                 ))
                                             ) : (
-                                                <>There is no student added today.</>
+                                                <>There is no user added today.</>
                                             )
                                         }
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Show card of recently updated students */}
+                            {/* Show card of recently updated users */}
                             <div className="col-lg-4 col-sm-12 mb-3">
                                 <div className="bg-white border-0 rounded-3 card-item p-3">
-                                    <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Updated Students
+                                    <p className="d-flex justify-content-between align-items-center fw-bolder text-black-50">Recently Updated Users
                                         <img src='https://cdn-icons-png.flaticon.com/512/5511/5511397.png' className="dashboardIcon"></img>
                                     </p>
                                     <hr></hr>
@@ -236,7 +274,7 @@ function DashBoard() {
                                                     </div>
                                                 ))
                                             ) : (
-                                                <>There is no student updated their infomation today.</>
+                                                <>There is no user updated their infomation today.</>
                                             )
                                         }
                                     </div>
@@ -244,14 +282,14 @@ function DashBoard() {
                             </div>
                         </div>
 
-                        {/* Chart of top ten active students */}
+                        {/* Chart of top ten active users */}
                         <div className="row">
                             <div className="barChart col-sm-12 col-lg-7">
                                 <div className="col-xl-6 chartContent">
                                     <div className="card chartBody">
                                         <div className="card-header fw-bolder">
                                             <FontAwesomeIcon icon={faChartColumn} className='me-2'></FontAwesomeIcon>
-                                            Top Ten Active Students
+                                            Top Ten Active Users
                                         </div>
                                         <div style={{ height: "88%" }}>
                                             {
@@ -265,7 +303,7 @@ function DashBoard() {
                             <div className="col-sm-12 col-lg-5 mb-2">
                                 <div className="weatherForcast bg-white rounded-3 p-3">
                                     <form className="searchFormLocation ms-2 mb-1" onSubmit={handleSubmit}>
-                                        <input className="border-0 fw-bolder text-black-50" type="text" name="keyword" id="keyword" value={keyWord} onChange={(e) => setKeyWord(e.target.value)} />
+                                        <input className="border-0 fw-bolder text-black-50" type="text" name="keyword" id="keyword" value={keyWord} onChange={(e) => setKeyWord(e.target.value)} style={{width: "80%"}} placeholder="Search location..."/>
                                         <button type="submit" className="border-0 bg-white"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                                     </form>
 
@@ -280,9 +318,15 @@ function DashBoard() {
                                                     <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[0]?.date)}</p>
                                                     <img src={currentIcon} className="weatherIcon"></img>
                                                     <p className="temperature">
-                                                        {weather?.current?.temp_c}
+                                                        {
+                                                            fTemp == false? (weather?.current?.temp_c) : (weather?.current?.temp_f)
+                                                        }                                   
                                                         <sup>o</sup>
-                                                        <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
+                                                        <button className="rounded-circle border-0 ms-1 fw-bolder" onClick={() => setFTemp(!fTemp)}>
+                                                            {
+                                                                fTemp == false? (<>C</>) : (<>F</>)
+                                                            }
+                                                        </button>
                                                     </p>
                                                     <small className="textCondition">
                                                         {weather?.current?.condition.text}
@@ -292,9 +336,15 @@ function DashBoard() {
                                                     <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[1]?.date)}</p>
                                                     <img src={displayIcon && displayIcon[1]} className="weatherIcon"></img>
                                                     <p className="temperature">
-                                                        {weather?.forecast?.forecastday[1]?.day?.avgtemp_c}
+                                                        {
+                                                            fTemp == false? (weather?.forecast?.forecastday[1]?.day?.avgtemp_c) : (weather?.forecast?.forecastday[1]?.day?.avgtemp_f)
+                                                        }                                   
                                                         <sup>o</sup>
-                                                        <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
+                                                        <button className="rounded-circle border-0 ms-1 fw-bolder" onClick={() => setFTemp(!fTemp)}>
+                                                            {
+                                                                fTemp == false? (<>C</>) : (<>F</>)
+                                                            }
+                                                        </button>
                                                     </p>
                                                     <small className="textCondition">
                                                         {weather?.forecast?.forecastday[1]?.day?.condition?.text}
@@ -304,9 +354,15 @@ function DashBoard() {
                                                     <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[2]?.date)}</p>
                                                     <img src={displayIcon && displayIcon[2]} className="weatherIcon"></img>
                                                     <p className="temperature">
-                                                        {weather?.forecast?.forecastday[2]?.day?.avgtemp_c}
+                                                        {
+                                                            fTemp == false? (weather?.forecast?.forecastday[2]?.day?.avgtemp_c) : (weather?.forecast?.forecastday[2]?.day?.avgtemp_f)
+                                                        }                                   
                                                         <sup>o</sup>
-                                                        <button className="rounded-circle border-0 ms-2 fw-bolder">C</button>
+                                                        <button className="rounded-circle border-0 ms-1 fw-bolder" onClick={() => setFTemp(!fTemp)}>
+                                                            {
+                                                                fTemp == false? (<>C</>) : (<>F</>)
+                                                            }
+                                                        </button>
                                                     </p>
                                                     <small className="textCondition">
                                                         {weather?.forecast?.forecastday[2]?.day?.condition?.text}
