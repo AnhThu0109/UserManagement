@@ -16,7 +16,7 @@ Briefly introduction:
 
 ## PAGES
 
-There are six pages including welcome page, login page, dashboard page, total users page, my account page, and not found page
+There are six pages including welcome page, login page, dashboard page, total users page, my account page, and not found page.
 
 ### `Welcome Page`
 
@@ -46,52 +46,45 @@ This page consists of some basic infomation:
 
 ### `Total Users Page`
 
-![Image 5](https://i.ibb.co/kXpZtfX/image-2023-03-30-194525797.png)<br>
+#### As an admin user:
+![Image 5](https://i.ibb.co/0cTNv4W/image-2023-03-30-201143274.png)<br>
+#### As a normal user:
+![Image 6](https://i.ibb.co/rFBy7hb/image-2023-03-30-203046216.pn)<br>
 This page is designed to provide you a list of all users in the system, including their username, gender, email address, and created time.
 
 The users list is paginated, with each page consisting of 7 users. You can navigate through the pages using the pagination buttons at the bottom of the page.
 
-![Image 6](https://i.ibb.co/cxRdq1K/image-2023-03-30-195731094.png)<br>
-As an admin user, you have the ability to
-Add new users to the system by clicking add user icon at the top right of the page 
-![Image 7](https://i.ibb.co/1RP5T25/image-2023-03-30-195936443.png)<br>
-See others information and delete existing users by clicking on the corresponding buttons next to each user's information in the list.
-![Image 8](https://i.ibb.co/sQycJk7/image-2023-03-30-200130510.png)<br>
-![Image 9](https://i.ibb.co/MGPGX7J/image-2023-03-30-200644481.png)<br>
+![Image 7](https://i.ibb.co/cxRdq1K/image-2023-03-30-195731094.png)<br>
+
+#### As an admin user, you have the ability to
+* Add new users to the system by clicking add user icon at the top right of the page.
+![Image 8](https://i.ibb.co/1RP5T25/image-2023-03-30-195936443.png)<br>
+* See others information by clicking on the corresponding buttons next to each user's information in the list.
+![Image 9](https://i.ibb.co/sQycJk7/image-2023-03-30-200130510.png)<br>
+* Delete existing users.
+![Image 10](https://i.ibb.co/MGPGX7J/image-2023-03-30-200644481.png)<br>
+
+#### As a normal user, you have the ability to
+* See others information by clicking on the corresponding buttons next to each user's information in the list.
+![Image 11](https://i.ibb.co/wL1zmCc/image-2023-03-30-203204098.png)<br>
+![Image 12](https://i.ibb.co/ZxHBNPx/image-2023-03-30-203258283.png)<br>
 
 Additionally, you can use the search bar provided to search for a specific user by their username or email address. and filer gender as Male or Female.
-![Image 10](https://i.ibb.co/cwNCtGR/image-2023-03-30-200743467.png)<br>
-![Image 11](https://i.ibb.co/bQBr8Yw/image-2023-03-30-200916350.png)<br>
+![Image 13](https://i.ibb.co/cwNCtGR/image-2023-03-30-200743467.png)<br>
+![Image 14](https://i.ibb.co/bQBr8Yw/image-2023-03-30-200916350.png)<br>
 
 ### `My Account Page`
 
+![Image 15](https://i.ibb.co/w6D8TR1/image-2023-03-30-201803995.png)<br>
+This is where you can access and manage your account information. This page consists of:
+* Basic Info: You can view your basic account information, including your name, email address, and other relevant details.
+* Update Info: You can update your account information, such as your name, email address, and other details as needed.
+* Change Avatar: You can also change your avatar by choosing illustrated images or uploading a new image from your computer.
+![Image 16](https://i.ibb.co/ryfQzFr/image-2023-03-30-202436180.png)<br>
+![Image 17](https://i.ibb.co/nM1pG5R/image-2023-03-30-202536439.png)<br>
+
 ### `Not Found Page`
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+When you entered does not exist or the page you are trying to access has been removed or relocated, "Not Found" page is shown with a message informing you that the page you requested could not be found and a button to redirect to Dashboard page.
+![Image 18](https://i.ibb.co/0KpZ0Cy/image-2023-03-30-202911821.png)<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
