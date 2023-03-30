@@ -89,7 +89,7 @@ When you entered does not exist or the page you are trying to access has been re
 ![Image 18](https://i.ibb.co/0KpZ0Cy/image-2023-03-30-202911821.png)<br>
 
 **Note: Menu can be collapsed or uncollapsed by clicking menu icon at top left of page**
-![Image 19](https://i.ibb.co/McRBmSH/image-2023-03-30-204536289.png)<br>
+![Image 19](https://i.ibb.co/tPXL604/image-2023-03-30-204820438.png)<br>
 
-**Note: To logout, click to user icon at the top right of page and click logout**
+**Note*: To logout, click to user icon at the top right of page and click logout**
 ![Image 20](https://i.ibb.co/R2Mqnh0/image-2023-03-30-204630165.png)<br>
