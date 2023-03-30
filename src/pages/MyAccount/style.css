@@ -68,3 +68,9 @@ div.userInfo{
 .btnTitleImages{
     margin-left: -10px;
 }
+
+.uploader__modal.show {
+    width: 80%;
+    height: 70%;
+    border-radius: 10px;
+}

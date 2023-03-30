@@ -3,10 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import { getUserById } from "../../utils/getUser";
 import updateUser from "../../utils/updateUser";
-import { Image, message, Button, Modal, Spin, Space } from "antd";
+import { Image, message, Button, Modal, Spin, Space, Segmented } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { changeFormatDate } from "../../utils/formatDate";
 import Avatar from "../../utils/avatar";
+// Installed by "react-uploader".
+import { Uploader } from "uploader";
+import { UploadButton } from "react-uploader";
 import "./../style.css";
 import "./style.css";
 
@@ -56,8 +59,17 @@ function MyAccount() {
   }
 
   //Show modal to update avatar
+  const [activeOption, setActiveOption] = useState("Illustrate Images");
   const [avatarSrc, setAvatarSrc] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
+ 
+  const uploader = Uploader({ apiKey: "public_kW15bBX9oNC7bM5zxUA86tRCTNPF" }); // Initialize once (at the start of your app) with Real API key.
+
+  //Function get active option of segmented
+  const handleOptionChange = (value) => {
+    setActiveOption(value);
+    console.log(value);
+  };
 
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const showModalUpdate = () => {
@@ -74,10 +86,18 @@ function MyAccount() {
   };
 
   //Update avatar function
-  const handleUpdateAvatar = async () => {
-    let user = {
-      "avatar": avatarSrc,
+  const handleUpdateAvatar = async (file) => {
+    let user;
+    if(file != ""){
+      user = {
+        "avatar": file,
+      }
+    } else {
+      user = {
+        "avatar": avatarSrc,
+      }
     }
+    
     try {
       const data = await updateUser(id, token, user);
       console.log(data);
@@ -89,6 +109,12 @@ function MyAccount() {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  //Function Upload Avatar from computer
+  const completeUploadAvatar = (file) => {
+    console.log(file);
+    handleUpdateAvatar(file);
   }
 
 
@@ -190,20 +216,40 @@ function MyAccount() {
 
             {/* Modal of update avatar */}
             <Modal open={isModalUpdateOpen} onOk={handleOkUpdate} onCancel={handleCancelUpdate} footer={[
-              <Button key="close" className="okBtnModal fw-bolder" onClick={handleUpdateAvatar}>
+              <Button key="close" className="okBtnModal fw-bolder" onClick={() => handleUpdateAvatar("")}>
                 SAVE
               </Button>,
             ]}>
-              <button className="btn border bg-black text-white btnTitleImages mb-2">Illustrate Images</button>
-              <div className="row mt-2">
-                {
-                  Avatar.map((item, index) => (
-                    <div key={index} className="col-3 px-1 pb-2">
-                      <img src={item} className={index === activeIndex ? "activeImg rounded-2 w-100" : "rounded-2 w-100"} onClick={() => { setAvatarSrc(item); setActiveIndex(index); }}></img>
-                    </div>
-                  ))
-                }
-              </div>
+
+              <Segmented
+                options={['Illustrate Images', 'Upload']}
+                selectedIndex={activeOption}
+                onChange={handleOptionChange}>
+              </Segmented><br></br>
+
+              {
+                activeOption === "Illustrate Images" ? (
+                  <div className="row mt-3">
+                    {
+                      Avatar.map((item, index) => (
+                        <div key={index} className="col-3 px-1 pb-2">
+                          <img src={item} className={index === activeIndex ? "activeImg rounded-2 w-100" : "rounded-2 w-100"} onClick={() => { setAvatarSrc(item); setActiveIndex(index); }}></img>
+                        </div>
+                      ))
+                    }
+                  </div>
+                ) : (
+                  <UploadButton uploader={uploader}
+                    options={{ multi: false }}
+                    onComplete={files => files.map(x => completeUploadAvatar(x.fileUrl))}>
+                    {({ onClick }) =>
+                      <button onClick={onClick} className="mt-3 btn btn-secondary">
+                        Upload your image here...
+                      </button>
+                    }
+                  </UploadButton>
+                )
+              }
             </Modal>
           </div>
         ) : (
