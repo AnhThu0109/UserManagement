@@ -46,14 +46,25 @@ This page consists of some basic infomation:
 
 ### `Total Users Page`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![Image 5](https://i.ibb.co/kXpZtfX/image-2023-03-30-194525797.png)<br>
+This page is designed to provide you a list of all users in the system, including their username, gender, email address, and created time.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The users list is paginated, with each page consisting of 7 users. You can navigate through the pages using the pagination buttons at the bottom of the page.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Image 6](https://i.ibb.co/cxRdq1K/image-2023-03-30-195731094.png)<br>
+As an admin user, you have the ability to
+Add new users to the system by clicking add user icon at the top right of the page 
+![Image 7](https://i.ibb.co/1RP5T25/image-2023-03-30-195936443.png)<br>
+See others information and delete existing users by clicking on the corresponding buttons next to each user's information in the list.
+![Image 8](https://i.ibb.co/sQycJk7/image-2023-03-30-200130510.png)<br>
+![Image 9](https://i.ibb.co/MGPGX7J/image-2023-03-30-200644481.png)<br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Additionally, you can use the search bar provided to search for a specific user by their username or email address. and filer gender as Male or Female.
+![Image 10](https://i.ibb.co/cwNCtGR/image-2023-03-30-200743467.png)<br>
+![Image 11](https://i.ibb.co/bQBr8Yw/image-2023-03-30-200916350.png)<br>
+
 ### `My Account Page`
+
 ### `Not Found Page`
 ## Learn More
 
