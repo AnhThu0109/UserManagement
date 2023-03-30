@@ -59,7 +59,7 @@ The users list is paginated, with each page consisting of 7 users. You can navig
 
 ![Image 7](https://i.ibb.co/cxRdq1K/image-2023-03-30-195731094.png)<br>
 
-#### As an admin user, you have the ability to
+#### As an admin user, you have the ability to:
 * Add new users to the system by clicking add user icon at the top right of the page.
 
 ![Image 8](https://i.ibb.co/1RP5T25/image-2023-03-30-195936443.png)<br>
@@ -72,7 +72,7 @@ The users list is paginated, with each page consisting of 7 users. You can navig
 
 ![Image 10](https://i.ibb.co/MGPGX7J/image-2023-03-30-200644481.png)<br>
 
-#### As a normal user, you have the ability to
+#### As a normal user, you have the ability to:
 * See others information by clicking on the corresponding buttons next to each user's information in the list.<br>
 
 ![Image 11](https://i.ibb.co/wL1zmCc/image-2023-03-30-203204098.png)<br>
