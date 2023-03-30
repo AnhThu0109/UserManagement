@@ -27,6 +27,7 @@ function MyAccount() {
   const [isUpdated, setIsUpdated] = useState(false);
   const [isLoad, setIsLoad] = useState(false);
 
+  //Set time for loading page
   const setLoading = () => {
     setTimeout(() => {
       setIsLoad(true);
@@ -63,7 +64,7 @@ function MyAccount() {
   const [avatarSrc, setAvatarSrc] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
  
-  const uploader = Uploader({ apiKey: "public_kW15bBX9oNC7bM5zxUA86tRCTNPF" }); // Initialize once (at the start of your app) with Real API key.
+  const uploader = Uploader({ apiKey: "public_kW15bBX9oNC7bM5zxUA86tRCTNPF" }); //Real API key.
 
   //Function get active option of segmented
   const handleOptionChange = (value) => {
@@ -77,10 +78,12 @@ function MyAccount() {
   };
 
   const handleOkUpdate = () => {
+    setActiveIndex(-1);
     setIsModalUpdateOpen(false);
   };
 
   const handleCancelUpdate = () => {
+    setActiveIndex(-1);
     setIsModalUpdateOpen(false);
     message.error('Upload avatar is canceled !!!');
   };
@@ -229,6 +232,7 @@ function MyAccount() {
 
               {
                 activeOption === "Illustrate Images" ? (
+                  // Show images when active option is "Illustrate Images" 
                   <div className="row mt-3">
                     {
                       Avatar.map((item, index) => (
@@ -239,6 +243,7 @@ function MyAccount() {
                     }
                   </div>
                 ) : (
+                  // Show upload button when active option is "Upload" 
                   <UploadButton uploader={uploader}
                     options={{ multi: false }}
                     onComplete={files => files.map(x => completeUploadAvatar(x.fileUrl))}>

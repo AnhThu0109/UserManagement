@@ -26,6 +26,13 @@ function Users() {
     const id = localStorage.getItem("userChosenId");
     const loginUserId = localStorage.getItem("id");
 
+    //Set time for loading page
+    const setLoading = () => {
+        setTimeout(() => {
+            setIsLoad(true);
+        }, 700);
+    };
+
     //Get id of chosen user
     const userChosen = (id) => {
         localStorage.setItem("userChosenId", id);
@@ -83,12 +90,6 @@ function Users() {
     const [isAddNew, setIsAddNew] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [isLoad, setIsLoad] = useState(false);
-
-    const setLoading = () => {
-        setTimeout(() => {
-            setIsLoad(true);
-        }, 700);
-    };
 
     //Handle change of check box "is admin?"
     const handleCheckboxChange = (event) => {

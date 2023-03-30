@@ -19,6 +19,7 @@ function DashBoard() {
     const [recentUpdatedUser, setRecentUpdatedUser] = useState();
     const [isLoad, setIsLoad] = useState(false);
 
+    //Set time for loading page
     const setLoading = () => {
         setTimeout(() => {
             setIsLoad(true);
@@ -67,6 +68,7 @@ function DashBoard() {
 
     //Fetch data weather
     const fetchWeather = async (location) => {
+        //If not search keyword yet ==> show weather of user's current location || show weather of seaching location
         if (!location) {
           navigator.geolocation.getCurrentPosition(
             (position) => {
