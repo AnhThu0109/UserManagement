@@ -20,24 +20,24 @@ There are six pages including welcome page, login page, dashboard page, total us
 
 ### `Welcome Page`
 
-![Image 1](https://i.ibb.co/vhbsv1f/image-2023-03-30-193244661.png)
+![Image 1](https://i.ibb.co/JnG8n79/image-2023-03-30-194221804.png)<br>
 On this page, you will find an introduction text and a "Get Started" button that will allow you to access our website and start exploring its features.
 
-![Image 2](https://i.ibb.co/3r7QDgp/image-2023-03-30-193327948.png)
+![Image 2](https://i.ibb.co/3r7QDgp/image-2023-03-30-193327948.png)<br>
 When you click on the "Get Started" button, you will be taken to a processing page. This may take a few moments, so please be patient.
 
 Once the processing is complete, you will be directed to our login page where you can enter your login credentials to access the website's full features.
 
 ### `Login Page`
 
-![Image 3](https://i.ibb.co/bmXR3Fm/image-2023-03-30-193430999.png)
+![Image 3](https://i.ibb.co/bmXR3Fm/image-2023-03-30-193430999.png)<br>
 This page is designed to provide you with secure access to my website's features.
 
 To access this website, you will need to enter your username and password in the fields provided. Once you have entered your login credentials, click the "Login" button to access the website's full features.
 
 ### `Dashboard Page`
 
-![Image 4](https://i.ibb.co/0GnGZMC/image-2023-03-30-192530605.png)
+![Image 4](https://i.ibb.co/0GnGZMC/image-2023-03-30-192530605.png)<br>
 This page consists of some basic infomation:
 * Total users in the system
 * List of three users added/ updated today
