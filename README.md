@@ -49,7 +49,7 @@ This page consists of some basic infomation:
 #### As an admin user:
 ![Image 5](https://i.ibb.co/0cTNv4W/image-2023-03-30-201143274.png)<br>
 #### As a normal user:
-![Image 6](https://i.ibb.co/rFBy7hb/image-2023-03-30-203046216.pn)<br>
+![Image 6](https://i.ibb.co/n6tmrRD/image-2023-03-30-203844878.png)<br>
 This page is designed to provide you a list of all users in the system, including their username, gender, email address, and created time.
 
 The users list is paginated, with each page consisting of 7 users. You can navigate through the pages using the pagination buttons at the bottom of the page.
@@ -59,13 +59,13 @@ The users list is paginated, with each page consisting of 7 users. You can navig
 #### As an admin user, you have the ability to
 * Add new users to the system by clicking add user icon at the top right of the page.
 ![Image 8](https://i.ibb.co/1RP5T25/image-2023-03-30-195936443.png)<br>
-* See others information by clicking on the corresponding buttons next to each user's information in the list.
+* See others information by clicking on the corresponding buttons next to each user's information in the list.<br>
 ![Image 9](https://i.ibb.co/sQycJk7/image-2023-03-30-200130510.png)<br>
 * Delete existing users.
 ![Image 10](https://i.ibb.co/MGPGX7J/image-2023-03-30-200644481.png)<br>
 
 #### As a normal user, you have the ability to
-* See others information by clicking on the corresponding buttons next to each user's information in the list.
+* See others information by clicking on the corresponding buttons next to each user's information in the list.<br>
 ![Image 11](https://i.ibb.co/wL1zmCc/image-2023-03-30-203204098.png)<br>
 ![Image 12](https://i.ibb.co/ZxHBNPx/image-2023-03-30-203258283.png)<br>
 
@@ -75,7 +75,7 @@ Additionally, you can use the search bar provided to search for a specific user 
 
 ### `My Account Page`
 
-![Image 15](https://i.ibb.co/w6D8TR1/image-2023-03-30-201803995.png)<br>
+![Image 15](https://i.ibb.co/wB2Yvj2/image-2023-03-30-204028364.png)<br>
 This is where you can access and manage your account information. This page consists of:
 * Basic Info: You can view your basic account information, including your name, email address, and other relevant details.
 * Update Info: You can update your account information, such as your name, email address, and other details as needed.
