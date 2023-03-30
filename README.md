@@ -1,4 +1,4 @@
-# Account Management Application Website
+# User Management Web Application
 
 Owner: Nguyen Ngoc Anh Thu
 
