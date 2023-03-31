@@ -30,7 +30,7 @@ Once the processing is complete, you will be directed to login page where you ca
 
 ### `Register Page`
 
-![Img Register](https://i.ibb.co/TTrc6dr/image-2023-03-31-144056997.png)<br>
+![Img Register](https://i.ibb.co/z7VBVyz/image-2023-03-31-151744298.png)<br>
 If you do not haave an account yet, this page allows you to create one on my website. Please fill out all required fields before submit it. 
 
 ### `Login Page`
@@ -211,6 +211,10 @@ When you entered does not exist or the page you are trying to access has been re
 ### `Uncollapsed menu`
 
 ![Image 19](https://i.ibb.co/tPXL604/image-2023-03-30-204820438.png)<br>
+
+### `Register Page`
+
+![Img Register](https://i.ibb.co/z7VBVyz/image-2023-03-31-151744298.png)<br>
 
 ### `Login Page`
 
