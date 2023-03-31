@@ -139,6 +139,14 @@ When you entered does not exist or the page you are trying to access has been re
 
 ### `My Account Page`
 
+![Image 29](https://i.ibb.co/y6pcqn6/image-2023-03-31-100017050.png)
+![Image 30](https://i.ibb.co/yRZdXhD/image-2023-03-31-100112112.png)<br>
+
+ #### Change avatar 
+
+![Image 31](https://i.ibb.co/R2xwbVv/Capture.png)
+![Image 32](https://i.ibb.co/X4krFvJ/image-2023-03-31-100339177.png)<br>
+
 ## TABLET VIEW
 
 ## DESTOP VIEW
