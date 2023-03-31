@@ -79,7 +79,7 @@ The users list is paginated, with each page consisting of 7 users. You can navig
 ![Image 11](https://i.ibb.co/wL1zmCc/image-2023-03-30-203204098.png)<br>
 ![Image 12](https://i.ibb.co/ZxHBNPx/image-2023-03-30-203258283.png)<br>
 
-Additionally, you can use the search bar provided to search for a specific user by their username or email address. and filer gender as Male or Female.
+Additionally, you can use the search bar provided to search for a specific user by their username or email address. and filter gender as Male or Female.
 
 ![Image 13](https://i.ibb.co/cwNCtGR/image-2023-03-30-200743467.png)<br>
 ![Image 14](https://i.ibb.co/bQBr8Yw/image-2023-03-30-200916350.png)<br>
