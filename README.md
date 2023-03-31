@@ -118,7 +118,7 @@ When you entered does not exist or the page you are trying to access has been re
 
 ### `Dashboard Page`
 
-![Image 23](https://i.ibb.co/bzv3z4z/image-2023-03-31-093253444.png)<br>
+![Image 23](https://i.ibb.co/bzv3z4z/image-2023-03-31-093253444.png)
 ![Image 24](https://i.ibb.co/x578tFk/image-2023-03-31-093401587.png)<br>
 
 ### `Total Users Page`
