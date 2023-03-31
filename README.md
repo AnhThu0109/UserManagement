@@ -57,12 +57,13 @@ This page is designed to provide you a list of all users in the system, includin
 
 The users list is paginated, with each page consisting of 7 users. You can navigate through the pages using the pagination buttons at the bottom of the page.
 
-![Image 7](https://i.ibb.co/cxRdq1K/image-2023-03-30-195731094.png)<br>
-
 #### As an admin user, you have the ability to:
+
+![Image 7](https://i.ibb.co/1RP5T25/image-2023-03-30-195936443.png)<br>
+
 * Add new users to the system by clicking add user icon at the top right of the page.
 
-![Image 8](https://i.ibb.co/1RP5T25/image-2023-03-30-195936443.png)<br>
+![Image 8](https://i.ibb.co/cxRdq1K/image-2023-03-30-195731094.png)<br>
 
 * See others information by clicking on the corresponding buttons next to each user's information in the list.<br>
 
@@ -192,7 +193,7 @@ When you entered does not exist or the page you are trying to access has been re
 
 ### `Uncollapsed menu`
 
-![Image 21](https://i.ibb.co/WVwxYvn/image-2023-03-31-093544424.png)<br>
+![Image 19](https://i.ibb.co/tPXL604/image-2023-03-30-204820438.png)<br>
 
 ### `Login Page`
 
@@ -200,31 +201,29 @@ When you entered does not exist or the page you are trying to access has been re
 
 ### `Dashboard Page`
 
-![Image 23](https://i.ibb.co/bzv3z4z/image-2023-03-31-093253444.png)
-![Image 24](https://i.ibb.co/x578tFk/image-2023-03-31-093401587.png)<br>
+![Image 4](https://i.ibb.co/kXpZtfX/image-2023-03-30-194525797.png)<br>
 
 ### `Total Users Page`
 
-![Image 25](https://i.ibb.co/Gnw0VGH/image-2023-03-31-094600101.png)<br>
+![Image 5](https://i.ibb.co/0cTNv4W/image-2023-03-30-201143274.png)<br>
 
  #### See information of other users (for Normal user and Admin)
 
-![Image 26](https://i.ibb.co/wYrXn9B/image-2023-03-31-094851418.png)<br>
+![Image 9](https://i.ibb.co/sQycJk7/image-2023-03-30-200130510.png)<br>
 
  #### Add new user (for Admin)
 
-![Image 27](https://i.ibb.co/KLhhknJ/image-2023-03-31-094659415.png)<br>
+![Image 8](https://i.ibb.co/cxRdq1K/image-2023-03-30-195731094.png)<br>
 
  #### Delete user (for Admin)
 
-![Image 28](https://i.ibb.co/102w4b5/image-2023-03-31-095201020.png)<br>
+![Image 10](https://i.ibb.co/MGPGX7J/image-2023-03-30-200644481.png)<br>
 
 ### `My Account Page`
 
-![Image 29](https://i.ibb.co/y6pcqn6/image-2023-03-31-100017050.png)
-![Image 30](https://i.ibb.co/yRZdXhD/image-2023-03-31-100112112.png)<br>
+![Image 15](https://i.ibb.co/wB2Yvj2/image-2023-03-30-204028364.png)<br>
 
  #### Change avatar 
 
-![Image 31](https://i.ibb.co/R2xwbVv/Capture.png)
-![Image 32](https://i.ibb.co/X4krFvJ/image-2023-03-31-100339177.png)<br>
+![Image 16](https://i.ibb.co/ryfQzFr/image-2023-03-30-202436180.png)<br>
+![Image 17](https://i.ibb.co/nM1pG5R/image-2023-03-30-202536439.png)<br>
