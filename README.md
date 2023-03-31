@@ -73,6 +73,8 @@ The users list is paginated, with each page consisting of 7 users. You can navig
 
 ![Image 10](https://i.ibb.co/MGPGX7J/image-2023-03-30-200644481.png)<br>
 
+**Note*: If an admin chooses to delete their own account, the system will automatically log them out and redirect them to the login page.**
+
 #### As a normal user, you have the ability to:
 * See others information by clicking on the corresponding buttons next to each user's information in the list.<br>
 
