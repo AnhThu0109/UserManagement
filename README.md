@@ -149,4 +149,82 @@ When you entered does not exist or the page you are trying to access has been re
 
 ## TABLET VIEW
 
+### `Uncollapsed menu`
+
+![Image 33](https://i.ibb.co/2PJznTH/image-2023-03-31-100614635.png)<br>
+
+### `Login Page`
+
+![Image 34](https://i.ibb.co/Y2j2mdX/image-2023-03-31-100732333.png)<br>
+
+### `Dashboard Page`
+
+![Image 35](https://i.ibb.co/k0CbQKb/image-2023-03-31-101142047.png)
+![Image 36](https://i.ibb.co/my6WKpx/image-2023-03-31-101246760.png)<br>
+
+### `Total Users Page`
+
+![Image 37](https://i.ibb.co/hBBNSHW/image-2023-03-31-101337370.png)<br>
+
+ #### See information of other users (for Normal user and Admin)
+
+![Image 38](https://i.ibb.co/Km5KcDm/image-2023-03-31-101606339.png)<br>
+
+ #### Add new user (for Admin)
+
+![Image 39](https://i.ibb.co/p3srK23/image-2023-03-31-101644294.png)<br>
+
+ #### Delete user (for Admin)
+
+![Image 40](https://i.ibb.co/pbdCd8R/image-2023-03-31-101804458.png)<br>
+
+### `My Account Page`
+
+![Image 41](https://i.ibb.co/D9PJWN6/image-2023-03-31-101917313.png)
+![Image 42](https://i.ibb.co/PrLhn3L/image-2023-03-31-101953954.png)<br>
+
+ #### Change avatar 
+
+![Image 43](https://i.ibb.co/nbV9KQR/image-2023-03-31-102036870.png)
+![Image 44](https://i.ibb.co/PNTp58c/image-2023-03-31-102120692.png)<br>
+
 ## DESTOP VIEW
+
+### `Uncollapsed menu`
+
+![Image 21](https://i.ibb.co/WVwxYvn/image-2023-03-31-093544424.png)<br>
+
+### `Login Page`
+
+![Image 3](https://i.ibb.co/D4hnzJ1/image-2023-03-30-194435873.png)<br>
+
+### `Dashboard Page`
+
+![Image 23](https://i.ibb.co/bzv3z4z/image-2023-03-31-093253444.png)
+![Image 24](https://i.ibb.co/x578tFk/image-2023-03-31-093401587.png)<br>
+
+### `Total Users Page`
+
+![Image 25](https://i.ibb.co/Gnw0VGH/image-2023-03-31-094600101.png)<br>
+
+ #### See information of other users (for Normal user and Admin)
+
+![Image 26](https://i.ibb.co/wYrXn9B/image-2023-03-31-094851418.png)<br>
+
+ #### Add new user (for Admin)
+
+![Image 27](https://i.ibb.co/KLhhknJ/image-2023-03-31-094659415.png)<br>
+
+ #### Delete user (for Admin)
+
+![Image 28](https://i.ibb.co/102w4b5/image-2023-03-31-095201020.png)<br>
+
+### `My Account Page`
+
+![Image 29](https://i.ibb.co/y6pcqn6/image-2023-03-31-100017050.png)
+![Image 30](https://i.ibb.co/yRZdXhD/image-2023-03-31-100112112.png)<br>
+
+ #### Change avatar 
+
+![Image 31](https://i.ibb.co/R2xwbVv/Capture.png)
+![Image 32](https://i.ibb.co/X4krFvJ/image-2023-03-31-100339177.png)<br>
