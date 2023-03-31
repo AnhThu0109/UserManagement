@@ -107,6 +107,8 @@ When you entered does not exist or the page you are trying to access has been re
 **Note*: To logout, click to user icon at the top right of page and click logout**
 ![Image 20](https://i.ibb.co/R2Mqnh0/image-2023-03-30-204630165.png)<br>
 
+# Responsive Web Design
+
 ## MOBILE VIEW
 
 ### `Uncollapsed menu`
