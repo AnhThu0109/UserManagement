@@ -12,7 +12,7 @@ Briefly introduction:
  - I have implemented two types of users: admin and normal. Admins have full access to the website's features and can view basic information of all users, add new users to the system and delete users, including themselves. In addition, admins can update their own information.
  Normal users have limited access to the website's features. They can only update their own information and view basic information for other users.
 
-- This website is also flexible for many devices such as desktop, tablet and mobile
+- This website is also flexible for many devices such as desktop, tablet and mobile.
 
 ## PAGES
 
