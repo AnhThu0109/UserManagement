@@ -5,7 +5,7 @@ Owner: Nguyen Ngoc Anh Thu
 Briefly introduction:
  - My site is built using HTML, CSS, Bootstrap 5, JavaScript, ReactJS, AntDesign and MongoDB.
 
- - This website consists of six pages including welcome page, login page, dashboard page, total users page, my account page, and not found page. When a user attempts to access our website without logging in, they will only be able to view the welcome page, login page and not found page. 
+ - This website consists of six pages including welcome page, login page, dashboard page, total users page, my account page, and not found page. When a user attempts to access my website without logging in, they will only be able to view the welcome page, login page and not found page. 
  
  - Upon providing valid login credentials, they will be redirected to the dashboard page, which provides an overview of the systems infomation. The total users page displays the total number of registered users on the website, while the my account page allows users to edit their account information.
 
@@ -21,12 +21,12 @@ There are six pages including welcome page, login page, dashboard page, total us
 ### `Welcome Page`
 
 ![Image 1](https://i.ibb.co/JnG8n79/image-2023-03-30-194221804.png)<br>
-On this page, you will find an introduction text and a "Get Started" button that will allow you to access our website and start exploring its features.
+On this page, you will find an introduction text and a "Get Started" button that will allow you to access my website and start exploring its features.
 
 ![Image 2](https://i.ibb.co/3r7QDgp/image-2023-03-30-193327948.png)<br>
 When you click on the "Get Started" button, you will be taken to a processing page. This may take a few moments, so please be patient.
 
-Once the processing is complete, you will be directed to our login page where you can enter your login credentials to access the website's full features.
+Once the processing is complete, you will be directed to login page where you can enter your login credentials to access the website's full features.
 
 ### `Login Page`
 
