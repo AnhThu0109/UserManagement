@@ -7,9 +7,9 @@ Briefly introduction:
 
  - This website consists of six pages including welcome page, login page, dashboard page, total users page, my account page, and not found page. When a user attempts to access our website without logging in, they will only be able to view the welcome page, login page and not found page. 
  
- Upon providing valid login credentials, they will be redirected to the dashboard page, which provides an overview of the systems infomation. The total users page displays the total number of registered users on the website, while the my account page allows users to edit their account information.
+ - Upon providing valid login credentials, they will be redirected to the dashboard page, which provides an overview of the systems infomation. The total users page displays the total number of registered users on the website, while the my account page allows users to edit their account information.
 
- I have implemented two types of users: admin and normal. Admins have full access to the website's features and can view basic information of all users, add new users to the system and delete users, including themselves. In addition, admins can update their own information.
+ - I have implemented two types of users: admin and normal. Admins have full access to the website's features and can view basic information of all users, add new users to the system and delete users, including themselves. In addition, admins can update their own information.
  Normal users have limited access to the website's features. They can only update their own information and view basic information for other users.
 
 - This website is also flexible for many devices such as desktop, tablet and mobile
