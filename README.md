@@ -105,3 +105,40 @@ When you entered does not exist or the page you are trying to access has been re
 
 **Note*: To logout, click to user icon at the top right of page and click logout**
 ![Image 20](https://i.ibb.co/R2Mqnh0/image-2023-03-30-204630165.png)<br>
+
+## MOBILE VIEW
+
+### `Uncollapsed menu`
+
+![Image 21](https://i.ibb.co/WVwxYvn/image-2023-03-31-093544424.png)<br>
+
+### `Login Page`
+
+![Image 22](https://i.ibb.co/WKdW7Qt/image-2023-03-31-094335770.png)<br>
+
+### `Dashboard Page`
+
+![Image 23](https://i.ibb.co/bzv3z4z/image-2023-03-31-093253444.png)<br>
+![Image 24](https://i.ibb.co/x578tFk/image-2023-03-31-093401587.png)<br>
+
+### `Total Users Page`
+
+![Image 25](https://i.ibb.co/Gnw0VGH/image-2023-03-31-094600101.png)<br>
+
+ #### See information of other users (for Normal user and Admin)
+
+![Image 26](https://i.ibb.co/wYrXn9B/image-2023-03-31-094851418.png)<br>
+
+ #### Add new user (for Admin)
+
+![Image 27](https://i.ibb.co/KLhhknJ/image-2023-03-31-094659415.png)<br>
+
+ #### Delete user (for Admin)
+
+![Image 28](https://i.ibb.co/102w4b5/image-2023-03-31-095201020.png)<br>
+
+### `My Account Page`
+
+## TABLET VIEW
+
+## DESTOP VIEW

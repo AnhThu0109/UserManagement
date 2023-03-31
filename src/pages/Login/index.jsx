@@ -83,7 +83,7 @@ const Login = () => {
         </h4>     
         <div>
         <form onSubmit={handleSubmit} className="pt-4 border p-sm-3 p-lg-4 rounded-3 bg-white">
-          <div className='mb-sm-2 mb-lg-3'>
+          <div className='mb-sm-2 mb-lg-3 login-input-div'>
             <label htmlFor="text" className='form-label'>Username:</label>
             <input
               className='form-control border border-3'
@@ -96,7 +96,7 @@ const Login = () => {
             />
           </div>
           
-          <div className='mb-sm-2 mb-lg-3'>
+          <div className='mb-sm-2 mb-lg-3 login-input-div'>
             <label htmlFor="password" className='form-label'>Password:</label>
             <input
               className='form-control border border-3'

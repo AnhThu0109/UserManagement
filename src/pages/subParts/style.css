@@ -90,6 +90,15 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
     div.weatherForcast {
         height: fit-content;
     }
+
+    .loginForm form {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .login-input-div, button.mt-3.mb-3.text-white.btn.btn-secondary.formLoginBtn {
+        margin: 0px 10px;
+    }
 }
 
 /* Galaxy Fold + iphone SE*/
@@ -114,6 +123,15 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
         width: 35% !important;
         height: 30% !important;
     }
+
+    .loginForm form {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .login-input-div, button.mt-3.mb-3.text-white.btn.btn-secondary.formLoginBtn {
+        margin: 0px 10px;
+    }
 }
 
 
@@ -126,6 +144,15 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
 
     .barChart{
         margin-bottom: 15px !important;
+    }
+
+    .loginForm form {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .login-input-div, button.mt-3.mb-3.text-white.btn.btn-secondary.formLoginBtn {
+        margin: 0px 10px;
     }
 }
 
