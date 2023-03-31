@@ -3,7 +3,7 @@
 Owner: Nguyen Ngoc Anh Thu
 
 Briefly introduction:
- - My site is built using HTML, CSS, Bootstrap 5, JavaScript, ReactJS and AntDesign,...
+ - My site is built using HTML, CSS, Bootstrap 5, JavaScript, ReactJS, AntDesign and MongoDB.
 
  - This website consists of six pages including welcome page, login page, dashboard page, total users page, my account page, and not found page. When a user attempts to access our website without logging in, they will only be able to view the welcome page, login page and not found page. 
  
