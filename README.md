@@ -31,7 +31,7 @@ Once the processing is complete, you will be directed to login page where you ca
 ### `Register Page`
 
 ![Img Register](https://i.ibb.co/TTrc6dr/image-2023-03-31-144056997.png)<br>
-If you do not haave an account yet, this page allows you to create one on my website. Please fill out all required fields before submit it. 
+If you do not have an account yet, this page allows you to create one on my website. Please fill out all required fields before submit it. 
 
 ### `Login Page`
 
