@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import NotFound from "../pages/NotFoundPage";
 import MyAccount from "../pages/MyAccount";
 import WelcomePage from "../pages/Welcome";
+import Register from "../pages/Register";
 
 const publicRoutes = [
     {
@@ -13,6 +14,10 @@ const publicRoutes = [
     {
         element: <Login/>,
         path: "/login"
+    },
+    {
+        element: <Register/>,
+        path: "/register"
     },
     {
         element: <NotFound/>,

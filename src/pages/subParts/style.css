@@ -84,9 +84,6 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
         margin-bottom: 15px !important;
     }
 
-    /* ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.dropDownLogOut.css-dev-only-do-not-override-1me4733 {
-        right: 2.6%;
-    } */
     div.weatherForcast {
         height: fit-content;
     }
@@ -94,6 +91,12 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
     .loginForm form {
         width: 80%;
         margin: 0 auto;
+    }
+
+    .signinForm {
+        width: 80%;
+        margin: 0 auto;
+        padding: 0px 10px;
     }
 
     .login-input-div, button.mt-3.mb-3.text-white.btn.btn-secondary.formLoginBtn {
@@ -129,6 +132,12 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
         margin: 0 auto;
     }
 
+    .signinForm {
+        width: 80%;
+        margin: 0 auto;
+        padding: 0px 10px;
+    }
+
     .login-input-div, button.mt-3.mb-3.text-white.btn.btn-secondary.formLoginBtn {
         margin: 0px 10px;
     }
@@ -149,6 +158,12 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
     .loginForm form {
         width: 80%;
         margin: 0 auto;
+    }
+
+    .signinForm {
+        width: 80%;
+        margin: 0 auto;
+        padding: 0px 10px;
     }
 
     .login-input-div, button.mt-3.mb-3.text-white.btn.btn-secondary.formLoginBtn {
@@ -203,6 +218,11 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
         width: 35% !important;
         height: 50% !important;
     }
+
+    .loginForm form, .signinForm {
+        width: 50%;
+        margin: 0 auto;
+    }
     
 }
 
@@ -243,6 +263,11 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
     div.notFound img {
         width: 35% !important;
         height: 70% !important;
+    }
+
+    .loginForm form, .signinForm {
+        width: 50%;
+        margin: 0 auto;
     }
 
 }

@@ -23,7 +23,8 @@ function Register() {
         "username": username,
         "email": email,
         "password": password,
-        "gender": gender
+        "gender": gender,
+        "isAdmin": false,
       }
       const response = await registerUser(user);
       if (response.ok){
@@ -80,7 +81,7 @@ function Register() {
         <input type="password" id="password"
           name="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)} className="form-control border border-3 mb-2" required />
+          onChange={(e) => setPassword(e.target.value)} className="form-control border border-3 mb-2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 4 or more characters" required />
 
         <label>Gender:</label>
         <select className="form-select border border-3" value={gender} onChange={(e) => setGender(e.target.value)}>
@@ -88,7 +89,7 @@ function Register() {
           <option value="Female" readOnly>Female</option>
         </select>
 
-        <button type="submit" className='mt-3 mb-3 text-white btn btn-secondary formLoginBtn'>Submit</button>
+        <button type="submit" className='mt-3 mb-3 mx-0 text-white btn btn-secondary formLoginBtn'>Submit</button>
       </form>
 
       {

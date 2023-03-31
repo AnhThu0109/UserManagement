@@ -109,7 +109,7 @@ const Login = () => {
             />
           </div>
           <button type="submit" className='mt-3 mb-3 text-white btn btn-secondary formLoginBtn'>Login</button><br></br>
-          {/* <small className='text-secondary'>Don't have an account?<Link to="/register" className='text-decoration-none'> Created here!</Link></small> */}
+          <small className='ms-2 text-secondary textRegister'>Don't have an account?<Link to="/register" className='text-decoration-none'> Created here!</Link></small>
         </form>
         </div>     
 

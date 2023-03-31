@@ -5,7 +5,7 @@ Owner: Nguyen Ngoc Anh Thu
 Briefly introduction:
  - My site is built using HTML, CSS, Bootstrap 5, JavaScript, ReactJS, AntDesign and MongoDB.
 
- - This website consists of six pages including welcome page, login page, dashboard page, total users page, my account page, and not found page. When a user attempts to access my website without logging in, they will only be able to view the welcome page, login page and not found page. 
+ - This website consists of seven pages including welcome page, register page, login page, dashboard page, total users page, my account page, and not found page. When a user attempts to access my website without logging in, they will only be able to view the welcome page, register page, login page and not found page. 
  
  - Upon providing valid login credentials, they will be redirected to the dashboard page, which provides an overview of the systems infomation. The total users page displays the total number of registered users on the website, while the my account page allows users to edit their account information.
 
@@ -16,7 +16,7 @@ Briefly introduction:
 
 ## PAGES
 
-There are six pages including welcome page, login page, dashboard page, total users page, my account page, and not found page.
+There are seven pages including welcome page, register page, login page, dashboard page, total users page, my account page, and not found page.
 
 ### `Welcome Page`
 
@@ -28,9 +28,14 @@ When you click on the "Get Started" button, you will be taken to a processing pa
 
 Once the processing is complete, you will be directed to login page where you can enter your login credentials to access the website's full features.
 
+### `Register Page`
+
+![Img Register](https://i.ibb.co/TTrc6dr/image-2023-03-31-144056997.png)<br>
+If you do not haave an account yet, this page allows you to create one on my website. Please fill out all required fields before submit it. 
+
 ### `Login Page`
 
-![Image 3](https://i.ibb.co/D4hnzJ1/image-2023-03-30-194435873.png)<br>
+![Image 3](https://i.ibb.co/kmCMXMD/image-2023-03-31-145205867.png)<br>
 This page is designed to provide you with secure access to my website's features.
 
 To access this website, you will need to enter your username and password in the fields provided. Once you have entered your login credentials, click the "Login" button to access the website's full features.
@@ -117,9 +122,13 @@ When you entered does not exist or the page you are trying to access has been re
 
 ![Image 21](https://i.ibb.co/WVwxYvn/image-2023-03-31-093544424.png)<br>
 
+### `Register Page`
+
+![Register mobile](https://i.ibb.co/Fhgk9Cm/image-2023-03-31-150435939.png)<br>
+
 ### `Login Page`
 
-![Image 22](https://i.ibb.co/WKdW7Qt/image-2023-03-31-094335770.png)<br>
+![Image 22](https://i.ibb.co/2jqP471/image-2023-03-31-150038813.png)<br>
 
 ### `Dashboard Page`
 
@@ -158,9 +167,13 @@ When you entered does not exist or the page you are trying to access has been re
 
 ![Image 33](https://i.ibb.co/2PJznTH/image-2023-03-31-100614635.png)<br>
 
+### `Register Page`
+
+![Register Tablet](https://i.ibb.co/Hq5t3x6/image-2023-03-31-150355664.png)<br>
+
 ### `Login Page`
 
-![Image 34](https://i.ibb.co/Y2j2mdX/image-2023-03-31-100732333.png)<br>
+![Image 34](https://i.ibb.co/dprRncP/image-2023-03-31-150154408.png)<br>
 
 ### `Dashboard Page`
 
@@ -201,7 +214,7 @@ When you entered does not exist or the page you are trying to access has been re
 
 ### `Login Page`
 
-![Image 3](https://i.ibb.co/D4hnzJ1/image-2023-03-30-194435873.png)<br>
+![Image 3](https://i.ibb.co/kmCMXMD/image-2023-03-31-145205867.png)<br>
 
 ### `Dashboard Page`
 

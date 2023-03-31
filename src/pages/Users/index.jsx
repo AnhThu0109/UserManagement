@@ -529,7 +529,7 @@ function Users() {
                                         <div className="row">
                                             <div className="col-sm-12 col-lg-6 mb-2">
                                                 <label for="" className="form-label text-secondary">Password</label>
-                                                <input type="password" className="border border-2 form-control" name="" id="password" value={password} placeholder="Password" required onChange={(e) => setPassword(e.target.value)}></input>
+                                                <input type="password" className="border border-2 form-control" name="" id="password" value={password} placeholder="Password" required onChange={(e) => setPassword(e.target.value)} pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 4 or more characters"></input>
                                             </div>
                                             <div className="col-sm-12 col-lg-6 mb-2">
                                                 <label for="" className="form-label text-secondary">Gender (Optional)</label>
