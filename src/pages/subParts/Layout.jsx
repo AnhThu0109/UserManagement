@@ -44,6 +44,7 @@ const Layout = () => {
     navigate("/login");
   }
 
+  //Function setting title of Nav bar
   const titleSetting = () => {
     if (activeItem == 1) {
       setTitle("Dashboard");
@@ -56,7 +57,43 @@ const Layout = () => {
     }
   }
 
+  //Function setting active menu item when handle click
+  const handleMenuItemClick = (item) => {
+    setActive({
+        activeDashboard: item === 1,
+        activeUsers: item === 2,
+        activeAccount: item === 3,
+    });
+    saveActiveItem(item);
+  };
+
+  // Set the title and active menu item based on the current URL when the user clicks the browser's back or forward button
+  const setTitleCurrentURL = () => {
+    const currentPath = window.location.pathname;
+    console.log("currentpath", currentPath);
+    if(currentPath == "/home"){
+      handleMenuItemClick(1);
+      setTitle("Dashboard");
+    }
+    if(currentPath == "/users"){
+      handleMenuItemClick(2);
+      setTitle("Users List");
+    }
+    if(currentPath == `/users/${id}`){
+      handleMenuItemClick(3);
+      setTitle("My Account");
+    } 
+    if (currentPath == "/*"){
+      setTitle("");
+    }
+  } 
+
   useEffect(() => {
+    // Set the initial title and active menu item based on the current URL
+    setTitleCurrentURL();
+    // Add an event listener to update the title and active menu item when the user clicks the browser's back or forward button
+    window.addEventListener('popstate', setTitleCurrentURL);
+
     setActive({
       activeDashboard: false,
       activeUsers: false,
@@ -65,6 +102,10 @@ const Layout = () => {
     setToken(t);
     set1stName(firstname);
     titleSetting();
+    return () => {
+      // Remove the event listener when the component unmounts
+      window.removeEventListener('popstate', setTitleCurrentURL);
+    };
   }, [token, firstname])
 
   return (
@@ -134,7 +175,7 @@ const Layout = () => {
               <div className="nav">
                 <li className={active.activeDashboard == true || activeItem == 1 ? "active" : ""}>
                   <div className="menuList">
-                    <Link className="nav-link pe-2" to="/home" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: true, activeUsers: false }); saveActiveItem(1); setTitle("Dashboard"); })}>
+                    <Link className="nav-link pe-2" to="/home" onClick={t != null && (() => { handleMenuItemClick(1); setTitle("Dashboard"); })}>
                       <FontAwesomeIcon icon={faSquarePollVertical} className='me-2' />
                       Dashboard
                     </Link>
@@ -143,7 +184,7 @@ const Layout = () => {
 
                 <li className={active.activeUsers == true || activeItem == 2 ? "active" : ""}>
                   <div className="menuList">
-                    <Link className="nav-link pe-2" to="/users" onClick={t != null && (() => { setActive({ activeAccount: false, activeDashboard: false, activeUsers: true }); saveActiveItem(2); setTitle("Users List"); })}>
+                    <Link className="nav-link pe-2" to="/users" onClick={t != null && (() => { handleMenuItemClick(2); setTitle("Users List"); })}>
                       <FontAwesomeIcon icon={faUserGroup} className='me-2' />
                       Total Users
                     </Link>
@@ -154,7 +195,7 @@ const Layout = () => {
                   t != null &&
                   <li className={active.activeAccount == true || activeItem == 3 ? "active" : ""}>
                     <div className="menuList">
-                      <Link className="nav-link pe-2" to={`/users/${id}`} onClick={t != null && (() => { setActive({ activeAccount: true, activeDashboard: false, activeUsers: false }); saveActiveItem(3); setTitle("My Account"); })}><FontAwesomeIcon icon={faUser} className='me-2' />My Account</Link>
+                      <Link className="nav-link pe-2" to={`/users/${id}`} onClick={t != null && (() => { handleMenuItemClick(3); setTitle("My Account"); })}><FontAwesomeIcon icon={faUser} className='me-2' />My Account</Link>
                     </div>
                   </li>
                 }

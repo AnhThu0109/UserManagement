@@ -104,9 +104,9 @@ This is where you can access and manage your account information. This page cons
 
 ### `Not Found Page`
 
-When you entered does not exist or the page you are trying to access has been removed or relocated, "Not Found" page is shown with a message informing you that the page you requested could not be found and a button to redirect to Dashboard page.
+When you entered does not exist or the page you are trying to access has been removed or relocated, "Not Found" page is shown with a message informing you that the page you requested could not be found and a button to return the previous page.
 
-![Image 18](https://i.ibb.co/0KpZ0Cy/image-2023-03-30-202911821.png)<br>
+![Image 18](https://i.ibb.co/qBtgZWX/image-2023-04-02-005431787.png)<br>
 
 **Note*: Menu can be collapsed or uncollapsed by clicking menu icon at top left of page**
 ![Image 19](https://i.ibb.co/tPXL604/image-2023-03-30-204820438.png)<br>
