@@ -116,6 +116,9 @@ function DashBoard() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        fetchWeather(keyWord).catch((error) => {
+            setIsError(true);
+            setErrorMess("Location is not found. Please type again!!!");})
     };
 
     useEffect(() => {
@@ -184,14 +187,9 @@ function DashBoard() {
         getAllLoginTimesOfUsers();
         
         //On first render, weather forecast will show current location of user
-        if(keyWord != ""){
-            fetchWeather(keyWord).catch((error) => {
-                setIsError(true);
-                setErrorMess("Location is not found. Please type again!!!");
-        });
-        } else{
+        if(keyWord == ""){
             fetchWeather();
-        }    
+        };    
 
         setIsError(false)
         setLoading();
