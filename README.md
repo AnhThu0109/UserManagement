@@ -145,7 +145,7 @@ When you entered does not exist or the page you are trying to access has been re
 
  #### Add new user (for Admin)
 
-![Image 27](https://i.ibb.co/KLhhknJ/image-2023-03-31-094659415.png)<br>
+![Image 27](https://i.ibb.co/BrfD2xN/image-2023-04-03-000811449.png)<br>
 
  #### Delete user (for Admin)
 
@@ -190,7 +190,7 @@ When you entered does not exist or the page you are trying to access has been re
 
  #### Add new user (for Admin)
 
-![Image 39](https://i.ibb.co/p3srK23/image-2023-03-31-101644294.png)<br>
+![Image 39](https://i.ibb.co/DtXKSXw/image-2023-04-03-000615752.png)<br>
 
  #### Delete user (for Admin)
 
