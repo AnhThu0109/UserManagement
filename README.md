@@ -68,7 +68,7 @@ The users list is paginated, with each page consisting of 7 users. You can navig
 
 * Add new users to the system by clicking add user icon at the top right of the page.
 
-![Image 8](https://i.ibb.co/cxRdq1K/image-2023-03-30-195731094.png)<br>
+![Image 8](https://i.ibb.co/9gLrmZG/image-2023-04-03-000050024.png)<br>
 
 * See others information by clicking on the corresponding buttons next to each user's information in the list.<br>
 
@@ -190,7 +190,7 @@ When you entered does not exist or the page you are trying to access has been re
 
  #### Add new user (for Admin)
 
-![Image 39](https://i.ibb.co/9gLrmZG/image-2023-04-03-000050024.png)<br>
+![Image 39](https://i.ibb.co/p3srK23/image-2023-03-31-101644294.png)<br>
 
  #### Delete user (for Admin)
 
@@ -234,7 +234,7 @@ When you entered does not exist or the page you are trying to access has been re
 
  #### Add new user (for Admin)
 
-![Image 8](https://i.ibb.co/cxRdq1K/image-2023-03-30-195731094.png)<br>
+![Image 8](https://i.ibb.co/9gLrmZG/image-2023-04-03-000050024.png)<br>
 
  #### Delete user (for Admin)
 
