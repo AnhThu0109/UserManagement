@@ -26,10 +26,13 @@ function DashBoard() {
         }, 1000);
     };
 
-    //Function to get recently user added/updated
+    //Function to get recently user added/updated 
+    //PropertyFilter will be "createdAt"/ "updatedAt"
     const getRecentlyUser = (propertyFilter, users, todayTime) => {
         let arr = users.filter(person => {
             const time = new Date(person[propertyFilter]);
+
+            //Get users added/updated today
             return time.getDate() === todayTime.getDate() && time.getMonth() === todayTime.getMonth() && time.getFullYear() === todayTime.getFullYear();
         });
         //Sort property desc
@@ -43,7 +46,7 @@ function DashBoard() {
         return newArr;
     }
 
-    //Function to get username of top active users
+    //Function to get username of top active users | arr is top ten user arr
     const getUsername = async (arr) => {
         const data = await getAllUser(userToken);
         const username = [];
@@ -72,12 +75,13 @@ function DashBoard() {
         if (!location) {
           navigator.geolocation.getCurrentPosition(
             (position) => {
-              const { latitude, longitude } = position.coords;
+              const { latitude, longitude } = position.coords; //latitude-longitude: units represent the coordinates at geographic coordinate system (vĩ độ-kinh độ)
               fetchDataWeather(`${latitude},${longitude}`)
                 .then((json) => {
                   setWeather(json);
                   setCurrentIcon(showIcon(json.current.condition.text));
                   let newArr = [];
+                  //Take condition text of days
                   json.forecast.forecastday.map((item) => {
                     let source = showIcon(item.day.condition.text);
                     newArr.push(source);
@@ -86,17 +90,14 @@ function DashBoard() {
                 })
                 .catch((error) => {
                   setIsError(true);
-                  setErrorMess(error.message);
+                  setErrorMess("Sorry. Your location is not found.");
                 });
-            },
-            (error) => {
-              setIsError(true);
-              setErrorMess(error.message);
             }
           );
         } else {
           fetchDataWeather(location)
             .then((json) => {
+                console.log("weather data",json);
               setWeather(json);
               setCurrentIcon(showIcon(json.current.condition.text));
               let newArr = [];
@@ -108,37 +109,36 @@ function DashBoard() {
             })
             .catch((error) => {
               setIsError(true);
-              setErrorMess(error.message);
+              setErrorMess("Location is not found. Please type again!!!");
             });
         }
       };
       
-
+    //Handle submit for form of searching location
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetchWeather(keyWord).catch((error) => {
-            setIsError(true);
-            setErrorMess("Location is not found. Please type again!!!");})
+        if(keyWord.trim() !== ""){
+            fetchWeather(keyWord);
+          }
     };
 
     useEffect(() => {
-        //Get all users
+        //Get all users ==> total users in system & top 3 added/updated
         async function getData() {
             await getAllUser(userToken)
                 .then(data => {
-                    console.log(data);
                     setUsers(data);
                     const today = new Date();
 
                     //Take 3 recently added users (who was added today)
                     let recentAddedArr = getRecentlyUser("createdAt", data, today);
-                    //Just take undefined user
+                    //Just take defined user
                     let addedArr = recentAddedArr.filter(user => user !== undefined);
                     setRecentAddedUser(addedArr);
 
                     //Take 3 recently updated users (who was updated today)
                     let recentUpdatedArr = getRecentlyUser("updatedAt", data, today);
-                    //Just take undefined user
+                    //Just take defined user
                     let updatedArr = recentUpdatedArr.filter(user => user !== undefined);
                     setRecentUpdatedUser(updatedArr);
                 })
@@ -187,9 +187,9 @@ function DashBoard() {
         getAllLoginTimesOfUsers();
         
         //On first render, weather forecast will show current location of user
-        if(keyWord == ""){
+        if(keyWord.trim() == ""){
             fetchWeather();
-        };    
+        }  
 
         setIsError(false)
         setLoading();
@@ -220,8 +220,6 @@ function DashBoard() {
                                         <img src='https://cdn-icons-png.flaticon.com/512/4951/4951228.png' className="dashboardIcon"></img>
                                     </p>
                                     <hr></hr>
-
-                                    <div>{console.log(recentAddedUser)}</div>
 
                                     {/* Display 3 user recently created today */}
                                     <div>
@@ -308,7 +306,7 @@ function DashBoard() {
                                     </form>
 
                                     {
-                                        isError == true ? (
+                                        isError == true || weather?.error ? (
                                             <p className="text-danger">{errorMess}</p>
                                         ) : (
                                             <>

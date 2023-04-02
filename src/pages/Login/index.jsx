@@ -21,6 +21,7 @@ const Login = () => {
   };
 
   //Update login time when user login to system --> logintime data use for chart in dashboard 
+  //Login at the first time ==> create login times with default = 1 || login times += 1
   const handleUpdateLoginTimes = async (id) => {
     try{
       //check for login times of this user existed or not
@@ -62,10 +63,10 @@ const Login = () => {
         setToken(data.accessToken);       
         navigate("/home");
       }   
-      else if (response.status === 404) { // handle 404 error for checking wrong username/password
+      else if (response.status === 404) { // handle 404 error for checking wrong password
         setIsAuth(false);
         setErrMess("Incorrect password");
-      } else {
+      } else { //wrong username ==> error 500
         setIsAuth(false);
         setErrMess("User not found");
       }

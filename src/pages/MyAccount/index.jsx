@@ -47,7 +47,7 @@ function MyAccount() {
       "gender": gender,
     }
 
-    localStorage.setItem("userFirstName", firstname);
+    localStorage.setItem("userFirstName", firstname);//set firstname again if user change firstname ==> display in nav bar
     try {
       const data = await updateUser(id, token, user);
       if (data) {
@@ -64,7 +64,7 @@ function MyAccount() {
   const [avatarSrc, setAvatarSrc] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
  
-  const uploader = Uploader({ apiKey: "public_kW15bBX9oNC7bM5zxUA86tRCTNPF" }); //Real API key.
+  const uploader = Uploader({ apiKey: "public_kW15bBX9oNC7bM5zxUA86tRCTNPF" }); //Real API key of https://upload.io
 
   //Function get active option of segmented
   const handleOptionChange = (value) => {
@@ -78,7 +78,7 @@ function MyAccount() {
   };
 
   const handleOkUpdate = () => {
-    setActiveIndex(-1);
+    setActiveIndex(-1); //reset active avatar chosen
     setIsModalUpdateOpen(false);
   };
 
@@ -91,6 +91,8 @@ function MyAccount() {
   //Update avatar function
   const handleUpdateAvatar = async (file) => {
     let user;
+
+    //If user choose update avatar from computer ==> file source != ""
     if(file != ""){
       user = {
         "avatar": file,
@@ -106,7 +108,7 @@ function MyAccount() {
       console.log(data);
       if (data) {
         setIsUpdated(true);
-        handleOkUpdate();
+        handleOkUpdate(); //To close pop-up
         message.success(`Avatar is updated successful !!!`); //Show successful message after changing avatar
       }
     } catch (error) {

@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate } from 'react-router-dom';
 import { Dropdown, Button, Space, Modal, Image, Menu, message, Popconfirm, Table, Input, Spin } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from 'react-highlight-words';
-import "./style.css";
-import "./../style.css"
 import { getAllUser, getUserById } from '../../utils/getUser';
 import { changeFormatDate } from '../../utils/formatDate';
 import deleteUser from '../../utils/deleteUser';
 import { logOut } from '../../utils/logout';
 import registerUser from '../../utils/registerUser';
+import "./style.css";
+import "./../style.css"
 
 function Users() {
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ function Users() {
         }, 700);
     };
 
-    //Get id of chosen user
+    //Get id of chosen user for showing modal see detail
     const userChosen = (id) => {
         localStorage.setItem("userChosenId", id);
         setUserId(id);
@@ -50,7 +50,6 @@ function Users() {
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-
 
     //Confirm delete and show message when cancel delete or delete successful
     const confirm = (e) => {
@@ -121,7 +120,7 @@ function Users() {
             } else {
                 const data = await response.json();
                 if (data.keyValue.username) {
-                    message.error(`Username ${data.keyValue.username} is already taken. Please try another.`, [5]);
+                    message.error(`Username ${data.keyValue.username} is already taken. Please try another.`, [5]); //set message shown in 5s
                 }
                 if (data.keyValue.email) {
                     message.error(`Email ${data.keyValue.email} is already taken. Please try another.`, [5]);
@@ -200,11 +199,11 @@ function Users() {
             setIsDeleted(true);
             setUserId("");
         } else {
-
+            console.log("error delete");
         }
     }
 
-    //For table
+    //For table using ant design
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     const searchInput = useRef(null);
@@ -400,12 +399,14 @@ function Users() {
             await getUserById(userId, token)
                 .then(data => {
                     setChosenUser(data);
-                    localStorage.setItem("chosenUsername", data.username);
+                    localStorage.setItem("chosenUsername", data.username); //
                     console.log("chosen user", data);
                 })
         }
 
         getData();
+
+        //If choose user by clicking button ==> call getUserChosen to get chosen user data 
         if (userId && userId != "") {
             getUserChosen();
         }
@@ -415,7 +416,7 @@ function Users() {
         //Reset state of add new user
         resetAddNew();
 
-        //Loading for 1.5s
+        //Loading before render
         setLoading();
         clearTimeout(setLoading);
     }, [currentPage, collapsedContent, userId, isDeleted, isAddNew])

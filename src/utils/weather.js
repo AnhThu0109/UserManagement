@@ -20,7 +20,7 @@ const showIcon = (text) => {
 };
 
 //Fetch data weather
-const fetchDataWeather = async (q = "Ho Chi Minh") => {
+const fetchDataWeather = async (q) => {
     const data = await fetch(
       `http://api.weatherapi.com/v1/forecast.json?key=3f66991e4c8c4f16b9731107230802&q=${q}&days=3&aqi=yes&alerts=no`
     );
