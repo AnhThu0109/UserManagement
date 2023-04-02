@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { Dropdown, Button, Space, Modal, Image, Menu, message, Popconfirm, Table, Input, Spin } from "antd";
+import { Dropdown, Button, Space, Modal, Image, Menu, message, Popconfirm, Table, Input, Spin, Badge } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from 'react-highlight-words';
 import { getAllUser, getUserById } from '../../utils/getUser';
@@ -300,7 +300,7 @@ function Users() {
             ),
     });
 
-    //Header for table
+    //Header for table (normal user)
     const columns = [
         {
             title: 'No.',
@@ -342,12 +342,71 @@ function Users() {
         },
     ];
 
+    //Header for table (admin)
+    const columnsAdmin = [
+        {
+            title: 'No.',
+            dataIndex: 'key',
+        },
+        {
+            title: 'USERNAME',
+            dataIndex: 'username',
+            sorter: (a, b) => a.username.localeCompare(b.username),
+            sortDirections: ['ascend', 'descend'],
+            ...getColumnSearchProps('username'),
+        },
+        {
+            title: 'ROLE',
+            dataIndex: 'role',
+            defaultSortOrder: 'descend',
+            filters: [
+                {
+                    text: 'Admin',
+                    value: 'Admin',
+                },
+                {
+                    text: 'Normal',
+                    value: 'Normal User',
+                },
+            ],
+            onFilter: (value, record) => record.role.indexOf(value) === 0,
+        },
+        {
+            title: 'GENDER',
+            dataIndex: 'gender',
+            defaultSortOrder: 'descend',
+            filters: [
+                {
+                    text: 'Male',
+                    value: 'Male',
+                },
+                {
+                    text: 'Female',
+                    value: 'Female',
+                },
+            ],
+            onFilter: (value, record) => record.gender.indexOf(value) === 0,
+        },
+        {
+            title: 'EMAIL',
+            dataIndex: 'email',
+            sorter: (a, b) => a.username.localeCompare(b.username),
+            sortDirections: ['ascend', 'descend'],
+            ...getColumnSearchProps('email'),
+        },
+        {
+            title: 'CREATED AT',
+            dataIndex: 'created',
+        },
+    ];
+
     //Data for table
     const data = [];
     users?.map((item, index) => {
         let userData = {
             key: `${index + 1}`,
             username: item.username,
+            role: item.isAdmin == true? ("Admin") : ("Normal User"),
             gender: item.gender,
             email: item.email,
             created: isAdmin == "false" ? (
@@ -441,9 +500,9 @@ function Users() {
                             }
                         </div>
 
-                        {/* Show add new user icon if isAdmin */}
+                        {/* Table all users */}
                         <div className='accountTable'>
-                            <Table columns={columns} dataSource={data} onChange={onChangeTable} pagination={{ pageSize: 7 }} scroll={{
+                            <Table columns={isAdmin == "false"? columns: columnsAdmin} dataSource={data} onChange={onChangeTable} pagination={{ pageSize: 7 }} scroll={{
                                 x: 'calc(700px + 50%)',
                             }} className='p-3' />
                         </div>

@@ -53,7 +53,7 @@ This page consists of some basic infomation:
 
 #### As an admin user:
 
-![Image 5](https://i.ibb.co/0cTNv4W/image-2023-03-30-201143274.png)<br>
+![Image 5](https://i.ibb.co/LdDqKT5/image-2023-04-03-012813184.png)<br>
 
 #### As a normal user:
 
@@ -64,7 +64,7 @@ The users list is paginated, with each page consisting of 7 users. You can navig
 
 #### As an admin user, you have the ability to:
 
-![Image 7](https://i.ibb.co/1RP5T25/image-2023-03-30-195936443.png)<br>
+![Image 7](https://i.ibb.co/xsqwCch/image-2023-04-03-013358040.png)<br>
 
 * Add new users to the system by clicking add user icon at the top right of the page.
 
@@ -72,11 +72,11 @@ The users list is paginated, with each page consisting of 7 users. You can navig
 
 * See others information by clicking on the corresponding buttons next to each user's information in the list.<br>
 
-![Image 9](https://i.ibb.co/sQycJk7/image-2023-03-30-200130510.png)<br>
+![Image 9](https://i.ibb.co/gjLtj6Y/image-2023-04-03-013700645.png)<br>
 
 * Delete existing users.
 
-![Image 10](https://i.ibb.co/MGPGX7J/image-2023-03-30-200644481.png)<br>
+![Image 10](https://i.ibb.co/Y7XKdZW/image-2023-04-03-013558102.png)<br>
 
 **Note*: If an admin chooses to delete their own account, the system will automatically log them out and redirect them to the login page.**
 
@@ -137,7 +137,7 @@ When you entered does not exist or the page you are trying to access has been re
 
 ### `Total Users Page`
 
-![Image 25](https://i.ibb.co/Gnw0VGH/image-2023-03-31-094600101.png)<br>
+![Image 25](https://i.ibb.co/kqfnx8Y/image-2023-04-03-013019945.png)<br>
 
  #### See information of other users (for Normal user and Admin)
 
@@ -182,7 +182,7 @@ When you entered does not exist or the page you are trying to access has been re
 
 ### `Total Users Page`
 
-![Image 37](https://i.ibb.co/hBBNSHW/image-2023-03-31-101337370.png)<br>
+![Image 37](https://i.ibb.co/nQK63Pj/image-2023-04-03-013138581.png)<br>
 
  #### See information of other users (for Normal user and Admin)
 
@@ -226,7 +226,7 @@ When you entered does not exist or the page you are trying to access has been re
 
 ### `Total Users Page`
 
-![Image 5](https://i.ibb.co/0cTNv4W/image-2023-03-30-201143274.png)<br>
+![Image 5](https://i.ibb.co/LdDqKT5/image-2023-04-03-012813184.png)<br>
 
  #### See information of other users (for Normal user and Admin)
 
@@ -238,7 +238,7 @@ When you entered does not exist or the page you are trying to access has been re
 
  #### Delete user (for Admin)
 
-![Image 10](https://i.ibb.co/MGPGX7J/image-2023-03-30-200644481.png)<br>
+![Image 10](https://i.ibb.co/Y7XKdZW/image-2023-04-03-013558102.png)<br>
 
 ### `My Account Page`
 
