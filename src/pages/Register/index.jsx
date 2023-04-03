@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import registerUser from '../../utils/registerUser';
 import "./style.css";
+import { message } from 'antd';
 
 function Register() {
   const [firstname, setFirstname] = useState('');
@@ -29,6 +30,7 @@ function Register() {
       const response = await registerUser(user);
       if (response.ok){
         const data = await response.json();
+        message.success("Your account has been created successfully !!!");
         navigate("/login");
       } else {
         const data = await response.json();
@@ -75,7 +77,7 @@ function Register() {
         <input type="email" id="email"
           name="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)} className="form-control border border-3 mb-2" required />
+          onChange={(e) => setEmail(e.target.value)} className="form-control border border-3 mb-2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
 
         <label>Password:</label>
         <input type="password" id="password"

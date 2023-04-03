@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Image, message, Button, Modal, Spin, Space, Segmented } from "antd";
+import { useNavigate, Link } from "react-router-dom";
+import { Image, message, Button, Modal, Spin, Space, Segmented, Popconfirm } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 // Installed by "react-uploader" for upload avatar from computer
 import { Uploader } from "uploader";
@@ -7,6 +8,8 @@ import { UploadButton } from "react-uploader";
 import { getUserById } from "../../utils/getUser";
 import updateUser from "../../utils/updateUser";
 import { changeFormatDate } from "../../utils/formatDate";
+import deleteUser from '../../utils/deleteUser';
+import { logOut } from '../../utils/logout';
 import Avatar from "../../utils/avatar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
@@ -52,7 +55,7 @@ function MyAccount() {
       const data = await updateUser(id, token, user);
       if (data) {
         setIsUpdated(true);
-        message.success(`User ${user?.username} is updated successful !!!`); //Show successful message after updating
+        message.success(`User ${user?.username} is updated successfully !!!`); //Show successful message after updating
       }
     } catch (error) {
       console.error(error);
@@ -109,7 +112,7 @@ function MyAccount() {
       if (data) {
         setIsUpdated(true);
         handleOkUpdate(); //To close pop-up
-        message.success(`Avatar is updated successful !!!`); //Show successful message after changing avatar
+        message.success(`Avatar is updated successfully !!!`); //Show successful message after changing avatar
       }
     } catch (error) {
       console.error(error);
@@ -122,6 +125,27 @@ function MyAccount() {
     handleUpdateAvatar(file);
   }
 
+  //Confirm delete and show message when cancel delete or delete successful
+  const navigate = useNavigate();
+  const confirm = (e) => {
+    console.log(e);
+    deleteUserById(id, token);
+    message.success(`Your account is deleted successfully !!!`);
+  };
+  const cancel = (e) => {
+      console.log(e);
+      message.error('Delete request is canceled !!!');
+  };
+
+  //Delete user
+  async function deleteUserById(index, tokenUser) {
+    const response = await deleteUser(index, tokenUser)
+    if (response.ok) { 
+      await Promise.all([logOut(token), window.location.replace("/login")]);
+    } else {
+        console.log("error delete");
+    }
+}
 
   useEffect(() => {
     async function getData() {
@@ -202,7 +226,7 @@ function MyAccount() {
                 <div className="row mb-2">
                   <div className="col-lg-6 col-sm-12 mb-3">
                     <label for="" className="form-label text-secondary">Email</label>
-                    <input type="email" className="form-control" name="" id="" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
+                    <input type="email" className="form-control" name="" id="" value={email} placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required onChange={(e) => setEmail(e.target.value)}></input>
                   </div>
                   <div className="col-lg-6 col-sm-12">
                     <label for="" className="form-label text-secondary">Phone</label>
@@ -216,6 +240,21 @@ function MyAccount() {
                   </div>
                 </div>
                 <button type="submit" className="float-end border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn">UPDATE PROFILE</button>
+
+                {/* Pop-up confirm before delete account */}
+                <Popconfirm
+                    placement=""
+                    title="Delete user"
+                    description="Are you sure to delete your account?"
+                    onConfirm={confirm}
+                    onCancel={cancel}
+                    okText="Yes"
+                    cancelText="No"
+                >
+                  <Link className="float-end border-0 rounded-pill py-2 px-4 mt-3 me-2 fw-bolder text-white text-decoration-none bg-danger deleteBtnAccount">
+                  DELETE
+                  </Link>
+                </Popconfirm>
               </form>
             </div>
 

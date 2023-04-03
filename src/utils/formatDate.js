@@ -2,7 +2,7 @@ const changeFormatDate = (date) => {
     let newDate = new Date(date);
     let options = {
       month: "short",
-      day: "numeric",
+      day: "2-digit",
       year: "numeric",
       hour12 : false,
       hour:  "2-digit",

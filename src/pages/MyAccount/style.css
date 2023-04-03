@@ -11,6 +11,14 @@ button.savechangeBtn:hover{
     background-color: #3da0a1;
 }
 
+.deleteBtnAccount{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.deleteBtnAccount:hover{
+    background-color: rgb(175, 19, 19) !important;
+}
+
 div.userInfo{
     height: fit-content;
     background-color: #f2f2f2;

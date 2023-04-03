@@ -55,12 +55,26 @@ function Users() {
     const confirm = (e) => {
         console.log(e);
         deleteUserById(id, token);
-        message.success(`User ${chosenUser?.username} is deleted successful !!!`);
+        message.success(`User ${chosenUser?.username} is deleted successfully !!!`);
     };
     const cancel = (e) => {
         console.log(e);
         message.error('Delete request is canceled !!!');
     };
+
+    //Delete user
+    async function deleteUserById(index, tokenUser) {
+        const response = await deleteUser(index, tokenUser)
+        if (response.ok) {
+            if (loginUserId == index) {
+                await Promise.all([logOut(token), window.location.replace("/login")]);
+            }
+            setIsDeleted(true);
+            setUserId("");
+        } else {
+            console.log("error delete");
+        }
+    }
 
     //Show modal to add new user
     const [isModalNewOpen, setIsModalNewOpen] = useState(false);
@@ -115,7 +129,7 @@ function Users() {
             const response = await registerUser(user);
             if (response.ok) {
                 setIsAddNew(true);
-                message.success(`New user is added successful !!!`);
+                message.success(`New user is added successfully !!!`);
                 handleOkNew();
             } else {
                 const data = await response.json();
@@ -186,22 +200,6 @@ function Users() {
             </Menu.Item>
         </Menu>
     );
-
-    //Delete user
-    async function deleteUserById(index, tokenUser) {
-        const response = await deleteUser(index, tokenUser)
-        if (response.ok) {
-            if (loginUserId == index) {
-                logOut(token);
-                window.location.reload();
-                navigate("/login");
-            }
-            setIsDeleted(true);
-            setUserId("");
-        } else {
-            console.log("error delete");
-        }
-    }
 
     //For table using ant design
     const [searchText, setSearchText] = useState('');
@@ -581,7 +579,7 @@ function Users() {
                                             </div>
                                             <div className="col-sm-12 col-lg-6 mb-2">
                                                 <label for="" className="form-label text-secondary">Email</label>
-                                                <input type="email" className="border border-2 form-control" name="" id="email" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input>
+                                                <input type="email" className="border border-2 form-control" name="" id="email" value={email} placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required onChange={(e) => setEmail(e.target.value)}></input>
                                             </div>
 
                                         </div>
