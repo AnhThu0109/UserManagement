@@ -1,13 +1,12 @@
-import { Outlet } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
-import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePollVertical, faUserGroup, faUser, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { Button, Avatar } from "antd";
-import { logOut } from '../../utils/logout';
 import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from "@ant-design/icons";
+import { logOut } from '../../utils/logout';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import("./style.css");
 import("../../index.css");
 

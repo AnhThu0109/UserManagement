@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
-import "./style.css";
 import { isLogin } from "../../utils/userRoutes";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./style.css";
+
 function WelcomePage() {
     const [showProcess, setShowProcess] = useState(false);
     const navigate = useNavigate();

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Spin, Space } from "antd";
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
+import { Spin, Space } from "antd";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartColumn, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getAllUser } from "../../utils/getUser";
 import { changeFormatDate, changeFormatDate1 } from "../../utils/formatDate";
 import { getAllLoginTimes } from "../../utils/loginTimes";
-import "./style.css";
 import { fetchDataWeather, showIcon } from "../../utils/weather";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./style.css";
 
 function DashBoard() {
     const userToken = localStorage.getItem("token");

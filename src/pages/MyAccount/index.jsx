@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
-import { getUserById } from "../../utils/getUser";
-import updateUser from "../../utils/updateUser";
 import { Image, message, Button, Modal, Spin, Space, Segmented } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { changeFormatDate } from "../../utils/formatDate";
-import Avatar from "../../utils/avatar";
-// Installed by "react-uploader".
+// Installed by "react-uploader" for upload avatar from computer
 import { Uploader } from "uploader";
 import { UploadButton } from "react-uploader";
+import { getUserById } from "../../utils/getUser";
+import updateUser from "../../utils/updateUser";
+import { changeFormatDate } from "../../utils/formatDate";
+import Avatar from "../../utils/avatar";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import "./../style.css";
 import "./style.css";
 
