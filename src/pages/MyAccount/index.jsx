@@ -52,10 +52,20 @@ function MyAccount() {
 
     localStorage.setItem("userFirstName", firstname);//set firstname again if user change firstname ==> display in nav bar
     try {
-      const data = await updateUser(id, token, user);
-      if (data) {
+      const response = await updateUser(id, token, user);
+      if (response.ok) {
         setIsUpdated(true);
         message.success(`User ${user?.username} is updated successfully !!!`); //Show successful message after updating
+      }
+      //Handle error 500
+      else if (response.status === 500){
+        const data = await response.json();
+        if(data?.keyPattern?.username){
+          message.error(`Username ${data.keyValue.username} is already taken. Please try another !!!`);
+        }
+        if(data?.keyPattern?.email){
+          message.error(`Email ${data.keyValue.email} is already taken. Please try another !!!`);
+        }
       }
     } catch (error) {
       console.error(error);

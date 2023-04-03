@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
-import { Spin, Space } from "antd";
+import { Spin, Space, Tooltip } from "antd";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartColumn, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { getAllUser } from "../../utils/getUser";
 import { changeFormatDate, changeFormatDate1 } from "../../utils/formatDate";
 import { getAllLoginTimes } from "../../utils/loginTimes";
 import { fetchDataWeather, showIcon } from "../../utils/weather";
+import showBrief from "../../utils/showBrief";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style.css";
 
@@ -73,53 +74,54 @@ function DashBoard() {
     const fetchWeather = async (location) => {
         //If not search keyword yet ==> show weather of user's current location || show weather of seaching location
         if (!location) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const { latitude, longitude } = position.coords; //latitude-longitude: units represent the coordinates at geographic coordinate system (vĩ độ-kinh độ)
-              fetchDataWeather(`${latitude},${longitude}`)
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords; //latitude-longitude: units represent the coordinates at geographic coordinate system (vĩ độ-kinh độ)
+                    fetchDataWeather(`${latitude},${longitude}`)
+                        .then((json) => {
+                            console.log("weather data", json);
+                            setWeather(json);
+                            setCurrentIcon(showIcon(json.current.condition.text));
+                            let newArr = [];
+                            //Take condition text of days
+                            json.forecast.forecastday.map((item) => {
+                                let source = showIcon(item.day.condition.text);
+                                newArr.push(source);
+                            });
+                            setDisplayIcon(newArr);
+                        })
+                        .catch((error) => {
+                            setIsError(true);
+                            setErrorMess("Sorry. Your location is not found.");
+                        });
+                }
+            );
+        } else {
+            fetchDataWeather(location)
                 .then((json) => {
-                  setWeather(json);
-                  setCurrentIcon(showIcon(json.current.condition.text));
-                  let newArr = [];
-                  //Take condition text of days
-                  json.forecast.forecastday.map((item) => {
-                    let source = showIcon(item.day.condition.text);
-                    newArr.push(source);
-                  });
-                  setDisplayIcon(newArr);
+                    console.log("weather data", json);
+                    setWeather(json);
+                    setCurrentIcon(showIcon(json.current.condition.text));
+                    let newArr = [];
+                    json.forecast.forecastday.map((item) => {
+                        let source = showIcon(item.day.condition.text);
+                        newArr.push(source);
+                    });
+                    setDisplayIcon(newArr);
                 })
                 .catch((error) => {
-                  setIsError(true);
-                  setErrorMess("Sorry. Your location is not found.");
+                    setIsError(true);
+                    setErrorMess("Location is not found. Please type again!!!");
                 });
-            }
-          );
-        } else {
-          fetchDataWeather(location)
-            .then((json) => {
-                console.log("weather data",json);
-              setWeather(json);
-              setCurrentIcon(showIcon(json.current.condition.text));
-              let newArr = [];
-              json.forecast.forecastday.map((item) => {
-                let source = showIcon(item.day.condition.text);
-                newArr.push(source);
-              });
-              setDisplayIcon(newArr);
-            })
-            .catch((error) => {
-              setIsError(true);
-              setErrorMess("Location is not found. Please type again!!!");
-            });
         }
-      };
-      
+    };
+
     //Handle submit for form of searching location
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(keyWord.trim() !== ""){
+        if (keyWord.trim() !== "") {
             fetchWeather(keyWord);
-          }
+        }
     };
 
     useEffect(() => {
@@ -185,11 +187,11 @@ function DashBoard() {
         }
         getData();
         getAllLoginTimesOfUsers();
-        
+
         //On first render, weather forecast will show current location of user
-        if(keyWord.trim() == ""){
+        if (keyWord.trim() == "") {
             fetchWeather();
-        }  
+        }
 
         setIsError(false)
         setLoading();
@@ -301,7 +303,7 @@ function DashBoard() {
                             <div className="col-sm-12 col-lg-5 mb-2">
                                 <div className="weatherForcast bg-white rounded-3 p-3">
                                     <form className="searchFormLocation ms-2 mb-1" onSubmit={handleSubmit}>
-                                        <input className="border-0 fw-bolder text-black-50" type="text" name="keyword" id="keyword" value={keyWord} onChange={(e) => setKeyWord(e.target.value)} style={{width: "80%"}} placeholder="Search location..."/>
+                                        <input className="border-0 fw-bolder text-black-50" type="text" name="keyword" id="keyword" value={keyWord} onChange={(e) => setKeyWord(e.target.value)} style={{ width: "80%" }} placeholder="Search location..." />
                                         <button type="submit" className="border-0 bg-white"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                                     </form>
 
@@ -310,65 +312,71 @@ function DashBoard() {
                                             <p className="text-danger">{errorMess}</p>
                                         ) : (
                                             <>
-                                            <p className="text-center fw-bolder locationWeather">{weather?.location?.name} - {weather?.location?.country}</p>
-                                            < div className="row mx-2 text-white weatherItems">
-                                                <div className="col text-center pt-2 rounded-4 weatherItem2 me-2 mb-2">
-                                                    <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[0]?.date)}</p>
-                                                    <img src={currentIcon} className="weatherIcon"></img>
-                                                    <p className="temperature">
-                                                        {
-                                                            fTemp == false? (weather?.current?.temp_c) : (weather?.current?.temp_f)
-                                                        }                                   
-                                                        <sup>o</sup>
-                                                        <button className="rounded-circle border-0 ms-1 fw-bolder" onClick={() => setFTemp(!fTemp)}>
-                                                            {
-                                                                fTemp == false? (<>C</>) : (<>F</>)
-                                                            }
-                                                        </button>
-                                                    </p>
-                                                    <small className="textCondition">
-                                                        {weather?.current?.condition.text}
-                                                    </small>
+                                                <p className="text-center fw-bolder locationWeather">{weather?.location?.name} - {weather?.location?.country}</p>
+                                                < div className="row mx-2 text-white weatherItems">
+                                                    <Tooltip title={weather?.current?.condition?.text}>
+                                                        <div className="col text-center pt-2 rounded-4 weatherItem2 me-2 mb-2">
+                                                            <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[0]?.date)}</p>
+                                                            <img src={currentIcon} className="weatherIcon"></img>
+                                                            <p className="temperature">
+                                                                {
+                                                                    fTemp == false ? (weather?.current?.temp_c) : (weather?.current?.temp_f)
+                                                                }
+                                                                <sup>o</sup>
+                                                                <button className="rounded-circle border-0 ms-1 fw-bolder" onClick={() => setFTemp(!fTemp)}>
+                                                                    {
+                                                                        fTemp == false ? (<>C</>) : (<>F</>)
+                                                                    }
+                                                                </button>
+                                                            </p>
+                                                            <small className="textCondition">
+                                                                {showBrief(weather?.current?.condition?.text, 20)}
+                                                            </small>
+                                                        </div>
+                                                    </Tooltip>
+                                                    <Tooltip title={weather?.forecast?.forecastday[1]?.day?.condition?.text}>
+                                                        <div className="col text-center pt-2 rounded-4 weatherItem me-2">
+                                                            <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[1]?.date)}</p>
+                                                            <img src={displayIcon && displayIcon[1]} className="weatherIcon"></img>
+                                                            <p className="temperature">
+                                                                {
+                                                                    fTemp == false ? (weather?.forecast?.forecastday[1]?.day?.avgtemp_c) : (weather?.forecast?.forecastday[1]?.day?.avgtemp_f)
+                                                                }
+                                                                <sup>o</sup>
+                                                                <button className="rounded-circle border-0 ms-1 fw-bolder" onClick={() => setFTemp(!fTemp)}>
+                                                                    {
+                                                                        fTemp == false ? (<>C</>) : (<>F</>)
+                                                                    }
+                                                                </button>
+                                                            </p>
+                                                            <small className="textCondition">
+                                                                {showBrief(weather?.forecast?.forecastday[1]?.day?.condition?.text, 20)}
+                                                            </small>
+                                                        </div>
+                                                    </Tooltip>
+                                                    <Tooltip title={weather?.forecast?.forecastday[2]?.day?.condition?.text}>
+                                                        <div className="col text-center pt-2 rounded-4 weatherItem">
+                                                            <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[2]?.date)}</p>
+                                                            <img src={displayIcon && displayIcon[2]} className="weatherIcon"></img>
+                                                            <p className="temperature">
+                                                                {
+                                                                    fTemp == false ? (weather?.forecast?.forecastday[2]?.day?.avgtemp_c) : (weather?.forecast?.forecastday[2]?.day?.avgtemp_f)
+                                                                }
+                                                                <sup>o</sup>
+                                                                <button className="rounded-circle border-0 ms-1 fw-bolder" onClick={() => setFTemp(!fTemp)}>
+                                                                    {
+                                                                        fTemp == false ? (<>C</>) : (<>F</>)
+                                                                    }
+                                                                </button>
+                                                            </p>
+                                                            <small className="textCondition">
+                                                                {showBrief(weather?.forecast?.forecastday[2]?.day?.condition?.text, 20)}
+                                                            </small>
+                                                        </div>
+                                                    </Tooltip>
                                                 </div>
-                                                <div className="col text-center pt-2 rounded-4 weatherItem me-2">
-                                                    <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[1]?.date)}</p>
-                                                    <img src={displayIcon && displayIcon[1]} className="weatherIcon"></img>
-                                                    <p className="temperature">
-                                                        {
-                                                            fTemp == false? (weather?.forecast?.forecastday[1]?.day?.avgtemp_c) : (weather?.forecast?.forecastday[1]?.day?.avgtemp_f)
-                                                        }                                   
-                                                        <sup>o</sup>
-                                                        <button className="rounded-circle border-0 ms-1 fw-bolder" onClick={() => setFTemp(!fTemp)}>
-                                                            {
-                                                                fTemp == false? (<>C</>) : (<>F</>)
-                                                            }
-                                                        </button>
-                                                    </p>
-                                                    <small className="textCondition">
-                                                        {weather?.forecast?.forecastday[1]?.day?.condition?.text}
-                                                    </small>
-                                                </div>
-                                                <div className="col text-center pt-2 rounded-4 weatherItem">
-                                                    <p className="fw-bolder">{changeFormatDate1(weather?.forecast?.forecastday[2]?.date)}</p>
-                                                    <img src={displayIcon && displayIcon[2]} className="weatherIcon"></img>
-                                                    <p className="temperature">
-                                                        {
-                                                            fTemp == false? (weather?.forecast?.forecastday[2]?.day?.avgtemp_c) : (weather?.forecast?.forecastday[2]?.day?.avgtemp_f)
-                                                        }                                   
-                                                        <sup>o</sup>
-                                                        <button className="rounded-circle border-0 ms-1 fw-bolder" onClick={() => setFTemp(!fTemp)}>
-                                                            {
-                                                                fTemp == false? (<>C</>) : (<>F</>)
-                                                            }
-                                                        </button>
-                                                    </p>
-                                                    <small className="textCondition">
-                                                        {weather?.forecast?.forecastday[2]?.day?.condition?.text}
-                                                    </small>
-                                                </div>
-                                            </div>
                                             </>
-                                         
+
                                         )
                                     }
 

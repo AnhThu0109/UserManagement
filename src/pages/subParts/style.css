@@ -210,6 +210,11 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
         margin: 0px 0px 15px 0px !important;
     }
 
+    .sb-nav-fixed div.userInfo {
+        margin: -10px 0px 15px 0px !important;
+    }
+
+
     .barChart .chartBody{
         height: 100%;
     }
