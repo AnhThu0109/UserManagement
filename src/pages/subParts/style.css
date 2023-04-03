@@ -174,7 +174,7 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     div.userInfo {
-        margin: -15px 0px 0px 0px;
+        margin: -5px 0px 0px 0px;
     }
 
     .barChart .chartContent{

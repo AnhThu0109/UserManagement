@@ -93,14 +93,14 @@ Additionally, you can use the search bar provided to search for a specific user 
 
 ### `My Account Page`
 
-![Image 15](https://i.ibb.co/wB2Yvj2/image-2023-03-30-204028364.png)<br>
+![Image 15](https://i.ibb.co/WvNLt2t/image-2023-04-03-143122426.png)<br>
 This is where you can access and manage your account information. This page consists of:
 * Basic Info: You can view your basic account information, including your name, email address, and other relevant details.
 * Update Info: You can update your account information, such as your name, email address, and other details as needed.
 * Change Avatar: You can also change your avatar by choosing illustrated images or uploading a new image from your computer.
 
-![Image 16](https://i.ibb.co/ryfQzFr/image-2023-03-30-202436180.png)<br>
-![Image 17](https://i.ibb.co/nM1pG5R/image-2023-03-30-202536439.png)<br>
+![Image 16](https://i.ibb.co/z4P4Ymk/image-2023-04-03-143256733.png)<br>
+![Image 17](https://i.ibb.co/23hr7Zd/image-2023-04-03-143419158.png)<br>
 
 ### `Not Found Page`
 
@@ -154,7 +154,7 @@ When you entered does not exist or the page you are trying to access has been re
 ### `My Account Page`
 
 ![Image 29](https://i.ibb.co/y6pcqn6/image-2023-03-31-100017050.png)
-![Image 30](https://i.ibb.co/yRZdXhD/image-2023-03-31-100112112.png)<br>
+![Image 30](https://i.ibb.co/y04XGqN/image-2023-04-03-143557940.png)<br>
 
  #### Change avatar 
 
@@ -199,12 +199,12 @@ When you entered does not exist or the page you are trying to access has been re
 ### `My Account Page`
 
 ![Image 41](https://i.ibb.co/D9PJWN6/image-2023-03-31-101917313.png)
-![Image 42](https://i.ibb.co/PrLhn3L/image-2023-03-31-101953954.png)<br>
+![Image 42](https://i.ibb.co/wyyLzGp/image-2023-04-03-143742986.png)<br>
 
  #### Change avatar 
 
-![Image 43](https://i.ibb.co/nbV9KQR/image-2023-03-31-102036870.png)
-![Image 44](https://i.ibb.co/PNTp58c/image-2023-03-31-102120692.png)<br>
+![Image 43](https://i.ibb.co/fd8ZYqj/image-2023-04-03-144206644.png)
+![Image 44](https://i.ibb.co/LhfFRnb/image-2023-04-03-144251587.png)<br>
 
 ## DESTOP VIEW
 
@@ -242,9 +242,9 @@ When you entered does not exist or the page you are trying to access has been re
 
 ### `My Account Page`
 
-![Image 15](https://i.ibb.co/wB2Yvj2/image-2023-03-30-204028364.png)<br>
+![Image 15](https://i.ibb.co/WvNLt2t/image-2023-04-03-143122426.png)<br>
 
  #### Change avatar 
 
-![Image 16](https://i.ibb.co/ryfQzFr/image-2023-03-30-202436180.png)<br>
-![Image 17](https://i.ibb.co/nM1pG5R/image-2023-03-30-202536439.png)<br>
+![Image 16](https://i.ibb.co/z4P4Ymk/image-2023-04-03-143256733.png)<br>
+![Image 17](https://i.ibb.co/23hr7Zd/image-2023-04-03-143419158.png)<br>
