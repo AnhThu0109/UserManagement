@@ -72,7 +72,7 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
     }
 
     div.userInfo {
-        margin: 0px 10px 10px 10px;
+        margin: 0px 10px 10px 10px !important;
     }
 
     .addUser {
@@ -174,7 +174,7 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     div.userInfo {
-        margin: -5px 0px 0px 0px;
+        margin: -5px 0px 0px 0px !important;
     }
 
     .barChart .chartContent{
@@ -202,6 +202,14 @@ a.dropdown-item.nav-link.fw-lighter.logOutTitle.pt-2 {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+    div.userInfo {
+        margin: 0px 0px 0px 0px !important;
+    }
+
+    .sb-nav-fixed.sb-sidenav-toggled div.userInfo {
+        margin: 0px 0px 15px 0px !important;
+    }
+
     .barChart .chartBody{
         height: 100%;
     }

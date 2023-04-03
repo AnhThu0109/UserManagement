@@ -66,7 +66,7 @@ function MyAccount() {
   const [activeOption, setActiveOption] = useState("Illustrate Images");
   const [avatarSrc, setAvatarSrc] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
- 
+
   const uploader = Uploader({ apiKey: "public_kW15bBX9oNC7bM5zxUA86tRCTNPF" }); //Real API key of https://upload.io
 
   //Function get active option of segmented
@@ -96,7 +96,7 @@ function MyAccount() {
     let user;
 
     //If user choose update avatar from computer ==> file source != ""
-    if(file != ""){
+    if (file != "") {
       user = {
         "avatar": file,
       }
@@ -105,7 +105,7 @@ function MyAccount() {
         "avatar": avatarSrc,
       }
     }
-    
+
     try {
       const data = await updateUser(id, token, user);
       console.log(data);
@@ -133,19 +133,19 @@ function MyAccount() {
     message.success(`Your account is deleted successfully !!!`);
   };
   const cancel = (e) => {
-      console.log(e);
-      message.error('Delete request is canceled !!!');
+    console.log(e);
+    message.error('Delete request is canceled !!!');
   };
 
   //Delete user
   async function deleteUserById(index, tokenUser) {
     const response = await deleteUser(index, tokenUser)
-    if (response.ok) { 
+    if (response.ok) {
       await Promise.all([logOut(token), window.location.replace("/login")]);
     } else {
-        console.log("error delete");
+      console.log("error delete");
     }
-}
+  }
 
   useEffect(() => {
     async function getData() {
@@ -239,10 +239,9 @@ function MyAccount() {
                     <input type="text" className="form-control" name="" id="" value={location} placeholder="Home Address" onChange={(e) => setLocation(e.target.value)}></input>
                   </div>
                 </div>
-                <button type="submit" className="float-end border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn">UPDATE PROFILE</button>
-
-                {/* Pop-up confirm before delete account */}
-                <Popconfirm
+                <div className="float-end">
+                  {/* Pop-up confirm before delete account */}
+                  <Popconfirm
                     placement=""
                     title="Delete user"
                     description="Are you sure to delete your account?"
@@ -250,11 +249,14 @@ function MyAccount() {
                     onCancel={cancel}
                     okText="Yes"
                     cancelText="No"
-                >
-                  <Link className="float-end border-0 rounded-pill py-2 px-4 mt-3 me-2 fw-bolder text-white text-decoration-none bg-danger deleteBtnAccount">
-                  DELETE
-                  </Link>
-                </Popconfirm>
+                  >
+                    <Link className="border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white text-decoration-none bg-danger deleteBtnAccount me-2">
+                      DELETE
+                    </Link>
+                  </Popconfirm>
+
+                  <button type="submit" className="border-0 rounded-pill py-2 px-4 mt-3 fw-bolder text-white savechangeBtn">UPDATE PROFILE</button>
+                </div>
               </form>
             </div>
 
