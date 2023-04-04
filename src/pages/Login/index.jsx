@@ -83,7 +83,7 @@ const Login = () => {
           <small className='text-black-50 textLogin'>Please log in to see more information.</small>
         </h4>     
         <div>
-        <form onSubmit={handleSubmit} className="pt-4 border p-sm-3 p-lg-4 rounded-3 bg-white">
+        <form onSubmit={handleSubmit} className="py-4 border p-sm-3 p-lg-4 rounded-3 bg-white">
           <div className='mb-sm-2 mb-lg-3 login-input-div'>
             <label htmlFor="text" className='form-label'>Username:</label>
             <input

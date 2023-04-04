@@ -7,8 +7,8 @@ import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from "@ant-design/
 import { logOut } from '../../utils/logout';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import("./style.css");
-import("../../index.css");
+import "./style.css";
+import "../../index.css";
 
 const Layout = () => {
   const [active, setActive] = useState({

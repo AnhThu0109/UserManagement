@@ -61,9 +61,11 @@ function MyAccount() {
       else if (response.status === 500){
         const data = await response.json();
         if(data?.keyPattern?.username){
+          setIsUpdated(true);
           message.error(`Username ${data.keyValue.username} is already taken. Please try another !!!`);
         }
         if(data?.keyPattern?.email){
+          setIsUpdated(true);
           message.error(`Email ${data.keyValue.email} is already taken. Please try another !!!`);
         }
       }

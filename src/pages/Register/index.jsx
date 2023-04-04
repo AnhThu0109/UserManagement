@@ -49,7 +49,7 @@ function Register() {
 
   return (
     <div className='py-4 signinContent'>
-      <h4 className='fw-bolder text-center py-4'>Create an account</h4>
+      <h4 className='fw-lighter text-center'>Create an account</h4>
       <form onSubmit={handleSubmit} className="pt-4 border p-sm-3 p-lg-4 rounded-3 bg-white signinForm">
         <div className='row mb-2'>
           <div className='col'>
