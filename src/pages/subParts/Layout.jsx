@@ -74,17 +74,14 @@ const Layout = () => {
       handleMenuItemClick(1);
       setTitle("Dashboard");
     }
-    if(currentPath == "/users"){
+    else if(currentPath == "/users"){
       handleMenuItemClick(2);
       setTitle("Users List");
     }
-    if(currentPath == `/users/${id}`){
+    else if(currentPath == `/users/${id}`){
       handleMenuItemClick(3);
       setTitle("My Account");
     } 
-    if (currentPath == "/*"){
-      setTitle("");
-    }
   } 
 
   useEffect(() => {

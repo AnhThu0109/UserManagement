@@ -59,8 +59,7 @@ const Login = () => {
         localStorage.setItem("id", data._id);
         localStorage.setItem("userFirstName", data.firstname);
         localStorage.setItem("active", 1);
-        localStorage.setItem("isAdmin", data.isAdmin);
-        setToken(data.accessToken);       
+        localStorage.setItem("isAdmin", data.isAdmin);      
         navigate("/home");
       }   
       else if (response.status === 404) { // handle 404 error for checking wrong password

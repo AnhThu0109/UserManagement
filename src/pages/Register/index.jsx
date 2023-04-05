@@ -77,7 +77,7 @@ function Register() {
         <input type="email" id="email"
           name="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)} className="form-control border border-3 mb-2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+          onChange={(e) => setEmail(e.target.value)} className="form-control border border-3 mb-2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required placeholder='Ex: abc@gmail.com'/>
 
         <label>Password:</label>
         <input type="password" id="password"

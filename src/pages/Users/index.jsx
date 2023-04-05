@@ -579,7 +579,7 @@ function Users() {
                                             </div>
                                             <div className="col-sm-12 col-lg-6 mb-2">
                                                 <label for="" className="form-label text-secondary">Email</label>
-                                                <input type="email" className="border border-2 form-control" name="" id="email" value={email} placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required onChange={(e) => setEmail(e.target.value)}></input>
+                                                <input type="email" className="border border-2 form-control" name="" id="email" value={email} placeholder="abc@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required onChange={(e) => setEmail(e.target.value)}></input>
                                             </div>
 
                                         </div>
